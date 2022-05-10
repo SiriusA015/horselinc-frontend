@@ -1,0 +1,59 @@
+
+<mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="DRAFTS" [disabled]="onPaymentInfoLoading || isLoadMore">
+        <div class="provider-list" infiniteScroll [infiniteScrollDistance]="2" [fromRoot]="true" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()" [scrollWindow]="false">
+            <payment-provider-list-item class="provider-list-item has-handle"
+                *ngFor="let invoice of draftInvoices" [invoice]="invoice" (click)="readInvoice(invoice.uid)"
+                [ngClass]="{'current-invoice':invoice?.uid == currentInvoice?.uid}"
+                [@animate]="{value:'*',params:{y:'100%'}}"
+            >
+            </payment-provider-list-item>
+            <div class="space-bottom"></div>
+            <div class="no-invoices" *ngIf="isLoadMore">
+                <mat-icon ><mat-spinner color="warn" diameter="20">
+                </mat-spinner></mat-icon>
+            </div>
+            <div class="cbtn">
+                <button mat-raised-button class="create-invoice" (click)="onShowCreateDialog()" routerLinkActive="router-link-active">
+                    Create Invoice 
+                </button>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="SUBMITTED" [disabled]="onPaymentInfoLoading || isLoadMore">
+        <div class="provider-list" infiniteScroll [infiniteScrollDistance]="2" [fromRoot]="true" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()" [scrollWindow]="false">
+            <payment-provider-list-item class="provider-list-item has-handle"
+                *ngFor="let invoice of submittedInvoices" [invoice]="invoice" (click)="readSubmitted(invoice.uid)"
+                [ngClass]="{'current-invoice':invoice?.uid == currentInvoice?.uid}"
+                [@animate]="{value:'*',params:{y:'100%'}}"
+            >
+            </payment-provider-list-item>
+            <div class="space-bottom"></div>
+            <div class="no-invoices" *ngIf="isLoadMore">
+                <mat-icon ><mat-spinner color="warn" diameter="20">
+                </mat-spinner></mat-icon>
+            </div>
+        </div>
+        <div class="cbtn">
+            <div class="action-btn" mat-raised-button mat-ripple (click)="onExportInovice()">Export payment history </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="PAID" [disabled]="onPaymentInfoLoading || isLoadMore">
+        <div class="provider-list" infiniteScroll [infiniteScrollDistance]="2" [fromRoot]="true" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()" [scrollWindow]="false">
+            <payment-provider-list-item class="provider-list-item has-handle"
+                *ngFor="let invoice of paidInvoices" [invoice]="invoice" (click)="readPaid(invoice.uid)"
+                [ngClass]="{'current-invoice':invoice?.uid == currentInvoice?.uid}"
+                [@animate]="{value:'*',params:{y:'100%'}}"
+                [paid]="paid">
+            </payment-provider-list-item>
+            <div class="space-bottom"></div>
+            <div class="no-invoices" *ngIf="isLoadMore">
+                <mat-icon ><mat-spinner color="warn" diameter="20">
+                </mat-spinner></mat-icon>
+            </div>
+        </div>
+        <div class="cbtn">
+            <div  class="action-btn" mat-raised-button mat-ripple (click)="onExportInovice()">Export payment history </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

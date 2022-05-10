@@ -1,0 +1,20 @@
+<div class="dialog-content-wrapper p-16">
+    <!-- <div class="container" fxLayout="column" fxLayoutAlign="start"> -->
+    <div class="title"> Add New Card </div>
+    <div></div>
+    <form class="full-width">
+        <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions" (change)="cardUpdated($event)" (error)="error = $event"></ngx-stripe-card>
+
+        <div class="action_btn" fxLayout="row" fxLayoutAlign="end">
+            <button mat-raised-button mat-button class="accent cancel-button" (click)="onClose(paymentCardForm)" aria-label="Cancel">
+                Cancel
+            </button>
+
+            <button mat-raised-button mat-button class="accent add-button" (click)="onAdd()" aria-label="Add" [disabled]="isProcessing" >
+                <span *ngIf="!isProcessing">Add</span>
+                <mat-icon *ngIf="isProcessing"><mat-spinner color="warn" diameter="20">
+                </mat-spinner></mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

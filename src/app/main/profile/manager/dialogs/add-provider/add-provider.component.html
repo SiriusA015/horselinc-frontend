@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="intro" fxLayout="column" fxLayoutAlign="start">
+
+        <div class="title-item" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="edit-profile">Add Service Provider</div>
+            <div mat-raised-button class="btn" (click)="closePanel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+        <p class="title-desc">Add a Service Provider to your profile in order to give them the ability to invoice you directly for services they provide. Invoices will ruquire your approval prior ti payment.</p>
+        <p class="title-desc">When a Service provider is added, services don’t have to be scheduled ahead of time in order for the Service Provider to request payment. </p>
+
+        <p class="item-name">Service Provider</p>
+        <div class="item1" style="margin-bottom:10px" fxLayout="row" fxLayoutAlign="space-between center">
+            <span style="margin-left:10px">
+                <img *ngIf="avatarUrl" src="{{serviceProvider.avatarUrl}}" class="avatar small32"/>
+                <img *ngIf="!avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32"/>
+            </span>
+            <input style="margin:0px; padding:0px" placeholder="Search for Provider" [value]="userName" readonly/>
+            <div class="search-icon" style="margin-right:10px" fxFlax="15" (click)="searchProvider()">
+                <mat-icon class="s-24">search</mat-icon>
+            </div>
+        </div>
+
+        <p class="item-name">Service type </p>
+        <mat-select class="shadow p-16 mb-20" [(ngModel)]="serviceType" (ngModelChange)="onServiceTypeChange()" required>
+            <mat-option *ngFor="let item of getServiceTypes()" value="{{item.key}}">{{item.value}}</mat-option>
+            <!-- <mat-option value="trainer">Trainer</mat-option>
+            <mat-option value="farrier">Farrier</mat-option>
+            <mat-option value="vet">Vet</mat-option>
+            <mat-option value="hauling">Hauling</mat-option>
+            <mat-option value="braider">Braider</mat-option>
+            <mat-option value="clipping">Clipping</mat-option>
+            <mat-option value="therapy">Therapy</mat-option>
+            <mat-option value="other">Other</mat-option> -->
+        </mat-select>
+
+        <input *ngIf="customTypeFlag" class="m-0" matInput placeholder="Custom Type" name="customType" [(ngModel)]="customType" autocomplete="off" required/>
+
+    </div>
+    <div class="cancel-save" fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-button class="cancel m-0" (click)="closePanel()">Cancel</button>
+        <button mat-button class="save m-0" (click)="onAddProvider()">Add</button>
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+
+<div class="containter" fxLayout="column" fxLayoutAlign="start start">
+    <div class="title">
+        <div>Edit Service</div>
+    </div>
+    <div class="trainer" *ngIf="request" fxLayout="row" fxLayoutAlign="start center">
+        <img *ngIf="!request.horse.avatarUrl" class="header-image" src="assets/icons/horselinc/ic-manager-green.svg" />
+        <img *ngIf="request.horse.avatarUrl" class="header-image" src="{{request.horse.avatarUrl}}" />
+        <div class="intro">
+            <div class="barn-name"> {{request.horseBarnName}} </div>
+            <div class=""> {{request.horseDisplayName}}</div>
+        </div>
+    </div>
+    <div class="current-services" *ngFor="let service of serviceTrue">
+        <div class="content" fxLayout="row" fxLayoutAlign="space-between center">
+            <div style="padding-top: 5px;"> {{service.service}} </div>
+            <img src="assets/icons/horselinc/filled.svg" (click)="deleteService(service)"/>
+        </div>
+        <div class="price" fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="65">Service Price ${{(service.rate).toFixed(2)}}</div>
+            <div fxFlex="25">Qty</div>
+            <div fxFlex="10"><input type="number" style="width: 30px; padding: 0px; background-color: #fafafa;" [(ngModel)]="service.quantity"  min="1"/></div>
+        </div>
+    </div>
+    <div class="add-service" fxLayout="row" fxLayoutAlign="space-between center"  (click)="openServiceListModal()">
+        <div>Add Another</div>
+        <img src="assets/icons/horselinc/keyboard_arrow_down-24px.svg"/>
+    </div>
+    <div class="action" fxLayout="row" fxLayoutAlign="space-between center">
+        <div matRipple (click)="onSave()">Save</div>
+        <div matRipple (click)="onCancel()">Cancel</div>
+    </div>
+</div>

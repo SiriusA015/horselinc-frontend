@@ -1,0 +1,23 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Avatar Edit</span>
+            <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="avatar-cropper" class="p-0 m-0">
+        <image-cropper [imageChangedEvent]="_data.event" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" [resizeToWidth]="300" format="jpeg" outputType="both" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()">
+        </image-cropper>
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button mat-button class="accent save-button" (click)="onSave()" aria-label="SAVE">
+            SAVE
+        </button>
+
+    </div>
+</div>

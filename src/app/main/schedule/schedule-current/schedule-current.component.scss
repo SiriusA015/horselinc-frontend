@@ -1,0 +1,21 @@
+@import "src/@fuse/scss/fuse";
+
+@include media-breakpoint('xs') {
+    schedule-card {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.date_s {
+    width: 100%;
+    padding-top: 30px;
+    
+    div {
+        height: 30px;
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: 500;
+        color: #5389a0;
+    }
+}

@@ -1,0 +1,16 @@
+@import "src/@fuse/scss/fuse";
+
+apps-calendar {
+
+    .container{
+        background-color: black;
+        width:100px;
+        .calCard{
+            background-color: red;
+        }
+        .special-date {
+            background-color: red;
+        }
+    }
+}
+ 

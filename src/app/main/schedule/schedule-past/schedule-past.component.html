@@ -1,0 +1,18 @@
+<div class="card-content" *ngIf="request">
+    <mat-card class="card">
+        <mat-card-header>
+            <div mat-card-avatar class="header-image"></div>
+            <mat-card-title class="barn-name">{{request.horseBarnName}}</mat-card-title>
+            <mat-card-subtitle class="display-name">{{request.horseDisplayName}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+                <div class="show-name" *ngIf="request.show">{{request.show.name}} - {{request.createdAt}}</div>
+                <div class="service-content" *ngFor="let service of request.services">{{service.service}}(x1)</div>
+                <div fxLayout="row" fxLayoutAlign="start center" class="creator-info">
+                    <img *ngIf="!this.request.creator?.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" />
+                    <img *ngIf="this.request.creator?.avatarUrl" src="{{request.creator?.avatarUrl}}" />
+                    <div class="creator-name" *ngIf="request.creator">{{request.creator.name}} ({{request.creator.barnName}})</div>
+                </div>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,49 @@
+@import 'src/@fuse/scss/fuse';
+horse-manager-list-item {
+    flex-shrink: 0;
+    padding: 16px 24px;
+    border-bottom: 1px solid;
+    border-color: rgba(0, 0, 0, 0.12);
+    font-family: Roboto;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    cursor: pointer;
+    &.unread {
+        .info {
+            .name {
+                font-weight: 700;
+            }
+            .row-2 {
+                .subject {
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+    .info {
+        overflow: hidden;
+        width: 0;
+        margin-left: 16px;
+    }
+    .text1 {
+        width: 180px;
+        height: 20px;
+        font-size: 16px;
+        line-height: 1.25;
+        color: #000000;
+    }
+    .text2 {
+        width: 180px;
+        height: 20px;
+        font-size: 14px;
+        line-height: 1.43;
+        color: rgba(0, 0, 0, 0.37);
+    }
+    .avatar-mini {
+        width: 15px;
+        height: 30px;
+        color: #92A8A8;
+    }
+}

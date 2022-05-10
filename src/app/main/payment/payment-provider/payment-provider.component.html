@@ -1,0 +1,48 @@
+<div class="page-layout carded left-sidebar inner-scroll">
+    <div class="m-0 center">
+        <div class="content-card" [ngClass]="{'current-invoice-selected':currentPaymentFlag != false}">
+            <div class="toolbar px-24 py-8" fxHide fxShow.xs>
+                <div (click)="deselectCurrentInvoice()" class="detail-show" fxLayout="row" fxLayoutAlign="start center"  *ngIf="currentPaymentFlag != false">
+                    <button mat-icon-button >
+                        <mat-icon class="secondary-text">chevron_left</mat-icon>
+                    </button>
+                    <div class="schedule-service" *ngIf="!currentPaymentFlag == false && currentTab==0">
+                        Invoice Draft
+                    </div>
+                    <div class="schedule-service" *ngIf="!currentPaymentFlag == false && currentTab!=0">
+                        Invoice Detail
+                    </div>
+                </div>
+                <div class="schedule-service" *ngIf="currentPaymentFlag == false">
+                        Payments
+                </div>
+            </div>
+            <div class="content" fxFlexAlign="row">
+                <payment-provider-list ></payment-provider-list>
+                <payment-provider-details fxFlex></payment-provider-details>
+            </div>
+        </div>
+    </div>
+</div>
+
+<fuse-sidebar name="payment-provider-create-panel" class="payment-provider-create-sidebar" position="right" [invisibleOverlay]="false">
+    <create-dialog></create-dialog>
+</fuse-sidebar>
+<fuse-sidebar name="payment-provider-edit-panel" class="payment-provider-edit-sidebar" position="right" [invisibleOverlay]="false">
+    <edit-dialog></edit-dialog>
+</fuse-sidebar>
+<fuse-sidebar name="payment-provider-showSearch-panel" class="payment-provider-showSearch-panel" position="right" [invisibleOverlay]="false">
+    <add-new-service></add-new-service>
+</fuse-sidebar>
+<fuse-sidebar name="payment-provider-export-invoice" class="payment-provider-export-invoice" position="right" [invisibleOverlay]="false">
+    <payment-provider-export-invoice> </payment-provider-export-invoice>
+</fuse-sidebar>
+<fuse-sidebar name="payment-provider-searchmanager" class="payment-provider-searchmanager" position="right" [invisibleOverlay]="false">
+    <payment-provider-search-manager> </payment-provider-search-manager>
+</fuse-sidebar>
+<fuse-sidebar name="invoice-confirm-panel" class="invoice-confirm-panel" position="right" [invisibleOverlay]="false">
+    <invoice-confirm> </invoice-confirm>
+</fuse-sidebar>
+<fuse-sidebar name="invoice-horse-profile-panel" class="invoice-horse-profile-panel" position="right" [invisibleOverlay]="false">
+    <invoice-horse-profile> </invoice-horse-profile>
+</fuse-sidebar>

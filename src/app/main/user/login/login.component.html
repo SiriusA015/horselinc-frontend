@@ -1,0 +1,29 @@
+<div id="user-login" class="page-layout simple fullwidth">
+
+    <!-- HEADER -->
+    <div class="title">
+            <img src="assets/images/logos/horselinc.svg"/>
+    </div>
+    <!-- / HEADER -->
+        
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="login">
+            <form id="login-form" name="loginForm" [formGroup]="loginForm" novalidate autocomplete="off" >
+                <input  matInput formControlName="email" type="email" placeholder="Enter your email" autocomplete="off" value=""/>
+                <input matInput formControlName="password" type="password" placeholder="Enter your password"  autocomplete="off" value=""/>
+                <button mat-raised-button color="warn" (click)="login()" [disabled]="loginForm.invalid" >
+                    <span *ngIf="!isProcessing">LOG IN</span>
+                    <mat-icon *ngIf="isProcessing"><mat-spinner color="warn" diameter="20">
+                    </mat-spinner></mat-icon>
+                </button>
+
+                <!-- routerLink="/horse/manager" -->
+                <p style="cursor:pointer; text-align:center; margin-top:40px; margin-bottom:26px"><a class="forget-password" routerLink="/user/resetpassword">Forgot password?</a></p>
+                <p style="cursor:pointer; text-align:center; margin-bottom:30px">Don't have an account? <a class="signup" (click)="register()">Sign Up</a></p>
+                <!-- routerLink="/user/register" -->
+            </form>
+        </div>
+    </div>
+    <!-- /CONTENT -->
+</div>

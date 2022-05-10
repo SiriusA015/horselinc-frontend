@@ -1,0 +1,40 @@
+<div class="page-layout carded left-sidebar inner-scroll">
+    <div class="center">
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" [ngClass]="{'current-provider-selected':currentHorseFlag != false}">
+
+            <div *ngIf="disFlag">
+                <div class="back" fxHide fxShow.xs fxLayout="row" fxLayoutAlign="start center" *ngIf="currentHorseFlag != false" (click)="gotoList()">
+                    <mat-icon class="text1 red-color">chevron_left</mat-icon>
+                    <span class="text1 red-color">Manager Horse</span>
+                </div>
+            </div>
+            <div class="content" fxLayout="row">
+                <horse-provider-list *ngIf="disFlag"></horse-provider-list>
+                <horse-provider-list *ngIf="!disFlag" fxFlex="100"></horse-provider-list>
+                <horse-provider-details *ngIf="disFlag" fxFlex></horse-provider-details>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+    <fuse-sidebar name="horse-provider-private-panel" class="horse-provider-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-provider-private class="h-100-p"></horse-provider-private>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-provider-invoice-panel" class="horse-provider-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-provider-invoice class="h-100-p"></horse-provider-invoice>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-provider-confirm-panel" class="horse-provider-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-provider-confirm class="h-100-p"></horse-provider-confirm>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-provider-search-panel" class="horse-provider-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-provider-search class="h-100-p"></horse-provider-search>
+    </fuse-sidebar>
+    <fuse-sidebar name="invoice-horse-profile-panel" class="horse-provider-sidebar" position="right" [invisibleOverlay]="false">
+        <invoice-horse-profile class="h-100-p"></invoice-horse-profile>
+    </fuse-sidebar>
+</div>

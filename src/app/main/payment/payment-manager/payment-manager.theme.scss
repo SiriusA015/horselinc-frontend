@@ -1,0 +1,98 @@
+@mixin payment-manager-theme($theme) {
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+    $accent: map-get($theme, accent);
+    $is-dark: map-get($theme, is-dark);
+
+    payment-manager {
+
+        .center {
+
+            .header {
+
+                .search-wrapper {
+                    background: map-get($background, card);
+
+                    .sidebar-toggle {
+                        border-right-color: map-get($foreground, divider);
+                    }
+
+                    .search {
+
+                        input {
+                            background: map-get($background, card);
+                            color: map-get($foreground, text);
+                        }
+                    }
+                }
+            }
+
+            .content-card {
+
+                .toolbar {
+
+                    .toolbar-separator {
+                        background: map-get($foreground, divider);
+                    }
+                }
+            }
+        }
+    }
+
+    payment-manager-list {
+        border-right-color: map-get($foreground, divider);
+    }
+
+    payment-manager-list-item {
+        border-bottom-color: map-get($foreground, divider);
+
+        .tags {
+
+            .tag {
+                background-color: rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        &.completed {
+            @if ($is-dark) {
+                background: map-get($background, background);
+            } @else {
+                background: #EFEFEF;
+            }
+
+            .title,
+            .notes {
+                color: map-get($foreground, secondary-text);
+            }
+        }
+
+        &.current-payment-manager {
+            // opacity: 0.2;
+            background: rgba(39, 197, 200, 0.2);//map-get($background, hover);
+        }
+
+        &.selected {
+            @if ($is-dark) {
+                background: map-get($background, background);
+            } @else {
+                background: map-get($accent, 50);
+            }
+        }
+    }
+
+    // Payment details
+    payment-manager-details {
+
+        .payment-manager-header {
+            background: map-get($background, background);
+            border-bottom-color: map-get($foreground, divider);
+        }
+
+        .payment-manager-header {
+
+            .tag {
+                background-color: rgba(0, 0, 0, 0.08);
+            }
+        }
+    }
+}

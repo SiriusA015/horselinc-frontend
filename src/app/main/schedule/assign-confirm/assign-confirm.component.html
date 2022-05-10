@@ -1,0 +1,53 @@
+<div fxLayout="column" >
+    <div *ngIf="addRequest" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign = "space-between center">
+            <div class="title black-green-color pt-8 pb-20">
+                Confirm
+            </div>
+            <div (click)="confirmCancel()"> 
+                <img class="btn-close" src="assets/icons/horselinc/filled.svg"/>
+            </div>
+        </div>
+        <div fxLayout="column" class="text-box2">
+            <span class="text-box1 text2 black-green-color">Date</span>
+            <span class="text-box1 text2 black-color">{{addRequest.requestDate | date : 'fullDate'}}</span>
+        </div>
+        <div fxLayout="column" class="text-box2">
+            <span class="text-box1 text2 black-green-color">Show</span>
+            <span class="text-box1 text2 black-color">{{addRequest.show?.name}}</span>
+        </div>
+        <div fxLayout="column" class="text-box2">
+            <span class="text-box1 text2 black-green-color">Class</span>
+            <span  class="text-box1 text2 black-color">{{addRequest.competitionClass}}</span>
+        </div>
+        <div fxLayout="column" class="text-box2">
+            <span class="text-box1 text2 black-green-color">Service provider</span>
+            <span  class="text-box1 text2 black-color">{{addRequest.serviceProvider?.name}}</span>
+        </div>
+        <div fxLayout="column" class="text-box2">
+            <span class="text-box1 text2 black-green-color">Reassigned to</span>
+            <span  class="text-box1 text2 black-color">{{addRequest.assigner?.name}}</span>
+        </div>
+        <div fxLayout="column" class="text-box2">
+            <span class="text-box1 text2 black-green-color">Services</span>
+            <div *ngFor="let service of addRequest.services" class="text-box1 text2 black-color" fxLayout="row" fxLayoutAlign="space-between start">
+                <span fxFlex="80">{{service.service}} (x{{service.quantity}})</span>
+                <span>${{(service.rate).toFixed(2)}}</span>
+            </div>
+        </div>
+    </div>   
+    <div class="cancel-save" >
+        <div fxLayout="row">
+            <div mat-ripple class="m-8 mb-16 btn-ctrl white-color" (click)="confirmCancel()" fxLayoutAlign="center center">
+                <span class="text1 green-color" style="cursor: pointer;">
+                    Cancel
+                </span>
+            </div>
+            <div mat-ripple class="m-8 mb-16 btn-ctrl red-color" (click)="confirmSave()" fxLayoutAlign="center center">
+                <span class="text1 white-color" style="cursor: pointer;">
+                    Confirm
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

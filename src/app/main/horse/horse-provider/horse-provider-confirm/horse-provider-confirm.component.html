@@ -1,0 +1,80 @@
+<div *ngIf="horse" class="container" fxLayout="column" fxLayoutAlign="start space-between">
+    <div class="content" fxLayout="column">
+        <div class="title" fxLayout="row" fxLayoutAlign="space-between center">
+            <div>Confirm</div>
+            <div class="button-div" (click)="ConfirmCancel()">
+                <img src="assets/icons/horselinc/filled.svg" />
+            </div>
+        </div>
+        <div class="format1">
+            <div class="txt1">HORSE</div>
+            <div class="txt2">{{horse.horseBarnName}}<span>"  {{horse.horseDisplayName}}"</span></div>
+        </div>
+
+        <div *ngIf="providerHorse.trainer" class="format1">
+            <div class="txt1">TRAINER</div>
+            <div class="txt2">{{providerHorse.trainer.name}}</div>
+        </div>
+        <div *ngIf="providerHorse.owners" class="format1">
+            <div class="txt1">OWNER(S)</div>
+            <div *ngFor="let owner of providerHorse.owners" fxLayout="column">
+                <div class="txt2">{{owner.name}}</div>
+            </div>
+        </div>
+
+        <div *ngIf="providerHorse.leaser" class="format1">
+            <div class="txt1">LEASED TO</div>
+            <div class="txt2">{{providerHorse.leaser.name}}</div>
+        </div>
+
+        <div class="format1">
+            <div class="txt1">DATE</div>
+            <div class="txt2">{{ horse.requestDate | date:'fullDate' }}</div>
+        </div>
+        <div *ngIf="horse.show.name || horse.showName" class="format1">
+            <div class="txt1">SHOW</div>
+            <div class="txt2" *ngIf="horse.show.name">{{horse.show.name}}</div>
+            <div class="txt2" *ngIf="horse.showName">{{horse.showName}}</div>
+        </div>
+        <div class="format2">
+            <div class="txt1">SERVICE</div>
+            <div *ngFor="let service of dataServices" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="txt2">{{service.service}} (x{{service.quantity}})</div>
+                <div class="txt2"> $ {{(service.rate*service.quantity).toFixed(2)}}</div>
+            </div>
+        </div>
+        <div class="format1" *ngIf="horse.competitionClass">
+            <div class="txt1">COMPETITION CLASS</div>
+            <div class="txt2">{{horse?.competitionClass}}</div>
+        </div>
+        <div class="format1">
+            <div class="txt1">TOTAL</div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="txt2 green-color">{{serviceNum}} Service{{serviceNum >1?'s':''}}</div>
+                <div class="txt2">$ {{invoiceTotal.toFixed(2)}}</div>
+            </div>
+        </div>
+        <div class="format1" *ngIf="horse.providerNote">
+            <div class="txt1">A NOTE TO THE HORSE MANAGERS</div>
+            <div class="txt2">{{horse?.providerNote}}</div>
+        </div>
+
+        <div class="sum" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="txt3 green-color"> TOTAL</div>
+            <div class="txt3"> $ {{invoiceTotal}}</div>
+        </div>
+
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <button mat-button class="submit-button huge red-color pointer" (click)="ConfirmSubmit()" [disabled]="isLogging || isLogging1">
+            Confirm & Submit Invoice
+            <mat-icon *ngIf="isLogging" ><mat-spinner color="warn" diameter="20">
+            </mat-spinner></mat-icon>
+        </button>
+        <button mat-button class="submit-button huge white-color pointer" (click)="ConfirmSave()" [disabled]="isLogging1 || isLogging">
+            Save to Drafts
+            <mat-icon *ngIf="isLogging1"><mat-spinner color="warn" diameter="20">
+            </mat-spinner></mat-icon>
+        </button>
+    </div>
+</div>

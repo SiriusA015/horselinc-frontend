@@ -1,0 +1,98 @@
+<div *ngIf="!disFlag" class="empty-page" fxLayout="column" fxLayoutAlign="center center">
+    <img src="assets/icons/horselinc/ic-manager.svg" class="avatar huge">
+    <div class="text">
+        No horses available at this time
+    </div>
+    <div fxLayout="row" class="empty-horse-button">
+        <!-- <div mat-raised-button class="button-active filter-button pointer " (click)="horseFilter()" fxLayoutAlign="center center">
+            <span class="text-16 green-color"> Filter</span>
+            <img *ngIf="filter-flag" src="assets/icons/horselinc/done-24px.svg">
+        </div> -->
+        <button mat-button class="text-16 button-active profile-button pointer" [disabled]="isLogging2" (click)="newHorseProfile()">
+            New Horse Profile
+        </button>
+    </div>
+</div>
+<div *ngIf="disFlag" class="horse-list" fxLayout="column">
+    <div class="search text-box1 input-color" div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="10">
+            <img src="assets/icons/horselinc/search.svg" class=" pointer button-div avatar small" />
+        </div>
+        <div fxFlex="80">
+            <input [(ngModel)]="userQuestion" fxFlex (ngModelChange)="this.userQuestionUpdate.next($event)" class="text-16 input-color p-0" placeholder="Search for horse name,trainer name,barn name" />
+        </div>
+        <mat-icon *ngIf="isLogging">
+            <mat-spinner color="warn" diameter="20">
+            </mat-spinner>
+        </mat-icon>
+    </div>
+    <div fxLayout="row" *ngIf="findErr" fxLayoutAlign="center center">
+        <div class="text-14 green-color mt-20">No items match your search</div>
+    </div>
+    <div class="list-box" fxLayout="column">
+        <div class="horse-list-item" [@animateStagger]="{value:'50'}" infiniteScroll [infiniteScrollContainer]="'.list-box'" [infiniteScrollThrottle]="1000" [infiniteScrollDistance]="2" [fromRoot]="true" (scrolled)="onScrollDown()">
+            <horse-manager-list-item mat-button *ngFor="let horse of disHorses" [horse]="horse" (click)="readHorse(horse?.uid)" [ngClass]="{'current-horsemanager':horse?.uid == currentHorse?.uid}" [@animate]="{value:'*',params:{y:'100%'}}">
+            </horse-manager-list-item>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon *ngIf="isLogging1">
+                    <mat-spinner color="warn" diameter="20">
+                    </mat-spinner>
+                </mat-icon>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="row" class="pofile-filter-button">
+        <button mat-button class="text-16 button-active filter-button pointer" (click)="horseFilter()" fxLayoutAlign="center center">
+            Filter
+            <img *ngIf="filterFlag" src="assets/icons/horselinc/done-24px.svg">
+        </button>
+        <button mat-button class="text-16 button-active profile-button pointer" [disabled]="isLogging2" (click)="newHorseProfile()">
+            New Horse Profile
+        </button>
+    </div>
+</div>
+<!------------------------------filter modal--------------------------------->
+<div class="filter-modal" fxHide="{{toggle}}" [ngClass]="{'empty-filter-modal':disFlag == false}">
+    <div class="modal" fxLayout="column" fxLayoutAlign="start start">
+        <div class="rect">
+            <div class="flat" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="filters">Filters</div>
+                <div (click)="horseFilter()" class="pointer">
+                    <img src="assets/icons/horselinc/filled.svg" class="Filled button-div" />
+                </div>
+            </div>
+            <div class="box">
+                <div style="width: 30%;">Sort by</div>
+                <div style="width: 70%;">
+                    <mat-select [(value)]="sort">
+                        <mat-option *ngFor="let data of sortBy" [value]="data" style="color: #27c5c8;">
+                            {{data}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="flat">
+                <div class="Show-only">Show Only</div>
+            </div>
+            <div class="box pointer" fxLayout="row" mat-raised-button (click)="ownerSelect()" fxLayoutAlign="space-between center">
+                <div *ngIf="selectOwner?.userId==''" fxFlex="75">Owner</div>
+                <div *ngIf="selectOwner?.userId!=''" fxFlex="75">{{selectOwner?.name}}</div>
+                <img src="assets/icons/horselinc/keyboard_arrow_down-24px.svg">
+            </div>
+            <div class="box pointer" fxLayout="row" mat-raised-button (click)="trainerSelect()" fxLayoutAlign="space-between center">
+                <div *ngIf="selectTrainer?.userId==''" fxFlex="75">Trainer</div>
+                <div *ngIf="selectTrainer?.userId!=''" fxFlex="75">{{selectTrainer?.name}}</div>
+                <img src="assets/icons/horselinc/keyboard_arrow_down-24px.svg">
+            </div>
+            <div class="flat" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="service-scheduled" style="width: 90%;"> Services Scheduled </div>
+                <mat-slide-toggle [(ngModel)]="checked" style="width: 10%;"></mat-slide-toggle>
+            </div>
+            <div class="action" fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-button class="clear-apply-button clear pointer" (click)="filterClear()">Clear</button>
+                <button mat-button class="clear-apply-button apply pointer" (click)="filterApply()">Apply</button>
+            </div>
+        </div>
+        <div class="arrow-down mr-30"></div>
+    </div>
+</div>

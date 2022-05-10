@@ -1,0 +1,29 @@
+<div id="user-register" class="page-layout simple fullwidth">
+
+    <!-- HEADER -->
+    <div class="title">
+            <img src="assets/images/logos/horselinc.svg"/>
+    </div>
+    <!-- / HEADER -->
+        
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="register">
+            <form id="register-form" name="registerForm" [formGroup]="registerForm" autocomplete="off" novalidate>
+                <input  matInput formControlName="email" type="email" placeholder="Enter your email" autocomplete="off" value=""/>
+                <!-- <mat-error *ngIf="loginForm.get('email').hasError('required')">Email is required</mat-error> -->
+                <input matInput formControlName="password" type="password" placeholder="Enter your password"  autocomplete="off" value=""/>
+                
+                <!-- [disabled]="registerForm.invalid" -->
+                <button mat-raised-button color="warn" (click)="register()" [disabled]="registerForm.invalid" >
+                    <span *ngIf="!isProcessing">SIGNUP</span>
+                    <mat-icon *ngIf="isProcessing"><mat-spinner color="warn" diameter="20">
+                        </mat-spinner></mat-icon>        
+                </button>
+                <button mat-raised-button class="login-instead" type="" routerLink="/user/login">LOG IN INSTEAD</button>
+    
+            </form>
+        </div>
+    </div>
+    <!-- /CONTENT -->
+</div>

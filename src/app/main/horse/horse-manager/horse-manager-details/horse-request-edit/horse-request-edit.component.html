@@ -1,0 +1,13 @@
+<div fxLayout="column" class="container">
+    <div class='title' fxLayoutAlign="center start"> Service Request Options </div>
+    <div *ngIf="flag" class="button">
+        <div mat-raised-button (click)="onEdit()" class="button pointer">Edit</div>
+    </div>
+    <div class="button">
+        <div mat-raised-button (click)="onDelete()" class="button pointer">Delete</div>
+    </div>
+    <div fxLayoutAlign="end end">
+        <div mat-raised-button (click)="onClose()" class="button black-green-color pointer">CANCEL</div>
+    </div>
+
+</div>

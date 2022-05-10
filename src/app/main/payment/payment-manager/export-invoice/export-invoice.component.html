@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="intro" fxLayout="column" fxLayoutAlign="start">
+        <div class="title-item" fxLayout="row" fxLayoutAlign="space-between center" >
+            <div class="edit-profile">Export Payment History</div>
+            <div mat-raised-button class="btn" (click)="closePanel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+
+        <p class="item-name">Service</p>
+        <mat-select class="shadow p-16 mb-20" [(value)]="serviceType">
+            <mat-option value="0">All Payments</mat-option>   
+            <mat-option value="1"> Outstanding Payments </mat-option>
+            <mat-option value="2"> Completed Payments </mat-option>   
+        </mat-select>
+
+        <p class="item-name">Invoice Date(s)</p>
+        <div class="item2 mb-20" fxLayout="column" fxLayoutAlign="space-between center">
+            <div class="date-containter" fxLayout="row" fxLayoutAlign="space-between center" (click)="picker1.open()">
+                <span fxFlex="15">
+                    From:
+                </span>
+                <input class="date-input" matInput [(ngModel)]="startDate" [matDatepicker]="picker1" placeholder="MM/DD/YYYY" readonly>
+                <div fxFlax="15">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </div>
+            </div> 
+            <mat-divider style="width:95%"></mat-divider>
+            <div class="date-containter" fxLayout="row" fxLayoutAlign="space-between center" (click)="picker2.open()">
+                <span fxFlex="15">
+                    To:
+                </span>
+                <input class="date-input" matInput [(ngModel)]="endDate" [matDatepicker]="picker2" placeholder="MM/DD/YYYY" readonly>
+                <div fxFlax="15">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </div>
+            </div>     
+        </div>
+        
+        <p class="item-name">Service Providers</p>
+        <div class="item1 mb-5" fxLayout="row" fxLayoutAlign="space-between center" (click)="searchProvider('provider')">
+            <input class="pointer m-0 p-0" placeholder="Tap To Search" readonly/>
+            <div class="ic-search mr-10" fxFlax="15" >
+                <mat-icon class="s-24">search</mat-icon>
+            </div>
+        </div>
+        <div *ngIf="serviceProviders.length>0" class="item1 mb-10">
+            <div class="search-list" *ngFor="let provider of serviceProviders"  fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="mt-10 mb-10" fxFlex="85" fxLayout="row" fxLayoutAlign="start center">
+                    <img src="{{(provider.avatarUrl)? provider.avatarUrl : 'assets/icons/horselinc/ic-profile.svg' }}" class="avatar small32"/>
+                    <div> {{provider.name}} </div>
+                </div>
+                <div class="ic-search mr-10 pointer" fxFlax="15" (click)="delete(provider)">
+                    <mat-icon class="s-24">delete</mat-icon>
+                </div>
+            </div>
+        </div>
+
+        <p class="item-name">Horses</p>
+        <div class="item1 mb-5" fxLayout="row" fxLayoutAlign="space-between center" (click)="searchProvider('horse')">
+            <input class="m-0 p-0 pointer" placeholder="Tap To Search" readonly/>
+            <div class="ic-search mr-10" fxFlax="15" >
+                <mat-icon class="s-24">search</mat-icon>
+            </div>
+        </div>
+        <div *ngIf="horses.length>0" class="item1 mb-10">
+            <div class="search-list" *ngFor="let horse of horses"  fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="mt-10 mb-10" fxFlex="85" fxLayout="row" fxLayoutAlign="start center">
+                    <img src="{{(horse.avatarUrl)? horse.avatarUrl : 'assets/icons/horselinc/ic-profile.svg' }}" class="avatar small32"/>
+                    <div> {{horse.barnName}} </div>
+                </div>
+                <div class="ic-search mr-10" fxFlax="15" (click)="deleteHorse(horse)">
+                    <mat-icon class="s-24">delete</mat-icon>
+                </div>
+            </div>
+        </div>
+
+        <div class="cancel-save" fxLayout="row" fxLayoutAlign="center">
+            <button mat-button class="save m-0" (click)="exportInvoicePayment()" [disabled]="isLogging"> Export Invoices
+                <mat-icon *ngIf="isLogging" ><mat-spinner color="white" diameter="20">
+                </mat-spinner></mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

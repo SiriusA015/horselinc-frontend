@@ -1,0 +1,71 @@
+<div class="page-layout carded left-sidebar inner-scroll">
+
+    <div class="content-card" >
+        <div class="toolbar" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="schedule-title"> Schedule </div>
+            <div class="update-date" *ngIf="whichTab && currentRequestList.length > 0 " fxHide.xs>Last update: {{curRequestListLastUpdate}}</div>
+            <div class="update-date" *ngIf="!whichTab && pastRequestList.length > 0" fxHide.xs>Last update: {{pastRequestListLastUpdate}}</div>
+        </div>
+
+        <div class="content">
+            <mat-tab-group (selectedTabChange)="selectTab($event)" >
+                <mat-tab label="Current" >
+                    <div class="no-requests" *ngIf="currentRequestList.length==0 && !isLoadingCurrent"> No requests available at this time </div>
+                    <div class="update-date-mobile" *ngIf="currentRequestList.length > 0 " fxHide  fxShow.xs>Last update: {{curRequestListLastUpdate}}</div>
+                    <div class="current-tab" *ngFor="let currentRequest of currentRequestList"  infiniteScroll [infiniteScrollDistance]="2" [fromRoot]="true" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()" [scrollWindow]="false">
+                        <div class="request-date" *ngIf="currentRequest.displayOpt">{{currentRequest.displayOpt}}</div>
+                        <div class="request-date">{{currentRequest.displayDate}}</div>
+                        <div class="request-list">
+                            <schedule-current *ngFor="let request of currentRequest.requestList"
+                                [request]="request"
+                                [reservation]="currentRequest.displayOpt">
+                            </schedule-current>
+                        </div>
+                    </div>
+                    <div class="ic-loading" *ngIf="isLoadingCurrent">
+                        <mat-icon ><mat-spinner color="warn" diameter="20">
+                        </mat-spinner></mat-icon>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Past">
+                    <div class="no-requests" *ngIf="pastRequestList.length==0 && !isLoadingPast"> No requests available at this time </div>
+                    <div class="update-date-mobile" *ngIf="pastRequestList.length > 0" fxHide  fxShow.xs>Last update: {{pastRequestListLastUpdate}}</div>
+                    <div class="past-tab" infiniteScroll [infiniteScrollDistance]="2" [fromRoot]="true" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()" [scrollWindow]="false">
+                        <div *ngFor="let pastRequest of pastRequestList" >
+                            <div class="request-date">{{pastRequest.displayDate}}</div>
+                            <div class="request-list">
+                                <schedule-current *ngFor="let request of pastRequest.requestList"
+                                    [request]="request"
+                                    [reservation]="pastRequest.displayOpt">
+                                </schedule-current>
+                            </div>
+                        </div>
+                    </div>
+                    <schedule-filter-dialog class="filter"></schedule-filter-dialog>
+                    <div class="ic-loading" *ngIf="isLoadingPast">
+                        <mat-icon><mat-spinner color="warn" diameter="20">
+                        </mat-spinner></mat-icon>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+
+    <fuse-sidebar  name="schedule-assign-panel" class="schedule-assign-panel" position="right" [invisibleOverlay]="false">
+        <schedule-assign></schedule-assign>
+    </fuse-sidebar>
+    <fuse-sidebar  name="assign-confirm-panel" class="assign-confirm-panel" position="right" [invisibleOverlay]="false">
+        <assign-confirm></assign-confirm>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-show-search-panel" class="schedule-search-panel" position="right" [invisibleOverlay]="false">
+        <horse-show-search></horse-show-search>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-search-service-panel" class="horse-search-service-panel" position="right" [invisibleOverlay]="false">
+        <horse-search-service></horse-search-service>
+    </fuse-sidebar>
+    <fuse-sidebar name="schedule-addServices-panel" class="schedule-addServices-panel" position="right" [invisibleOverlay]="false">
+        <add-services></add-services>
+    </fuse-sidebar>
+    
+</div>

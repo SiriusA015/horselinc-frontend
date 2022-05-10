@@ -1,0 +1,100 @@
+<div id="profile-payment" fxLayout="column">
+    <!-- CONTENT -->
+    <div class="title" fxLayout="row" fxLayoutAlign="space-between center">
+        <p class="label">Edit payment Information</p>
+    </div>
+
+    <div class="content">
+        <div class="card-list">
+            <table class="card">
+                <tr *ngFor="let item of this.user?.horseManager?.customer?.cards">
+                    <td class="column1"><img src="assets/icons/stripcard/{{item.brand}}.svg" /></td>
+                    <td class="column2">{{item.brand}} {{item.last4}}</td>
+                    <td class="column3">
+                        <mat-icon style="cursor:pointer;" *ngIf="item.id !== this.user?.horseManager?.customer.defaultSource" (click)="onDeletePaymentCard(item)">remove_circle_outline</mat-icon>
+                        <mat-radio-button style="margin-left:10px; margin-bottom: 2px;" value="online" [checked]="item.id === this.user?.horseManager?.customer.defaultSource" (change)="onChangeDefaultCard(item)"></mat-radio-button>
+                    </td>
+                </tr>
+            </table>
+            <div class="card-add">
+                <p style="cursor:pointer;" (click)="onAddPaymentCard()">Add New Card</p>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="payment">
+            <div class="approver">
+                <p class="approver-title">Payment approvers</p>
+                <p class="approver-desc">These Horse Managers can approve payments to Service Providers on your behalf (up to a specified dollar value). </p>
+
+                <!-- [@animateStagger]="{value:'50'}" -->
+                <mat-table class="approver-list" #table [dataSource]="paymentApproversData">
+                    <!-- service Column -->
+                    <ng-container matColumnDef="avatar">
+                        <mat-header-cell *matHeaderCellDef>Avatar</mat-header-cell>
+                        <div class="column1" *matCellDef="let paymentApprover">
+                            <img *ngIf="paymentApprover.avatarUrl" src="{{paymentApprover.avatarUrl}}" class="avatar small32" />
+                            <img *ngIf="!paymentApprover.avatarUrl" src="assets/icons/horselinc/avatar-placeholder.png" class="avatar small32" />
+                        </div>
+                    </ng-container>
+                    <!-- rate Column -->
+                    <ng-container matColumnDef="name-amount">
+                        <mat-header-cell *matHeaderCellDef>Name-Amount</mat-header-cell>
+                        <div class="column2" *matCellDef="let paymentApprover">
+                            <p class="name">{{paymentApprover.name}}</p>
+                            <p class="amount" *ngIf="paymentApprover.amount==0">(Unlimited)</p>
+                            <p class="amount" *ngIf="paymentApprover.amount!=0">(up to ${{paymentApprover.amount}})</p>
+                        </div>
+                    </ng-container>
+
+                    <ng-container matColumnDef="edit-buttons">
+                        <mat-header-cell *matHeaderCellDef>Edit Actions</mat-header-cell>
+                        <div class="column3" *matCellDef="let paymentApprover">
+                            <div fxFlex="row" fxLayoutAlign="center center">
+                                <!-- <mat-icon aria-label="" (click)="$event.stopPropagation(); editPaymentApprover(paymentApprover)">edit</mat-icon> -->
+                                <mat-icon style="cursor:pointer;" class="editIcon s-20" (click)="$event.stopPropagation();editPaymentApprover(paymentApprover)">edit</mat-icon>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container matColumnDef="delete-buttons">
+                        <mat-header-cell *matHeaderCellDef>Delete Actions</mat-header-cell>
+                        <div class="column4" *matCellDef="let paymentApprover">
+                            <div fxFlex="row" fxLayoutAlign="center center">
+                                <!-- <mat-icon aria-label="" (click)="$event.stopPropagation(); deletePaymentApprover(paymentApprover)">delete</mat-icon> -->
+                                <mat-icon style="cursor:pointer;" class="editIcon s-20" (click)="$event.stopPropagation();deletePaymentApprover(paymentApprover)">close</mat-icon>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <!-- <mat-header-row *matHeaderRowDef="providerServiceDataColumns"></mat-header-row>     -->
+                    <mat-row *matRowDef="let paymentApprover; columns: paymentApproversDataColumns;" (click)="editPaymentApprover(paymentApprover)" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+                    </mat-row>
+                </mat-table>
+                <button mat-raised-button class="approver-btn" type="" (click)="addPaymentApprover()">Add Payment Approver</button>
+            </div>
+
+            <div class="auth">
+                <p class="auth-title">Authorized to Approve Payments</p>
+                <p class="auth-desc">These Horse Managers have added you as a payment approver. </p>
+                <div class="item">
+                    <!-- <img class="avatar" src="assets/images/avatars/alice.jpg" /> -->
+                    <div class="name_desc">
+                        <div class="name">Eliza McGee</div>
+                        <div class="desc">(up to $500)</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <!-- <img class="avatar" src="assets/images/avatars/alice.jpg" /> -->
+                    <div class="name_desc">
+                        <div class="name">Eliza McGee</div>
+                        <div class="desc">(up to $500)</div>
+                    </div>
+                </div>
+                <button mat-raised-button class="auth-btn" type="">Request Authorization</button>
+            </div>
+        </div>
+    </div>
+    <!-- /CONTENT -->
+</div>

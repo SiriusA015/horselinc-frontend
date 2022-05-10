@@ -1,0 +1,159 @@
+@import 'src/@fuse/scss/fuse';
+
+payment-manager-list-item {
+    display: block;
+    position: relative;
+    margin: 10px 0px 20px 0px;
+    border-bottom: 0px solid;
+    text-transform: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: Roboto;
+
+    .rectangle {
+        width: 100%;
+        min-height: 160px;
+        height: auto;
+        padding: 5px;
+        box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    &.move-disabled {
+        .handle {
+            display: none;
+        }
+    }
+    .tags {
+        .money {
+            float:right;
+            padding-top:5px;
+            width: 59px;
+            height: 20px;
+            font-size: 16px;
+            text-align: right;
+        }
+        .money1 {
+            float:right;
+            padding-top:5px;
+            width: 59px;
+            height: 20px;
+            font-size: 16px;
+            text-align: right;
+        }
+        .oval {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+          }
+        .tag {
+            font-size: 11px;
+            border-radius: 2px;
+            margin: 8px 4px 0 0;
+            padding: 3px 8px;
+            .ic-manager-green {
+                width: 56px;
+                height: 56px;
+                object-fit: contain;
+              }
+            .tag-color {
+                width: 8px;
+                height: 8px;
+                margin-right: 8px;
+                border-radius: 50%;
+            }
+        }
+    }
+    &.completed {
+        .title,
+        .notes {
+            text-decoration: line-through;
+        }
+    }
+    .info {
+        margin: 0 16px 0 20px;
+        @include media-breakpoint('lt-md') {
+            margin: 0 5px 0 10px;
+        }
+        .arrow-forward {
+            width: 15px;
+            height: 30px;
+            color: #92A8A8;
+        }
+        .title {
+            flex:1;
+            height: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 10px;
+            color: #000000;
+            overflow: hidden;
+            .provider-name {
+                font-weight: bold; 
+                font-size: 16px; 
+                overflow: hidden;
+            }
+            .title-date {
+                height: 20px;
+                font-size: 12px;
+                text-align: right;
+            }
+            .title-money {
+                font-size: 16px;
+                @include media-breakpoint('lt-md') {
+                    font-size: 14px;
+                }
+            }
+        }
+        .tags {
+            height: 30px;
+            margin: 10px;
+
+            .tag-label {
+                margin-left: 10px;
+                height: 20px;
+                font-size: 16px;
+                color: #000000;
+            }
+        }
+        .notes {
+            width: 180px;
+            display:block;
+            margin-left: 10px;
+            margin-top: 10px;
+            height: 20px;
+            font-size: 14px;
+            line-height: 1.43;
+            color: #000000;
+            overflow: hidden;
+        }
+        .ic-arrow {
+            float:right; 
+            padding:10px;
+        }
+        .duration {
+            height: 20px;
+            margin-left: 10px;
+            width: 200px;
+            font-size: 12px;
+        }
+    }
+    .buttons {
+        .is-starred {
+            margin: 0 0 0 16px;
+        }
+        .is-important {
+            margin: 0;
+        }
+    }
+    &:not(.has-handle):not(.move-disabled),
+    &.has-handle [ngxdraghandle],
+    &.has-handle [ngxDragHandle] {
+        cursor: move;
+    }
+    .red-color {
+        color: #ec7185;
+    }
+    .green-color {
+        color: #76BFC5;
+    }
+}

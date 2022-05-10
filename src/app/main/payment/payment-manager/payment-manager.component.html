@@ -1,0 +1,29 @@
+<div class="page-layout carded left-sidebar inner-scroll">
+    <div class="m-0 center">
+        <div class="content-card" [ngClass]="{'current-payment-selected':currentPaymentFlag != false}">
+            <div class="toolbar px-24 py-8" fxHide fxShow.xs>
+                <div (click)="deselectCurrentPayment()"  *ngIf="currentPaymentFlag !== false" class="detail-show" fxLayout="row" fxLayoutAlign="start center">
+                    <button mat-icon-button >
+                        <mat-icon class="secondary-text">chevron_left</mat-icon>
+                    </button>
+                    <div class="schedule-service">
+                        Invoice Detail
+                    </div>
+                </div>
+                <div class="schedule-service" *ngIf="currentPaymentFlag == false">
+                        Payments
+                </div>
+            </div>
+            <div class="content" fxFlexAlign="row">
+                <payment-manager-list ></payment-manager-list>
+                <payment-manager-details fxFlex></payment-manager-details>
+            </div>
+        </div>
+    </div>
+    <fuse-sidebar name="payment-manager-export-invoice" class="payment-manager-export-invoice" position="right" [invisibleOverlay]="false">
+        <payment-manager-export-invoice> </payment-manager-export-invoice>
+    </fuse-sidebar>
+    <fuse-sidebar name="payment-manager-searchprovider" class="payment-manager-searchprovider" position="right" [invisibleOverlay]="false">
+        <payment-manager-search-provider> </payment-manager-search-provider>
+    </fuse-sidebar>
+</div>

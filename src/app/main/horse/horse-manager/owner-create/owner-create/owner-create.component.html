@@ -1,0 +1,48 @@
+<div class="container">
+    <!-- (ngSubmit)="saveUser()" -->
+    <form id="profileForm" fxLayout="column" fxLayoutAlign="start" name="profileForm" [formGroup]="profileForm" novalidate>
+        <div class="item1" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="edit-profile">Create Horse Owner</div>
+            <div mat-raised-button class="btn" (click)="closePanel()" style="cursor: pointer;"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+        <div class="photo input-group">
+            <label for="file123" class="file-upload">
+                <input id="file123" type="file" (change)="changedAvatarFile($event)">
+                <img class="image" src={{avatarUrl}}/>
+            </label>
+        </div>
+
+        <p class="item-name">Your Name</p>
+        <input class="shadow mb-10" name="name" formControlName="name" autocomplete="off" required/>
+
+        <p class="item-name">Barn Name</p>
+        <input class="shadow mb-10" name="barnName" formControlName="barnName" autocomplete="off" required/>
+
+        <p class="item-name">Phone</p>
+        <input class="shadow mb-10" name="phone" formControlName="phone" autocomplete="off" required/>
+
+        <p class="item-name">Location</p>
+        <div class="item2">
+            <input class="m-0" placeholder="Search your address" #search [formControl]="searchControl" autocomplete="off" autocapitalize="off" spellcheck="off" />
+            <mat-divider style="margin-left:5%;width:95%"></mat-divider>
+            <input class="m-0" placeholder="Or enter address here" name="location" [(ngModel)]="location" [ngModelOptions]="{standalone: true}" autocomplete="off" />
+            <mat-icon class="search-icon s-24">search</mat-icon>
+        </div>
+
+        <p class="item-name"></p>
+        <p class="item-name">Your Email</p>
+        <input class="shadow mb-10" name="name" formControlName="email" autocomplete="off" required/>
+
+        <p class="item-name">Password</p>
+        <div class="item2">
+            <input type="password" class="shadow mb-10" name="enterPassword" [(ngModel)]="enterPassword" [ngModelOptions]="{standalone: true}" placeholder="Enter Password" autocomplete="off" required/>
+            <mat-divider style="margin-left:5%;width:95%"></mat-divider>
+            <input type="password" class="shadow mb-10" name="confirmPassword" [(ngModel)]="confirmPassword" [ngModelOptions]="{standalone: true}" placeholder="Confirm Password" autocomplete="off" required/>
+        </div>
+    </form>
+
+    <div class="cancel-save" fxLayout="row" fxLayoutAlign="space-between center">
+        <button class="cancel" mat-button (click)="closePanel()"> Cancel </button>
+        <button class="save" mat-button (click)="saveUser()"> Save </button>
+    </div>
+</div>

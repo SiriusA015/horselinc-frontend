@@ -1,0 +1,215 @@
+@import 'src/@fuse/scss/fuse';
+payment-provider-details {
+    height: 100vh;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    height: calc(100vh - 64px);
+    font-family: Roboto;
+    @include media-breakpoint('gt-md') {
+        height: 100vh;
+    }
+    @include media-breakpoint('xs') {
+        height: calc(100vh - 54px);
+    }
+    .detail-header {
+        height: 70px;
+        padding: 24px 5%;
+        background-color: #efefef;
+        div {
+            height: 24px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #4f748c;
+        }
+    }
+    .detail-content {
+        .trainer-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+        .contact-info {
+            width: 100%;
+            min-height: 92px;
+            height: auto;
+            background-color: #ffffff;
+            padding-left: 5%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            .trainer {
+                width: 100%;
+                margin: 10px 0px;
+                .payer-name {
+                    height: 20px;
+                    font-size: 16px;
+                    color: #000000;
+                    margin: 0px 10px;
+                }
+                .payer-name1 > div {
+                    width: auto;
+                    height: auto;
+                    font-size: 14px;
+                    color: #000000;
+                    margin: 0px 5px;
+                }
+            }
+            .submit-date {
+                height: 15px;
+                font-size: 11px;
+                color: rgba(0, 0, 0, 0.37);
+                margin: 5px 0px;
+            }
+        }
+        .detail-show {
+            width: 100%;
+            background-color: #efefef;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            .trainer {
+                padding-left: 5%;
+                width: 100%;
+                margin: 10px 0px;
+                .barn-name {
+                    height: 16px;
+                    font-size: 14px;
+                    color: #000000;
+                    padding-left: 10px;
+                }
+                .display-name {
+                    height: 14px;
+                    font-size: 12px;
+                    color: rgba(0, 0, 0, 0.7);
+                    padding-left: 10px;
+                }
+            }
+            .date-show-note {
+                padding-left: 5%;
+                margin: 15px 0px;
+                .date {
+                    width: auto;
+                    height: 20px;
+                    font-size: 12px;
+                    color: rgba(0, 0, 0, 0.37);
+                }
+                .show-name {
+                    width: auto;
+                    height: 20px;
+                    font-size: 12px;
+                    color: rgba(0, 0, 0, 0.37);
+                }
+            }
+            .service-list {
+                width: 90%;
+                max-width: 400px;
+                margin: 20px 0px;
+                padding-left: 5%;
+                .mane {
+                    width: auto;
+                    height: 20px;
+                    font-size: 14px;
+                    color: #000000;
+                    margin: 5px 0px;
+                    display: flex;
+                    justify-content: space-between;
+                    .money {
+                        min-width: auto;
+                    }
+                }
+            }
+            .separator {
+                width: 100%;
+                height: 2px;
+                background-color: #ffffff;
+            }
+            .in-value {
+                width: 90%;
+                max-width: 400px;
+                padding-left: 5%;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .invoice-total {
+                    width: auto;
+                    height: 20px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: rgba(0, 0, 0, 0.87);
+                }
+                .money {
+                    width: auto;
+                    font-weight: bold;
+                }
+            }
+
+            .balance-info {
+                width: 90%;
+                max-width: 400px;
+                padding-left: 5%;
+                .payer-info {
+                    padding-top: 10px;
+                    padding-bottom: 5px;
+                }
+                .service-balance > div{
+                    font-size: 16px;
+                    color: #4f748c;
+                    padding: 5px 0px;
+                }
+                .tip {
+                    height: 20px;
+                    font-size: 16px;
+                    color: #ec7185;
+                }
+                .amount {
+                    width: auto;
+                    font-weight: bold;
+                }
+                .paid-date {
+                    width: auto;
+                    height: 20px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: rgba(0, 0, 0, 0.87);
+                }
+            }
+        }
+        .note-info {
+            width: 100%;
+            text-align: center;
+            .note {
+                font-size: 14px;
+                width: 90%;
+                max-width: 400px;
+                margin: 20px 0px;
+                padding-left: 5%;
+            }
+        }
+        .action-group {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px 5%;
+            .action-ctrl {
+                max-width: 370px;
+                width: 90%;
+                font-size: 16px;
+                text-align: center;
+                cursor: pointer;
+                button {
+                    width: 100%;
+                    height: 44px;
+                    border-radius: 100px;
+                    box-shadow: 0 5px 14px 0 rgba(83, 25, 13, 0.07), 0 2px 7px 0 rgba(80, 14, 12, 0.2);
+                    background-color: #ec7185;
+                    color: #ffffff;
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+}

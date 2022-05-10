@@ -1,0 +1,103 @@
+<div class="container" page-layout simple fullwidth>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <form id="profile-form" name="profileForm" [formGroup]="profileForm" novalidate>
+            <div class="row-item">
+                <div class="photo input-group">
+                    <label for="file123" class="file-upload">
+                            <input id="file123" type="file" (change)="changedAvatarFile($event)">
+                            <img class="image" src={{avatarUrl}}/>
+                    </label>
+                </div>
+            </div>
+            <div class="row-item">
+                <mat-progress-bar class="upload-progress" *ngIf="false" mode="determinate" value="{{avatarUploadPercentOb | async}}"></mat-progress-bar>
+            </div>
+            <div class="row-item">
+                <div class="edit-item">
+                    <input class="edit-content" matInput placeholder="" name="name" formControlName="name" autocomplete="off" required/>
+                    <div class="edit-title">Your Name</div>
+                </div>
+                <div class="space5"></div>
+                <div class="edit-item">
+                    <input class="edit-content" matInput placeholder="" name="phone" (keypress)="psearch($event)" placeholder="+12312345678" formControlName="phone" autocomplete="off" required/>
+                    <div class="edit-title">Phone number</div>
+                </div>
+            </div>
+            <div class="row-item">
+                <div class="edit-item">
+                    <input class="edit-content" matInput placeholder="Search your address" #search [formControl]="searchControl" autocomplete="off" autocapitalize="off" spellcheck="off" />
+                    <mat-icon class="edit-right-icon s-24">search</mat-icon>
+                </div>
+            </div>
+            <div class="row-item">
+                <div class="edit-item">
+                    <input class="edit-content" matInput placeholder="" name="location" [(ngModel)]="location" [ngModelOptions]="{standalone: true}" autocomplete="off" />
+                    <div class="edit-title">Or enter your address here</div>
+                </div>
+            </div>
+
+            <div class="row-item">
+                <div class="edit-item" (click)="onGoInvoicing()">
+                    <mat-icon *ngIf="invoicingFlag" class="edit-left-icon s-20">account_balance</mat-icon>
+                    <input style="cursor: pointer;" class="edit-content" [ngClass]="{'pl-40':invoicingFlag}" matInput value="{{invoicingLabel}}" autocomplete="off" readonly/>
+                    <mat-icon class="edit-right-icon s-20">arrow_forward_ios</mat-icon>
+                </div>
+            </div>
+            <div class="row-item" *ngIf="providerServiceDataEnable">
+                <mat-table class="service-list1" #table [dataSource]="providerServiceData" [@animateStagger]="{value:'50'}">
+                    <!-- service Column -->
+                    <div matColumnDef="service-rate">
+                        <div *matHeaderCellDef>Service</div>
+                        <div class="column1" *matCellDef="let providerService">
+                            <div class="name">{{providerService.service}}</div>
+                            <div class="desc">{{providerService.rate | currency:'USD':'symbol'}}</div>
+                        </div>
+                    </div>
+
+                    <div matColumnDef="edit-button">
+                        <div *matHeaderCellDef>Edit Actions</div>
+                        <div class="column2" *matCellDef="let providerService">
+                            <mat-icon style="cursor:pointer;" class="edit-right-icon s-20" (click)="$event.stopPropagation();editProviderService(providerService)">edit</mat-icon>
+                        </div>
+                    </div>
+                    <div matColumnDef="delete-button">
+                        <div *matHeaderCellDef>Delete Actions</div>
+                        <div class="column3" *matCellDef="let providerService">
+                            <mat-icon style="cursor:pointer;" class="edit-right-icon s-20" (click)="$event.stopPropagation();deleteProviderService(providerService)">close</mat-icon>
+                        </div>
+                    </div>
+
+                    <!-- <mat-header-row *matHeaderRowDef="providerServiceDataColumns"></mat-header-row>     -->
+                    <mat-row *matRowDef="let providerService; columns: providerServiceDataColumns;" (click)="editProviderService(providerService)" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+                    </mat-row>
+                </mat-table>
+            </div>
+
+            <div class="row-item" style="flex-direction:row; justify-content:flex-end">
+                <p style="cursor:pointer;" class="add-new-service" (click)="newProviderService()">Add New Service</p>
+            </div>
+            <div class="row-item">
+                <p class="term-condition">
+                    By creating an payment, you agree to the <a class="link">Terms<br> & Conditions</a> and <a class="link">Privacy Policy</a> of HorseLinc.
+                </p>
+            </div>
+            <div style="padding-bottom: 20px">
+                <button mat-raised-button color="warn" (click)="saveUser()" [disabled]="profileForm.invalid">Create Account</button>
+            </div>
+        </form>
+        <!-- <div *ngIf="message">
+            <p style="color:lightcoral; font-size:16px">{{message}}</p>
+        </div> -->
+    </div>
+    <!-- /CONTENT -->
+
+    <fuse-sidebar name="user-payment-info" class="user-payment-info" position="right" [invisibleOverlay]="false">
+        <user-payment-info></user-payment-info>
+    </fuse-sidebar>
+    <fuse-sidebar name="user-payment-approver" class="user-payment-approver" position="right" [invisibleOverlay]="false">
+        <user-payment-approver></user-payment-approver>
+    </fuse-sidebar>
+</div>

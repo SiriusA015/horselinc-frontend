@@ -1,0 +1,40 @@
+ <div id="profile-manager" class="page-layout carded left-sidebar inner-scroll">
+      <div class="m-0 center">  
+           <div class="content-card" [ngClass]="{'current-profile-selected':currentProfileFlag != false}">          
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar px-24 py-0" fxHide fxShow.xs *ngIf="currentProfileFlag != false" fxLayout="row" fxLayoutAlign="start center" (click)="gotoList()">
+                <mat-icon class="secondary-text">chevron_left</mat-icon>
+                <p>Manager Profile</p>
+            </div>
+
+            <!-- / CONTENT TOOLBAR -->
+            <!-- CONTENT -->
+            <div class="content" fxLayout="row">
+                <apps-profile-manager-list></apps-profile-manager-list>
+                <apps-profile-manager-details fxFlex ></apps-profile-manager-details>
+            </div>
+            <!-- CONTENT -->
+
+        </div> 
+      </div>
+
+    <fuse-sidebar name="profile-manager-editprofile" class="profile-manager-editprofile"  position="right" [invisibleOverlay]="false">
+        <profile-manager-editprofile class="h-100-p"></profile-manager-editprofile>
+    </fuse-sidebar>
+    <fuse-sidebar name="profile-manager-updateemail" class="profile-manager-updateemail" position="right" [invisibleOverlay]="false">
+        <profile-manager-updateemail class="h-100-p"></profile-manager-updateemail>
+    </fuse-sidebar>
+    <fuse-sidebar name="profile-manager-updatepassword" class="profile-manager-updatepassword" position="right" [invisibleOverlay]="false">
+        <profile-manager-updatepassword class="h-100-p"></profile-manager-updatepassword>
+    </fuse-sidebar>
+    <fuse-sidebar name="profile-manager-addprovider" class="profile-manager-addprovider" position="right" [invisibleOverlay]="false">
+        <profile-manager-addprovider class="h-100-p"></profile-manager-addprovider>
+    </fuse-sidebar>
+    <fuse-sidebar name="profile-manager-searchprovider" class="profile-manager-searchprovider" position="right" [invisibleOverlay]="false">
+        <profile-manager-searchprovider class="h-100-p"></profile-manager-searchprovider>
+    </fuse-sidebar>
+    <fuse-sidebar name="profile-manager-addapprover" class="profile-manager-addapprover" position="right" [invisibleOverlay]="false">
+        <profile-manager-addapprover class="h-100-p"></profile-manager-addapprover>
+    </fuse-sidebar>
+ </div> 

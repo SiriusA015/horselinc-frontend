@@ -1,0 +1,157 @@
+<div *ngIf="!disFlag" class="empty-page" fxLayout="column" fxLayoutAlign="center center" fxFill>
+    <img src="assets/icons/horselinc/ic-manager.svg" class="avatar huge">
+    <div class="text">
+        Select a horse profile to the left.
+    </div>
+</div>
+<div class="horse-details" *ngIf="disFlag" fxLayout="column">
+    <div class="pl-16 mb-32">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div>
+                <img *ngIf="providerHorse.avatarUrl" src="{{providerHorse?.avatarUrl}}" class="avatar  medium-65" />
+                <img *ngIf="!providerHorse.avatarUrl" src="assets/icons/horselinc/ic-manager-green.svg" class="avatar  medium-65" />
+            </div>
+
+            <div fxLayout="column">
+                <div>
+                    <span *ngIf="providerHorse.barnName" class="title-20 black-green-color">{{providerHorse.barnName}} </span>
+                </div>
+                <div fxLayout="row">
+                    <span *ngIf="providerHorse.displayName" class="text-12 opacity-color2">"{{providerHorse.displayName}}"</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div style="display:flex; flex-wrap:wrap;">
+            <div *ngIf="providerHorse.trainer" class="text-box4" fxLayout="column">
+                <div class="pb-16">
+                    <span class="text-14 black-green-color">TRAINER</span>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div>
+                        <img *ngIf="providerHorse.trainer.avatarUrl" src="{{providerHorse.trainer?.avatarUrl}}" class="avatar small32" />
+                        <img *ngIf="!providerHorse.trainer.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32" />
+                    </div>
+                    <div fxLayout="column">
+                        <span *ngIf="providerHorse.trainer.name" class="text-16 black-color">{{providerHorse.trainer?.name}} </span>
+                        <span *ngIf="providerHorse.trainer.barnName" class="text-12 black-color">({{providerHorse.trainer.barnName}})</span>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="providerHorse.leaser" class="text-box4" fxLayout="column">
+                <div class="pb-16">
+                    <span class="text-14 black-green-color">LEASED TO</span>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div>
+                        <img *ngIf="providerHorse.leaser.avatarUrl" src="{{providerHorse.leaser?.avatarUrl}}" class="avatar small32" />
+                        <img *ngIf="!providerHorse.leaser.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32" />
+                    </div>
+                    <div fxLayout="column">
+                        <span *ngIf="providerHorse.leaser.name" class="text-16 black-color">{{providerHorse.leaser?.name}} </span>
+                        <span *ngIf="providerHorse.leaser.barnName" class="text-12 black-color">({{providerHorse.leaser?.barnName}})</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let owner of providerHorse.owners" class="text-box4" fxLayout="column">
+                <div class="pb-16">
+                    <span class="text-14 black-green-color">OWNER</span>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div>
+                        <img *ngIf="owner.avatarUrl" src="{{owner?.avatarUrl}}" class="avatar small32" />
+                        <img *ngIf="!owner.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32" />
+                    </div>
+                    <div fxLayout="column">
+                        <span *ngIf="owner.name" class="text-16 black-color">{{owner.name}} </span>
+                        <span *ngIf="owner.barnName" class="text-12 black-color">({{owner.barnName}})</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column" class="pb-60" fxLayout.lt-md="column">
+            <div fxLayout="column" class="text-box1">
+                <span class="text-16 black-green-color">Horse Details</span>
+                <div fxLayout="row" *ngIf="providerHorse.barnName" class="text-box1">
+                    <span fxFlex="35" class="text-14 mt-10 black-color">Barn Name :</span>
+                    <span class="text-14 mt-10 black-color">{{providerHorse?.barnName}}</span>
+                </div>
+                <div fxLayout="row" *ngIf="providerHorse.displayName" class="text-box1">
+                    <span fxFlex="35" class="text-14 mt-10 black-color">Show Name :</span>
+                    <span class="text-14 mt-10 black-color">{{providerHorse?.displayName}}</span>
+                </div>
+                <div fxLayout="row" *ngIf="providerHorse.birthYear" class="text-box1">
+                    <span fxFlex="35" class="text-14 mt-10 black-color">Birth Year :</span>
+                    <span class="text-14 mt-10 black-color">{{providerHorse?.birthYear}}</span>
+                </div>
+                <div fxLayout="row" *ngIf="providerHorse.gender" class="text-box1">
+                    <span fxFlex="35" class="text-14 mt-10 black-color">Gender :</span>
+                    <span class="text-14 mt-10 black-color">{{providerHorse?.gender}}</span>
+                </div>
+            </div>
+            <div fxLayout="column" class="text-box1" *ngIf="addManagerNoteFlag">
+                <span class="text-16 black-green-color">Horse Manager Notes</span>
+                <div fxLayout="row" class="text-box1">
+                    <span class="text-14 mt-10 black-color">{{providerHorse?.description}}</span>
+                </div>
+            </div>
+            <div fxLayout="column" class="text-box1" *ngIf="!addInforFlag">
+                <span class="text-16 black-green-color">Additional Information</span>
+                <div fxLayout="row" *ngIf="providerHorse.height" class="text-box1">
+                    <span fxFlex="35" class="text-14 mt-10 black-color">Height :</span>
+                    <span class="text-14 mt-10 black-color">{{(providerHorse.height).toFixed(2)}} Hands</span>
+                </div>
+                <div fxLayout="row" *ngIf="providerHorse.color" class="text-box1">
+                    <span fxFlex="35" class="text-14 mt-10 black-color">Color :</span>
+                    <span class="text-14 mt-10 black-color">{{providerHorse?.color}}</span>
+                </div>
+                <div fxLayout="row" *ngIf="providerHorse.sire" class="text-box1">
+                    <span fxFlex="35" class="text-14 mt-10 black-color">Sire :</span>
+                    <span class="text-14 mt-10 black-color">{{providerHorse?.sire}}</span>
+                </div>
+                <div fxLayout="row" *ngIf="providerHorse.dam" class="text-box1">
+                    <span fxFlex="35" class="text-14 mt-10 black-color">Dam :</span>
+                    <span class="text-14 mt-10 black-color">{{providerHorse?.dam}}</span>
+                </div>
+                <div fxLayout="row" *ngIf="providerHorse.registrations.length>0" class="text-box1">
+                    <span fxFlex="35" class="text-14 black-color">USEF :</span>
+                    <div fxLayout="column" fxFlex="90">
+                        <div *ngFor="let registration of providerHorse.registrations">
+                            <span class="text-14 mt-10 black-color">{{registration.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" class="text-box1" *ngIf="addInforFlag">
+                <span class="text-16 black-green-color">Additional Information</span>
+                <span class="text-14 ml-16 mt-10 black-color">N/A</span>
+                <div>
+                </div>
+            </div>
+            <div fxLayout="column">
+                <div class="text-box1 text-16 black-green-color">My Private Notes</div>
+                <div fxLayout="row">
+                    <div class="text-box3 text-14 black-color">{{providerHorse?.privateNote}}</div>
+                    <div *ngIf="noteFlag" (click)="AddNote()" fxFlex="10" fxLayoutAlign="end end">
+                        <img class="avatar small button-div pointer pt-10 mt-10" src="assets/icons/horselinc/ic-nav-create.svg">
+                    </div>
+                </div>
+            </div>
+            <div style="height:70px;"></div>
+            <div fxLayout="row" class="cancel-save" fxLayoutAlign.lt-md="center center">
+                <button mat-button class="m-4 mt-16 mb-8 button small red-color" *ngIf="!noteFlag" (click)="AddNote()">
+                    <span class="text-16 white-color">
+                        Add note
+                    </span>
+                </button>
+                <button mat-button class="m-4 mt-16 mb-8 mr-4 button big red-color" (click)="CreateInvoice()">
+                    <span class="text-16 white-color">
+                        Create Invoice
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+@import "src/@fuse/scss/fuse";
+horse-manager {
+    width: 100%;
+    .center {
+        .content-card {
+            .toolbar {
+                -webkit-box-pack: start;
+                justify-content: flex-start;
+                -webkit-box-align: center;
+                align-items: center;
+                -webkit-box-flex: 1;
+                flex: 1 1 auto;
+                height: 80px;
+                min-height: 80px;
+                max-height: 80px;
+                .toolbar-separator {
+                    height: 32px;
+                    width: 1px;
+                    margin: 0 12px;
+                }
+            }
+            horse-manager-list {
+                min-width: 320px;
+            }
+            horse-manager-list {
+                flex: 0 0 25%;
+                border-right: #efefef 1px solid;
+                overflow-y: auto;
+            }
+            @include media-breakpoint('lt-md') {
+                horse-manager-list {
+                    flex: 0 0 35%;
+                }
+            }
+            @include media-breakpoint('xs') {
+                horse-manager-list {
+                    border-right: none;
+                }
+                horse-manager-list,
+                horse-manager-details {
+                    flex: 1 0 100%;
+                }
+                horse-manager-details {
+                    display: none !important;
+                }
+                &.current-horse-selected {
+                    .toolbar {
+                        padding-left: 16px !important;
+                        .horse-selection {
+                            display: none !important;
+                        }
+                    }
+                    .back {
+                        padding: 10px 0 0 10px;
+                    }
+                    .content {
+                        horse-manager-list {
+                            display: none !important;
+                        }
+                        horse-manager-details {
+                            display: flex !important;
+                            display: -webkit-box !important;
+                            display: -moz-box !important;
+                            display: -ms-flexbox !important;
+                            display: -webkit-flex !important;
+                            display: -moz-flex !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .horse-manager-sidebar {
+        // display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        width: auto;
+        min-width: 360px;
+        max-width: 720px;
+        z-index: 1000;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+        background-color: #4f748c;
+        height: 100%;
+        @include media-breakpoint('xs') {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+        &.left-positioned {
+            left: 0;
+            transform: translateX(-100%);
+        }
+        &.right-positioned {
+            right: 0;
+            transform: translateX(100%);
+        }
+        &.open {
+            transform: translateX(0);
+        }
+        &.locked-open {
+            position: relative !important;
+            transform: translateX(0) !important;
+        }
+        &.folded {
+            position: absolute !important;
+            top: 0;
+            bottom: 0;
+        }
+        &.animations-enabled {
+            transition-property: transform, width, min-width, max-width;
+            transition-duration: 150ms;
+            transition-timing-function: ease-in-out;
+        }
+    }
+    .red-color {
+        color: #ec7185;
+    }
+}

@@ -1,0 +1,72 @@
+@import "src/@fuse/scss/fuse";
+
+.container {
+    background-image: url('assets/images/backgrounds/horse-material-bg.svg');
+    font-family: Roboto;
+    font-size: 20px;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+
+    .title {
+        text-align: center;
+        justify-content: center;
+        padding-top: 95px;
+        padding-bottom: 30px;      
+    }
+    .content {
+        .cards {
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            
+            @include media-breakpoint(xs) {
+                margin-bottom: 50px;
+            }
+
+            a{
+                &.hover{
+                    color:none;
+                }  
+            }
+            .card {
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                flex-grow: 0;
+
+                height: 392px;
+                width: 360px;
+                padding: 24px 20px;
+                margin: 50px 50px;
+
+                color: #ffffff;
+                background: #5389a0;
+                box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+                
+                @include media-breakpoint(xs) {
+                    height: 180px;
+                    margin: 10px 10px;
+                }
+
+                &:hover{
+                    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.12);
+                }
+                .card-img{
+                    margin-right: 15px;
+                }
+                .card-content{
+                    .card-content-item{
+                        font-size: 16px;
+                        line-height: 1.25;
+                    }
+                }
+            }
+        }
+    }
+}

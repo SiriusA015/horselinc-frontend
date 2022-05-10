@@ -1,0 +1,49 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start">
+
+    <!-- CONTENT -->
+    <div class="title">
+        <p class="label">Add payment approver</p>
+        <button mat-icon-button class="close toggle-sidebar-folded" (click)="closePanel();">
+            <mat-icon class="secondary-text s-20">close</mat-icon>
+        </button>
+    </div>
+
+    <div class="content">
+        <p>Payment approvers</p>
+        <div class="edit-item">
+            <input *ngIf="action=='Edit'" type="text" class="pr-20" [value]="curApprover.name" readonly>
+            <input *ngIf="action=='Add'" type="text" class="pr-20" [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" matInput [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnOfSearch" (optionSelected)="onSelectApprover($event.option.value)">
+                <mat-option *ngFor="let item of horseManagers" [value]="item">
+                    {{item.name}}
+                </mat-option>
+            </mat-autocomplete>
+            <div class="edit-icon" style="margin-right:10px" fxFlax="15">
+                <mat-icon class="s-24">search</mat-icon>
+            </div>
+        </div>
+
+        <p>Dollar Value</p>
+
+        <div class="edit-item">
+            <input matInput type="" placeholder="" autocomplete="off" value="Unlimited" />
+            <mat-slide-toggle class="edit-icon" style="margin-right:10px" [(ngModel)]="amountUnlimited"></mat-slide-toggle>
+        </div>
+
+        <div class="edit-item">
+            <input mat-input [(ngModel)]="amountValue" [readonly]="amountUnlimited" />
+            <div class="edit-title">Up to</div>
+        </div>
+
+        <div *ngIf="message">
+            <p style="color:lightcoral">{{message}}</p>
+        </div>
+
+    </div>
+    <!-- /CONTENT -->
+    <div class="next-cancel">
+        <button mat-raised-button class="cancel" type="" (click)="closePanel();">Cancel</button>
+        <button mat-raised-button class="next" type="" (click)="editApprover();">{{this.action}}</button>
+    </div>
+
+</div>

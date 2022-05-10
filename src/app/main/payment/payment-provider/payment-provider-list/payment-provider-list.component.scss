@@ -1,0 +1,79 @@
+@import "src/@fuse/scss/fuse";
+payment-provider-list {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    position: relative;
+    padding: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    min-width: 320px;
+}
+
+.provider-list {
+    height: 100%;
+    overflow: auto;
+
+    .no-invoices {
+        position: absolute;
+        bottom: 60px;
+        margin-left: 50%;
+    }
+
+    .space-bottom {
+        height: 60px;
+    }
+}
+
+::ng-deep.mat-tab-label {
+    width: 33%;
+    min-width: 33% !important;
+}
+
+mat-tab-group {
+    height: 100%;
+}
+
+::ng-deep.mat-tab-body-wrapper {
+    height: 100%;
+}
+
+::ng-deep.mat-ink-bar {
+    background-color: #27c5c8 !important;
+}
+
+::ng-deep.mat-tab-body.mat-tab-body-active{
+    overflow-y: hidden;
+    .mat-tab-body-content {
+        overflow-y: hidden;
+    }
+}
+
+.cbtn {
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    .create-invoice {
+        width: 210px;
+        height: 44px;
+        border-radius: 100px;
+        box-shadow: 0 5px 14px 0 rgba(83, 25, 13, 0.07), 0 2px 7px 0 rgba(80, 14, 12, 0.2);
+        background-color: #ec7185;
+        color: #ffffff;
+    }
+    .action-btn {
+        width: 210px;
+        height: 40px;
+        border-radius: 100px;
+        text-align: center;
+        padding-top: 10px;
+        cursor: pointer;
+        box-shadow: 0 5px 20px 0 rgba(13, 62, 83, 0.15), 0 2px 10px 0 rgba(12, 75, 80, 0.29);
+        background-color: #ffffff;
+        font-family: Roboto;
+        color: #ec7185;
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,53 @@
+<mat-toolbar class="p-0 mat-elevation-z1" fxHide.gt-md>
+
+    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+
+        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+
+            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
+                <mat-icon class="primary-text">menu</mat-icon>
+            </button>
+
+            <!-- <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div> -->
+
+            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
+                <div class="logo ml-16">
+                    <img class="logo-icon" src="assets/images/logos/fuse.svg">
+                </div>
+            </div>
+
+            <!-- <div class="px-8 px-md-16">
+                <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts>
+            </div> -->
+
+            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img *ngIf="avatarUrl"  class="avatar small32" src="{{avatarUrl}}">
+                    <img *ngIf="!avatarUrl" class="avatar small32" src="assets/icons/horselinc/avatar-placeholder.png">
+                    <div fxLayout="column" fxLayoutAlign="start start" class="userInfo ml-8 mr-12">
+                        <span class="username" style="font-size: 14px;line-height: 1.43;letter-spacing: 0.25px;">{{userName}}</span>
+                        <span class="userType"style="font-size: 12px;font-weight:300; line-height: 1.43;">{{userType}}</span>
+                    </div>
+                    <img class="avatar" src="assets/icons/horselinc/arrow-drop-down-24-px.svg">
+                </div>
+            </button>
+
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" (click)="onSwitchProfile()">
+                    <img class="small mr-12" src="assets/icons/horselinc/ic-side-freelancer.svg">
+                    <span>{{switchProfile}}</span>
+                </button>
+
+                <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/user/login/">
+                    <img class="small mr-12" src="assets/icons/horselinc/ic-side-exit.svg">
+                    <span>Log out</span>
+                </button>
+
+            </mat-menu>
+        </div>
+        <div>
+            <img class="avatar" src="assets/icons/horselinc/horseshoe-white.svg">
+        </div>
+    </div>
+
+</mat-toolbar>

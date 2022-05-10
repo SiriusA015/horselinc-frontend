@@ -1,0 +1,66 @@
+<div class="container page-layout simple fullwidth" >
+    <!-- class="page-layout simple fullwidth" -->
+    <!-- CONTENT -->
+    <div class="content">
+        <form id="profile-form" name="profileForm" [formGroup]="profileForm" novalidate>
+            <div class="row-item">
+                <div class="photo input-group">
+                    <label for="file123" class="file-upload">
+                        <!-- <img *ngIf="!avatarUrl" src="assets/icons/horselinc/ic-camera-alt.svg"/>
+                        <img class="image" *ngIf="avatarUrl" src={{avatarUrl}}/> -->
+                        <input id="file123" type="file" (change)="changedAvatarFile($event)">
+                        <img class="image" src={{avatarUrl}}/>
+                    </label>
+                </div>
+            </div>
+            <div class="row-item">
+                <div class="edit-item">
+                    <input class="edit-content" matInput placeholder="" name="name" formControlName="name" autocomplete="off" required/>
+                    <div class="edit-title">Your Name</div>
+                </div>
+                <div class="space5"></div>
+                <div class="edit-item">
+                    <input class="edit-content" matInput placeholder="" name="barnName" formControlName="barnName" autocomplete="off" required>
+                    <div class="edit-title">Barn Name</div>
+                </div>
+            </div>
+            <div class="row-item">
+                <div class="edit-item">
+                    <input class="edit-content" matInput placeholder="" name="phone" (keypress)="psearch($event)" placeholder="+12312345678" formControlName="phone" autocomplete="off" required/>
+                    <div class="edit-title">Phone number</div>
+                </div>
+            </div>
+            <div class="row-item">
+                <div class="edit-item">
+                    <input class="edit-content" matInput placeholder="Search your address" #search [formControl]="searchControl" autocomplete="off" autocapitalize="off" spellcheck="off" />
+                    <mat-icon class="edit-icon s-24">search</mat-icon>
+                </div>
+            </div>
+            <div class="row-item">
+                <div class="edit-item">
+                    <input class="edit-content" matInput placeholder="" name="location" [(ngModel)]="location" [ngModelOptions]="{standalone: true}" autocomplete="off" />
+                    <div class="edit-title">Or enter your address here</div>
+                </div>
+            </div>
+            <div class="row-item">
+                <button style="margin-top:20px" class="add-payment-btn" mat-raised-button color="warn" (click)="openPaymentInfo()">Add Payment Information</button>
+            </div>
+            <div class="row-item">
+                <p class="term-condition">
+                    By creating an payment, you agree to the <a class="link">Terms<br> & Conditions</a> and <a class="link">Privacy Policy</a> of HorseLinc.
+                </p>
+            </div>
+            <div style="padding-bottom: 20px">
+                <button mat-raised-button color="warn" (click)="saveUser()" [disabled]="profileForm.invalid">CREATE ACCOUNT</button>
+            </div>
+        </form>
+    </div>
+    <!-- /CONTENT -->
+
+    <fuse-sidebar name="user-payment-info" class="user-payment-info" position="right" [invisibleOverlay]="false">
+        <user-payment-info></user-payment-info>
+    </fuse-sidebar>
+    <fuse-sidebar name="user-payment-approver" class="user-payment-approver" position="right" [invisibleOverlay]="false">
+        <user-payment-approver></user-payment-approver>
+    </fuse-sidebar>
+</div>

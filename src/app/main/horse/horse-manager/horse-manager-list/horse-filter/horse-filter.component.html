@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="text1">{{title}}</div>
+    <div *ngIf="isLogging" fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>
+            <mat-spinner color="warn" diameter="20">
+            </mat-spinner>
+        </mat-icon>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center start">
+        <mat-radio-group *ngIf="!isLogging" aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="selectOwner">
+
+            <mat-radio-button class="example-radio-button" [value]="'none'"> <span class="text">None</span> </mat-radio-button>
+
+            <mat-radio-button class="example-radio-button" *ngFor="let owner of tempOwner" [value]="owner">
+                <span class="text">{{owner.name}}</span>
+            </mat-radio-button>
+        </mat-radio-group>
+        <div fxLayout="row" fxLayoutAlign="center end">
+            <div mat-raised-button (click)="onCloseClick()" class="button pointer">CLOSE</div>
+            <div mat-raised-button (click)="onDoneClick()" class="button pointer">DONE</div>
+        </div>
+    </div>
+</div>

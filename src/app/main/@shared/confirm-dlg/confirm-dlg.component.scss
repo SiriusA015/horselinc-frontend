@@ -1,0 +1,37 @@
+@import "src/@fuse/scss/fuse";
+.modal {
+    width: 250px;
+    min-height: 90px;
+    height: auto;
+    @include media-breakpoint('xs') {
+        width: 100%;
+        min-width: 200px;
+    }
+    .title {
+        width: 100%;
+        min-height: 40px;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .msg {
+        min-height: 20px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .action_btns {
+        margin-top: 10px;
+        cursor: pointer;
+        div {
+            padding-top: 5px;
+            min-height: 30px;
+            width: 40%;
+            text-align: center;
+            background-color: #ffffff;
+            margin: 8px 8px 0 8px;
+            font-size: 16px;
+            color: #4f748c;
+            font-weight: bold;
+        }
+    }
+}

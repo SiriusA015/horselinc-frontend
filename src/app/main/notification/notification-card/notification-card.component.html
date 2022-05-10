@@ -1,0 +1,9 @@
+<div class="screen_c">
+    <div class="card_container" fxLayout="row" fxLayoutAlign="space-between center">
+        <img *ngIf="!notification?.creator?.avatarUrl" class="avatar small32" src="assets/icons/horselinc/ic-profile.svg" />
+        <img *ngIf="notification?.creator?.avatarUrl" class="avatar small32" src="{{notification?.creator?.avatarUrl}}" />
+        <div class="content_txt" fxFlex="50%"> {{notification.message}} </div>
+        <div class="date" fxFlex="20%">{{getDateDisp2()}}</div>
+        <div class="action_btn" fxFlex="15%" matRipple (click)="deleteNotification(notification)"> Delete </div>
+    </div>
+</div>

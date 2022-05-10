@@ -1,0 +1,77 @@
+<div id="horse-owner-payment-info">
+    <!-- CONTENT -->
+    <div class="title" fxLayout="row" fxLayoutAlign="space-between center">
+        <p class="label" style="text-align:left">Payment options</p>
+        <div mat-raised-button class="close" (click)="closePanel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+    </div>
+
+    <div class="content">
+        <div class="myCreditCard">
+            <p>My Credit Card</p>
+        </div>
+        <div class="cardList">
+            <table>
+                <tr *ngFor="let item of this.user?.horseManager?.customer?.cards">
+                    <td class="column1"><img src="assets/icons/stripcard/{{item.brand}}.svg" /></td>
+                    <td class="column2">{{item.brand}} {{item.last4}}</td>
+                    <td class="column3">
+                        <mat-radio-button value="online" class="py-8" [checked]="item.id === this.user?.horseManager?.customer.defaultSource" (change)="onChangeDefaultCard(item)"></mat-radio-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="cardAdd">
+            <p style="cursor:pointer;" (click)="onAddPaymentCard()">Add New Card</p>
+            <!-- <p>ADD NEW BANK ACCOUNT</p> -->
+        </div>
+
+        <div class="approverHeader">
+            <p class="approver-title">Payment approvers</p>
+            <p class="approver-desc">These Horse Managers can approve payments to<br> Service Providers on your behalf (up to a specified<br> dollar value). </p>
+        </div>
+        <mat-table class="approverTable" #table [dataSource]="paymentApproversData" [@animateStagger]="{value:'50'}">
+            <!-- service Column -->
+            <ng-container matColumnDef="avatar">
+                <mat-header-cell *matHeaderCellDef>Avatar</mat-header-cell>
+                <div class="column1" *matCellDef="let paymentApprover">
+                    <img *ngIf="paymentApprover.avatarUrl" src="{{paymentApprover.avatarUrl}}" class="avatar small32" />
+                    <img *ngIf="!paymentApprover.avatarUrl" src="assets/icons/horselinc/avatar-placeholder.png" class="avatar small32" />
+                </div>
+            </ng-container>
+            <!-- rate Column -->
+            <ng-container matColumnDef="name-amount">
+                <mat-header-cell *matHeaderCellDef>Name-Amount</mat-header-cell>
+                <div class="column2" *matCellDef="let paymentApprover">
+                    <p class="name">{{paymentApprover.name}}</p>
+                    <p class="amount" *ngIf="paymentApprover.amount==0">(Unlimited)</p>
+                    <p class="amount" *ngIf="paymentApprover.amount!=0">(up to ${{paymentApprover.amount}})</p>
+                </div>
+            </ng-container>
+
+            <ng-container matColumnDef="edit-buttons">
+                <mat-header-cell *matHeaderCellDef>Edit Actions</mat-header-cell>
+                <div class="column3" *matCellDef="let paymentApprover">
+                    <div fxFlex="row" fxLayoutAlign="center center">
+                        <mat-icon style="cursor:pointer;" class="editIcon s-20" (click)="$event.stopPropagation();editPaymentApprover(paymentApprover)">edit</mat-icon>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container matColumnDef="delete-buttons">
+                <mat-header-cell *matHeaderCellDef>Delete Actions</mat-header-cell>
+                <div class="column4" *matCellDef="let paymentApprover">
+                    <div fxFlex="row" fxLayoutAlign="center center">
+                        <mat-icon style="cursor:pointer;" class="editIcon s-20" (click)="$event.stopPropagation();deletePaymentApprover(paymentApprover)">close</mat-icon>
+                    </div>
+                </div>
+            </ng-container>
+            <mat-row *matRowDef="let paymentApprover; columns: paymentApproversDataColumns;" (click)="editPaymentApprover(paymentApprover)" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
+        <div class="approverAdd">
+            <p style="cursor:pointer;" (click)="addPaymentApprover()">Add Payment Approver</p>
+        </div>
+        <div style="height:auto">
+        </div>
+    </div>
+</div>

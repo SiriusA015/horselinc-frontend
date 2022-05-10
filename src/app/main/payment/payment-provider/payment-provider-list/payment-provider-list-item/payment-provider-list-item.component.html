@@ -1,0 +1,48 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+
+    <div class="rectangle" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+
+        <div class="info" fxFlex fxFlexLayout="column" *ngIf="invoice && invoice?.requests.length>0">
+
+            <div class="title" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="title-date"> {{invoice?.createdAt | date: 'MM/dd/yyyy'}} </div>
+                <div class="title-money" *ngIf="!paid" style="color: #ec7185;"> Invoice Total: ${{getAmountWithApplicationFee(invoice?.amount).toFixed(2)}} </div>
+                <div class="title-money" *ngIf="paid" style="color: #76BFC5;"> Invoice Total: ${{getAmountWithApplicationFee(invoice?.amount).toFixed(2)}} </div>
+            </div>
+
+            <!-- for registered users  -->
+            <div class="title" *ngIf="invoice?.requests[0]?.horse?.trainer && invoice?.payers && invoice?.payers?.length==1">
+                <div class="payer-name" *ngIf="invoice?.payers[0]"> {{invoice.payers[0]?.name}} </div>
+            </div>
+
+            <div class="title" *ngIf="!invoice?.requests[0]?.horse?.trainer && invoice?.shareInfo?.name && invoice?.shareInfo?.name!=''">
+                <div class="payer-name" *ngIf="invoice?.shareInfo?.name && invoice?.shareInfo?.name!=''"> {{invoice?.shareInfo?.name}} </div>
+            </div>
+
+            <div *ngFor="let request of invoice.requests; let idx = index" >
+                <div class="tags">
+                    <div class="money1"> ${{getSubTotal(request?.services).toFixed(2)}} </div>
+                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                        <img *ngIf="!request.horse?.avatarUrl" src="assets/icons/horselinc/ic-manager-green.svg" class="Oval" />
+                        <img *ngIf="request.horse?.avatarUrl" src="{{request.horse.avatarUrl}}" class="Oval" />
+                        <div class="tag-label"> {{request?.horseBarnName}}  </div>
+                    </div>
+                </div>
+
+                <div class="detail">
+                    <div *ngIf="detectLast(invoice?.requests.length, idx)" style="float:right; padding:10px;">
+                        <mat-icon class="arrow-forward">chevron_right</mat-icon>
+                    </div>
+                    <div class="notes">
+                        {{request?.services.length}} service{{(request?.services.length>1)? 's': '' }} provided
+                    </div>
+        
+                    <div class="duration">
+                        {{request?.createdAt | date: 'MM/dd/yyyy'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions" fxLayout="row" fxLayoutAlign="start center"></div>
+    </div>
+</div>

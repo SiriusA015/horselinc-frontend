@@ -1,0 +1,48 @@
+@import "src/@fuse/scss/fuse";
+horse-show-search {
+    .action-title {
+        width: 100%;
+        padding: 25px;
+        font-family: Roboto;
+        .confirm {
+            height: 24px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #4f748c;
+          }
+    }
+    .search-show {
+        padding: 10px;
+        height: 56px;
+        min-height: 56px;
+        box-shadow: 0 2px 15px 0 rgba(13, 62, 83, 0.24);
+        background-color: #fafafa;
+    }
+    .search-list {
+        padding: 8px;
+        height: 56px;
+        min-height: 56px;
+    }
+    .input-text {
+        background-color: #fafafa;
+    }
+    button {
+        padding: 5px;
+    }
+    .text2 {
+        font-size: 14px;
+    }
+    .ic-search {
+        &:hover {
+            border-radius: 13px;
+            box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.12);
+        }
+        &:active {
+            border-radius: 13px;
+            box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.12);
+        }
+    }
+    .loading-bar {
+        margin-top: 50px;
+    }
+}

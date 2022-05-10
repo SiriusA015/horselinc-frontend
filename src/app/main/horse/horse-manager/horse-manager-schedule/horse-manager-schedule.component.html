@@ -1,0 +1,102 @@
+<div fxLayout="column" name="serviceRequestForm" [formGroup]="serviceRequestForm">
+    <div fxLayout="column">
+        <div fxLayout="row">
+            <div class="text-box6 title-26 black-green-color pt-8 pb-20">
+                Request Services
+            </div>
+            <div (click)="ScheduleCancel()">
+                <img class="button-div pointer" src="assets/icons/horselinc/filled.svg" />
+            </div>
+        </div>
+        <div class="text-14 black-green-color pt-12 pb-12">Horse Show</div>
+        <div class="text-box4" fxLayout="column">
+            <div fxLayout="row" class="text-box3 pointer" fxLayoutAlign="space-between center" (click)="picker1.open()">
+                <span fxFlex="15" class="text-14 black-color">
+                    Date
+                </span>
+                <input fxFlax="70" readonly class="input-color text-14" [(ngModel)]="requestDate" [ngModelOptions]="{standalone: true}" name="requestDate" [matDatepicker]="picker1" required/>
+                <div fxFlax="15">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" class="text-box3 pointer" fxLayoutAlign="space-between center" (click)="showSearch()">
+                <span *ngIf="!show" class="text-14 opacity-color">
+                    Search for Show by Title
+                </span>
+                <span *ngIf="show" class="text-14 black-color">
+                    {{show.name}}
+                </span>
+                <div class="button-div">
+                    <img src="assets/icons/horselinc/search.svg" />
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" class="text-box3" (input)="setShowName()">
+                <input class="input-text input-color text-14 p-0" placeholder="Or enter name" [(ngModel)]="showName" [ngModelOptions]="{standalone: true}" name="showName" required/>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" class="text-box3">
+                <input class="input-text input-color text-14 p-0" formControlName="competitionClass" name="competitionClass" placeholder="Enter Competition Class" required/>
+            </div>
+        </div>
+        <div class="text-box1 mt-24 mb-20 pointer" fxLayout="row" fxLayoutAlign="space-between center" (click)="searchServiceProvider()">
+            <div *ngIf=" !currentProvider " fxLayout="row" fxLayoutAlign="start center">
+                <span class="text-16 green-color">Search for Provider</span>
+            </div>
+            <div *ngIf=" currentProvider " fxLayout="row" fxLayoutAlign="start center">
+                <img *ngIf="!currentProvider?.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32" />
+                <img *ngIf="currentProvider?.avatarUrl" src="{{currentProvider?.avatarUrl}}" class="avatar small32" />
+                <span *ngIf="currentProvider?.name" class="text-16 blackcolor">{{currentProvider?.name}}</span>
+            </div>
+            <div class="button-div">
+                <img src="assets/icons/horselinc/search.svg" />
+            </div>
+            <div class="edit-title">Service Provider</div>
+        </div>
+
+        <div *ngFor="let service of serviceTrue" class="text-box5 mt-4 mb-4" fxLayout="column">
+
+            <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between center">
+                <div class="text-16 green-color">
+                    {{service?.service}}
+                </div>
+                <div (click)="serviceCancel(service)" class="button-div pointer">
+                    <img src="assets/icons/horselinc/cancel-24-px.svg" />
+                </div>
+            </div>
+            <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between center">
+                <div class="text-14 green-color" fxFlex="75">
+                    Service Price $ {{service?.rate?.toFixed(2)}}
+                </div>
+                <div class="text-14 green-color" fxFlex="13">
+                    Qty
+                </div>
+                <input min="1" class="text-16 input-color p-0" fxFlex="10" type="number" [(ngModel)]="service.quantity" name="percentage" (ngModelChange)="changeServiceQuantity($event, service.uid)" [ngModelOptions]="{standalone: true}" required/>
+            </div>
+            <div class="edit-title">Service</div>
+        </div>
+        <div *ngIf="serviceFalse" (click)="getServiceProviderServices()" class="text-box1 mt-4 mb-4 pointer" fxLayoutAlign="space-between center">
+            <span>Select Service</span>
+            <img src="assets/icons/horselinc/keyboard_arrow_down-24px.svg">
+
+        </div>
+        <div class="text-box5 mt-16 mb-16 ">
+            <textarea formControlName="instruction" class="text-area green-color text-16" placeholder="Please describe any specific requests or special needs for the" required>
+            </textarea>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <div mat-ripple class="m-8 mb-16 button medium white-color pointer" (click)="ScheduleCancel()" fxLayoutAlign="center center">
+            <span class="text-16 green-color">
+                Cancel
+            </span>
+        </div>
+        <div mat-ripple class="m-8 mb-16 button medium red-color pointer" (click)="ScheduleNext()" fxLayoutAlign="center center">
+            <span class="text-16 white-color">
+                Next
+            </span>
+        </div>
+    </div>
+</div>

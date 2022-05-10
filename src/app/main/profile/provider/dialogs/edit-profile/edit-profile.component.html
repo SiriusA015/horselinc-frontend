@@ -1,0 +1,41 @@
+<div class="container">
+    <form id="profile-form" fxLayout="column" fxLayoutAlign="start" name="profileForm" [formGroup]="profileForm" novalidate>
+        <div class="item1" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="edit-profile">Edit Profile</div>
+            <div mat-raised-button class="btn" (click)="closePanel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+        <div class="photo input-group">
+            <label for="file123" class="file-upload">
+                <!-- <img *ngIf="!avatarUrl" src="assets/icons/horselinc/ic-camera-alt.svg"/>
+                <img class="image" *ngIf="avatarUrl" src={{avatarUrl}}/> -->
+                <input id="file123" type="file" (change)="changedAvatarFile($event)">
+                <img class="image" src={{avatarUrl}}/>
+            </label>
+        </div>
+        <p class="item-name">Your Name</p>
+        <input class="shadow mb-10" name="name" formControlName="name" autocomplete="off" required/>
+
+        <p class="item-name">Phone</p>
+        <input class="shadow mb-10" name="phone" formControlName="phone" (keydown)="psearch($event)" placeholder="+12312345678" autocomplete="off" required/>
+
+        <p class="item-name">Location</p>
+
+        <div class="item2">
+            <input class="m-0" placeholder="Search your address" #search [formControl]="searchControl" autocomplete="off" autocapitalize="off" spellcheck="off" />
+            <mat-divider style="margin-left:5%;width:95%"></mat-divider>
+            <input class="m-0" placeholder="Or enter adrdess here" name="location" [(ngModel)]="location" [ngModelOptions]="{standalone: true}" autocomplete="off" />
+            <mat-icon class="search-icon s-24">search</mat-icon>
+        </div>
+
+        <p class="item-name"></p>
+        <div class="item2">
+            <button mat-button class="m-0" (click)="openUpdateEmailPanel()">Change Email</button>
+            <mat-divider style="margin-left:5%;width:95%"></mat-divider>
+            <button mat-button class="m-0" (click)="openUpdatePasswordPanel()">Change Password</button>
+        </div>
+    </form>
+    <div class="cancel-save" fxLayout="row" fxLayoutAlign="space-between center">
+        <button class="cancel" mat-raised-button (click)="closePanel()"> Cancel </button>
+        <button class="save" mat-raised-button (click)="saveUser()"> Save </button>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+@import "src/@fuse/scss/fuse";
+.container {
+    width: 250;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Roboto;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    @include media-breakpoint('xs') {
+        width: 80%;
+    }
+    .example-radio-group {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+    }
+    .example-radio-button {
+        margin: 3px;
+    }
+    .text {
+        font-size: 14px;
+        line-height: 1.43;
+        font-weight: 900;
+    }
+    .button {
+        margin: 16px 24px 0 24px;
+        color: #4f748c;
+    }
+    .pointer {
+        cursor: pointer;
+    }
+    .text1 {
+        margin-bottom: 8px;
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 1.25;
+        color: #4f748c;
+    }
+}

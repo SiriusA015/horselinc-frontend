@@ -1,0 +1,59 @@
+<div id="profile-provider-ratelist">
+    <p class="main-title">
+        Edit rates
+    </p>
+
+    <div class="service-list" fxFlex>
+        <div class="seperator"></div>
+        <mat-table class="service-table" #table [dataSource]="providerServiceData">
+            <!-- service Column -->
+            <ng-container matColumnDef="service">
+                <mat-header-cell *matHeaderCellDef>Service</mat-header-cell>
+                <div class="column1" *matCellDef="let providerService">
+                    <p class="text-truncate font-weight-600">{{providerService.service}}</p>
+                </div>
+            </ng-container>
+            <!-- rate Column -->
+            <ng-container matColumnDef="rate">
+                <mat-header-cell *matHeaderCellDef>Rate</mat-header-cell>
+                <div class="column2" *matCellDef="let providerService">
+                    <p class="text-truncate font-weight-600">$ {{providerService.rate.toFixed(2)}}</p>
+                </div>
+            </ng-container>
+
+            <ng-container matColumnDef="edit-buttons">
+                <mat-header-cell *matHeaderCellDef>Edit Actions</mat-header-cell>
+                <div class="column3" *matCellDef="let providerService">
+                    <div fxFlex="row" fxLayoutAlign="end center">
+                        <!-- <button mat-icon-button (click)="$event.stopPropagation();editProviderService(providerService)" color="accent"> -->
+                        <mat-icon aria-label="" (click)="$event.stopPropagation();editProviderService(providerService)">edit</mat-icon>
+                        <!-- </button> -->
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container matColumnDef="delete-buttons">
+                <mat-header-cell *matHeaderCellDef>Delete Actions</mat-header-cell>
+                <div class="column4" *matCellDef="let providerService">
+                    <div fxFlex="row" fxLayoutAlign="end center">
+                        <!-- <button mat-icon-button (click)="$event.stopPropagation();deleteProviderService(providerService)" color="warn"> -->
+                        <mat-icon aria-label="" (click)="$event.stopPropagation();deleteProviderService(providerService)">delete</mat-icon>
+                        <!-- </button> -->
+                    </div>
+                </div>
+            </ng-container>
+
+            <!-- <mat-header-row *matHeaderRowDef="providerServiceDataColumns"></mat-header-row>     -->
+            <mat-row *matRowDef="let providerService; columns: providerServiceDataColumns;" matRipple>
+            </mat-row>
+            <mat-divider></mat-divider>
+        </mat-table>
+        <div class="seperator"></div>
+        <button class="add-service-btn" mat-raised-button (click)="newProviderService()"> Add Another </button>
+        <!-- <div class="seperator"></div> -->
+        <!-- <div fxLayout="row" fxLayoutAlign="end">
+            <p style=" font-size: 16px; color: #27c5c8; cursor:pointer" (click)="newProviderService()">ADD SERVICE</p>
+        </div> -->
+    </div>
+
+</div>

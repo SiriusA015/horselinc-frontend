@@ -1,0 +1,10 @@
+<div fxLayout="column" class="container">
+  <div class="checkBox"*ngFor="let providerService of providerServices" fxLayout="row"  fxLayoutAlign="space-between center">
+      <span class="text">{{providerService.service}}-${{(providerService.rate).toFixed(2)}}</span>
+      <mat-checkbox  [(ngModel)]="checkboxes[providerService.uid]" ></mat-checkbox>
+  </div>
+  <div  fxLayout="row">
+      <button mat-button (click) = "onClose()" class="btn">CLOSE</button>
+      <button mat-button (click) = "onDone()" class="btn">DONE</button>
+  </div>
+</div>

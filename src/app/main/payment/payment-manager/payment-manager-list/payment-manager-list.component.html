@@ -1,0 +1,39 @@
+<mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="OUTSTANDING" [disabled]="isSelectedItmeLoading || isLoadMore">
+        <div class="list" infiniteScroll [infiniteScrollDistance]="2" [fromRoot]="true" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()" [scrollWindow]="false">
+            <payment-manager-list-item class="payment-manager-list-item has-handle"
+                *ngFor="let payment of payments" [payment]="payment" (click)="readPayment(payment.uid)"
+                [ngClass]="{'current-payment-manager':payment?.uid == currentPayment?.uid}"
+                [@animate]="{value:'*',params:{y:'100%'}}"
+                [completed]="false"
+            >
+            </payment-manager-list-item>
+            <div class="space-bottom"></div>
+            <div class="no-invoices" *ngIf="isLoadMore">
+                <mat-icon ><mat-spinner color="warn" diameter="20">
+                </mat-spinner></mat-icon>
+            </div>
+        </div>
+        <div class="cbtn" fxFlex fxLayoutAlign="center center">
+            <div class="btn-action" mat-raised-button mat-ripple (click)="onExportInovice()">Export payment history </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="COMPLETED" [disabled]="isSelectedItmeLoading || isLoadMore">
+        <div class="list" infiniteScroll [infiniteScrollDistance]="2" [fromRoot]="true" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()" [scrollWindow]="false">
+            <payment-manager-list-item class="payment-manager-list-item has-handle"
+                *ngFor="let payment of paidInvoices" [payment]="payment" (click)="readPaid(payment.uid)"
+                [ngClass]="{'current-payment-manager':payment?.uid == currentPayment?.uid}"
+                [@animate]="{value:'*',params:{y:'100%'}}"
+                [completed]="true">
+            </payment-manager-list-item>
+            <div class="space-bottom"></div>
+            <div class="no-invoices" *ngIf="isLoadMore">
+                <mat-icon ><mat-spinner color="warn" diameter="20">
+                </mat-spinner></mat-icon>
+            </div>
+        </div>
+        <div class="cbtn" fxFlex fxLayoutAlign="center center">
+            <div  class="btn-action" mat-raised-button mat-ripple (click)="onExportInovice()">Export payment history </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

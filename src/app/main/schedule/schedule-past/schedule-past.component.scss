@@ -1,0 +1,73 @@
+@import "src/@fuse/scss/fuse";
+
+.card-content {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    font-family: Roboto;
+
+    @include media-breakpoint('xs') {
+        margin-right: 0px;
+    }
+
+    .card {
+        width: 344px;
+        min-height: 194px;
+        padding:0px;
+        @include media-breakpoint('xs') {
+            width: 100%;
+        }
+        mat-card-header{
+            padding: 15px 20px 5px 20px;
+            border-radius: 6px 6px 0px 0px;
+            background-color: #f1f1f1;
+            .header-image {
+                background-image: url('assets/icons/horselinc/ic-manager-green.svg');
+                background-size: cover;
+            }
+            .barn-name {
+                height: 16px;
+                font-size: 14px;
+                color: #000000;
+            }
+            .display-name {
+                height: 14px;
+                font-size: 12px;
+                color: rgba(0, 0, 0, 0.54);
+            }
+        }
+        mat-card-content{
+            height: auto;
+            padding: 10px 20px 5px 20px;
+            .show-name {
+                width: 294px;
+                font-size: 14px;
+                color: rgba(0, 0, 0, 0.37);
+                margin: 0px 0px 5px;
+            }
+            .service-content {
+                width: 293px;
+                height: auto;
+                font-size: 14px;
+                color: #000000;
+                margin: 5px 0px 10px;
+            }
+            .creator-info {
+                bottom: 10px; 
+                margin-top: 10px;
+            }
+            img {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                margin-right: 15px;
+            }
+            .creator-name {
+                width: 280px;
+                height: 20px;
+                font-size: 12px;
+                color: #000000;
+            }
+        }
+    }
+}
+

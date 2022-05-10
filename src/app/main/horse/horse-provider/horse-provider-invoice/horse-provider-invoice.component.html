@@ -1,0 +1,178 @@
+<div *ngIf="providerHorse" fxLayout="column" name="providerInvoiceForm" [formGroup]="providerInvoiceForm">
+
+    <div fxLayout="row" class="text-box2">
+        <div class="text-box6 title-26 black-green-color pt-8">
+            Create Invoice
+        </div>
+        <div (click)="InvoiceCancel()">
+            <img class="button-div pointer" src="assets/icons/horselinc/filled.svg" />
+        </div>
+    </div>
+    <div class="text-14 black-green-color pl-16 pt-12 pb-12">HORSE</div>
+    <div class="text-box1 pointer" fxLayout="row" fxLayoutAlign="space-between center" (click)="setHorseSearch()">
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <img *ngIf="providerHorse.avatarUrl" src="{{providerHorse.avatarUrl}}" class="avatar small40" />
+            <img *ngIf="!providerHorse.avatarUrl" src="assets/icons/horselinc/ic-manager-green.svg" class="avatar  small40" />
+
+            <div fxLayout="column">
+                <span *ngIf="providerHorse.barnName" class="text-16 black-color">
+                        {{providerHorse.barnName}} 
+                    </span>
+                <span *ngIf="providerHorse.displayName" class="text3 black-color">
+                        {{providerHorse.displayName}}
+                    </span>
+            </div>
+        </div>
+        <div class="button-div">
+            <img src="assets/icons/horselinc/search.svg" />
+        </div>
+    </div>
+
+    <div class="text-14 black-green-color pl-16 mt-16 mb-8 ">TRAINER</div>
+    <div *ngIf="providerHorse.trainer" class="text-box2" fxLayout="row" fxLayoutAlign="start center">
+        <img *ngIf="providerHorse.trainer.avatarUrl" src="{{providerHorse.trainer.avatarUrl}}" class="avatar small40" />
+        <img *ngIf="!providerHorse.trainer.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small40" />
+        <span class="text-16 black-color">
+                    {{providerHorse.trainer.name}} 
+                </span>
+    </div>
+
+    <div *ngIf="providerHorse.owners?.length>0" class="text-14 black-green-color mt-4 mb-8 pr-16">
+        <mat-divider class="ml-16"></mat-divider>
+        <div class="ml-16 mb-8 mt-8">
+            OWNER(S)
+        </div>
+
+        <div *ngFor="let owner of providerHorse?.owners" class="text-box2 mt-4" fxLayout="row" fxLayoutAlign="start center">
+            <img *ngIf="owner?.avatarUrl" src="{{owner?.avatarUrl}}" class="avatar small40" />
+            <img *ngIf="!owner?.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small40" />
+            <span class="text-14 black-color">
+                    {{owner?.name}} 
+                </span>
+        </div>
+    </div>
+
+    <div *ngIf="providerHorse.leaser" class="text-14 black-green-color mt-4 mb-8 pr-16">
+        <mat-divider class="ml-16"></mat-divider>
+        <div class="ml-16 mb-8 mt-8">
+            LEASED TO
+        </div>
+
+        <div class="text-box2 mt-4" fxLayout="row" fxLayoutAlign="start center">
+            <img *ngIf="providerHorse?.leaser?.avatarUrl" src="{{providerHorse?.leaser?.avatarUrl}}" class="avatar small40" />
+            <img *ngIf="!providerHorse?.leaser?.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small40" />
+            <span class="text-14 black-color">
+                    {{providerHorse?.leaser?.name}} 
+                </span>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="text-box5 mt-8 mb-8 pointer" fxLayoutAlign="space-between center" (click)="picker1.open()">
+        <span fxFlex="15" class="text-14 black-color">
+                Date
+        </span>
+        <input fxFlex="75" class="input-color text-14 black-color" readonly matInput [matDatepicker]="picker1" placeholder="" [(ngModel)]="requestDate" [ngModelOptions]="{standalone: true}" name="requestDate" required>
+        <div fxFlax="15">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </div>
+    </div>
+
+    <div *ngFor="let service of serviceTrue" class="text-box7 mt-4 mb-4" fxLayout="column">
+        <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between center">
+            <div class="text-16 green-color">
+                {{service?.service}}
+            </div>
+            <div (click)="serviceCancel(service)" class="button-div">
+                <img src="assets/icons/horselinc/cancel-24-px.svg" />
+            </div>
+        </div>
+        <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between center" class="text-14 green-color">
+            <div class="text-14 green-color">
+                Service Price $ {{service?.rate.toFixed(2)}}
+            </div>
+            <div class="text-14 green-color">
+                Qty
+            </div>
+            <input class="text-16 input-color p-0" fxFlex="10" type="number" [(ngModel)]="service.quantity" name="percentage" min="1" (ngModelChange)="changeServiceQuantity($event, service.uid)" [ngModelOptions]="{standalone: true}" required/>
+        </div>
+        <div class="edit-title">Service</div>
+    </div>
+    <div *ngFor="let newService of newServices" class="text-box7 mt-4 mb-4" fxLayout="column">
+        <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between center">
+            <input class="text-16 input-color p-0" [(ngModel)]="newService.service" placeholder="Input service" (ngModelChange)="changeCustomServiceService($event, newService.uid)" [ngModelOptions]="{standalone: true}" required/>
+            <div (click)="customServiceCancel(service)" class="button-div">
+                <img src="assets/icons/horselinc/cancel-24-px.svg" />
+            </div>
+        </div>
+        <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between center" class="text-14 green-color">
+            <span> Service Price  $</span>
+            <input class="text-16 input-color p-0" fxFlex="15" type="number" (keypress)="psearch($event, newService)" [(ngModel)]="newService.rate" placeholder="0.00" (ngModelChange)="changeCustomServiceRate($event, newService.uid)" [ngModelOptions]="{standalone: true}"
+                required/>
+            <div class="text-14 green-color">
+                Qty
+            </div>
+            <input class="text-16 input-color p-0" fxFlex="10" type="number" (keypress)="psearch1($event, newService)" [(ngModel)]="newService.quantity" name="percentage" (ngModelChange)="changeCustomServiceQuantity($event, newService.uid)" [ngModelOptions]="{standalone: true}"
+                required/>
+        </div>
+        <div class="edit-title">Service</div>
+    </div>
+
+    <div (click)="getServiceProviderServices()" class="text-box5 mt-8 mb-4 pointer" fxLayoutAlign="space-between center">
+        <span>Select Service</span>
+        <img src="assets/icons/horselinc/keyboard_arrow_down-24px.svg">
+    </div>
+    <div class="mt-16 mb-16 mr-8" fxLayout="row" fxLayoutAlign="end center">
+        <span class="text-16 green-color pointer" (click)="AddService()">
+                Add Custom Service
+        </span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon *ngIf="isLogging">
+            <mat-spinner color="warn" diameter="20"></mat-spinner>
+        </mat-icon>
+    </div>
+    <div class="text-box2 mb-24" fxLayout="row" fxLayoutAlign="start center">
+        <span class="text-14 black-green-color">
+                    Horse managers will see the these prices increased by 5% to cover the processing fees
+                </span>
+    </div>
+    <textarea placeholder="Add a note to the Horse Managers" class="text-area mb-24 text-14 blackcolor" name="providerNote" formControlName="providerNote" placeholder="Add a note to the Horse Managers">   
+        </textarea>
+    <div class="text-14 black-green-color pl-16 mb-12">SHOW(optional)</div>
+    <div class="text-box4" fxLayout="column">
+        <div fxLayout="row" class="text-box3 pointer" fxLayoutAlign="space-between center" (click)="searchShow()">
+            <div *ngIf="!shows" class="text-14 opacity-color">
+                Search by Name
+            </div>
+            <div *ngIf="shows" fxLayout="row" class="text-16 black-color" fxLayoutAlign="space-between center">
+                {{shows.name}}
+            </div>
+            <div class="button-div">
+                <img src="assets/icons/horselinc/search.svg" />
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row" class="text-box3" (input)="setShowName()">
+            <input class="input-text input-color text-14 p-0" placeholder="Or enter show here" [(ngModel)]="showName" [ngModelOptions]="{standalone: true}" name="showName" required/>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row" class="text-box3">
+            <input class="input-text input-color text-14 p-0" name="competitionClass" formControlName="competitionClass" placeholder="Competition Class" required/>
+        </div>
+    </div>
+    <div style="height:70px;"></div>
+    <div fxLayout="row" class="cancel-save" fxLayoutAlign="center end">
+        <button mat-button class="m-8 button medium white-color pointer" (click)="InvoiceCancel()">
+            <span class="text-16 green-color">
+                Cancel
+            </span>
+        </button>
+        <button mat-button class="m-8 button medium red-color pointer" (click)="InvoiceSave()">
+            <span class="text-16 white-color">
+                Review
+            </span>
+        </button>
+    </div>
+</div>

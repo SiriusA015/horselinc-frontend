@@ -1,0 +1,17 @@
+<div class="container">
+    <form id="update-email-form" fxLayout="column" fxLayoutAlign="start" name="updateEmailForm" [formGroup]="updateEmailForm" novalidate>
+        <div class="item1" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="edit-profile">Change Email</div>
+            <div mat-raised-button class="btn" (click)="closePanel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+
+        <input class="m-0 shadow" type="email" matInput placeholder="Enter your Email" name="email" formControlName="email" autocomplete="off" required/>
+        <p *ngIf="message" class="alert-danger">{{ message }}</p>
+
+    </form>
+
+    <div class="cancel-save" fxLayout="row" fxLayoutAlign="space-between center">
+        <button class="cancel" mat-raised-button (click)="closePanel()"> Cancel </button>
+        <button class="save" mat-raised-button (click)="updateEmail()"> Save </button>
+    </div>
+</div>

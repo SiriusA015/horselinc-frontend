@@ -1,0 +1,117 @@
+@import "src/@fuse/scss/fuse";
+
+.container {
+    background-color: #4f748c;
+    background-image: url('assets/images/backgrounds/horse-material-bg.svg');
+    background-repeat: repeat;
+    font-family: Roboto;
+    font-size: 20px;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    .title {
+        text-align: center;
+        justify-content: center;
+        padding-top: 95px;
+        padding-bottom: 30px;
+        @include media-breakpoint(xs) {
+            padding-top: 30px;
+        }
+    }
+    .content {
+        .cards {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            .card {
+                flex: 0 1 calc(33.3% -32px);
+                flex-grow: 0;
+                display: block;
+                height: 392px;
+                width: 360px;
+                padding: 24px 20px;
+                margin: 20px 50px;
+                @include media-breakpoint(xs) {
+                    width: 100%;
+                    height: 360px;
+                    margin: 10px 0px;
+                }
+                position: relative;
+                color: #ffffff;
+                background: #335c77;
+                box-shadow: 0 1px 5px 0 rgba(0,
+                0,
+                0,
+                0.2),
+                0 3px 1px -2px rgba(0,
+                0,
+                0,
+                0.12),
+                0 2px 2px 0 rgba(0,
+                0,
+                0,
+                0.14);
+                .card-title {
+                    height: 100px;
+                    display: flex;
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 1.4;
+                    align-items: center;
+                    img {
+                        margin-right: 15px;
+                    }
+                }
+                .card-data {
+                    font-size: 16px;
+                    font-weight: normal;
+                    line-height: 1.25;
+                    margin-right: 15px;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 120px;
+                    bottom: 20px;
+                    .card-data-item {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        justify-content: left;
+                        align-items: center;
+                        img {
+                            margin-right: 15px;
+                        }
+                        div {
+                            justify-content: center;
+                        }
+                    }
+                }
+            }
+        }
+        .buttons {
+            justify-content: center;
+            display: flex;
+            .continue {
+                border-radius: 0px;
+                font-weight: 300;
+                color: white;
+                background-color: #ec7185;
+                width: 360px;
+                height: 44px;
+                margin: 40px;
+                font-size: 18px;
+                line-height: 1.25;
+                letter-spacing: 0.37px;
+            }
+                margin-bottom: 20px;
+        }
+    }
+}

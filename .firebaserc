@@ -1,0 +1,23 @@
+{
+  "projects": {
+    "default": "horselinc-dev",
+    "horselinc-dev": "horselinc-dev",
+    "horselinc-prod": "horselinc-5b153"
+  },
+  "targets": {
+    "horselinc-dev": {
+      "hosting": {
+        "frontend": [
+          "horselinc-dev"
+        ]
+      }
+    },
+    "horselinc-5b153": {
+      "hosting": {
+        "frontend": [
+          "horselinc-prod"
+        ]
+      }
+    }
+  }
+}

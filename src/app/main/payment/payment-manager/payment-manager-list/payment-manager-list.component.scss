@@ -1,0 +1,76 @@
+@import "src/@fuse/scss/fuse";
+payment-manager-list {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    position: relative;
+    padding: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    min-width: 320px;
+    
+    mat-tab-group.mat-primary .mat-ink-bar {background-color: #27c5c8 !important;}
+    mat-tab-group {
+        height: 100%;
+        .mat-tab-label {
+            width: 50%;
+            min-width: 50%;
+            font-weight: bold;
+        }
+        .mat-tab-body-wrapper {
+            height: 100%;
+        }
+    
+        .mat-tab-body.mat-tab-body-active{
+            overflow-y: hidden;
+            .mat-tab-body-content {
+                overflow-y: hidden;
+            }
+        }
+    }
+
+    .list {
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .no-payments-text {
+        font-size: 24px;
+        font-weight: 300;
+    }
+    .no-invoices {
+        position: absolute;
+        bottom: 60px;
+        margin-left: 50%;
+        z-index: 1;
+    }
+    .space-bottom {
+        height: 60px;
+    }
+
+    .payment-list{
+        height: 100%;
+    }
+
+    .cbtn {
+        position: absolute;
+        width: 100%;
+        bottom: 20px;
+        display: flex;
+        justify-content: center;
+        .btn-action {
+            width: 210px;
+            height: 40px;;
+            border-radius: 100px;
+            text-align: center;
+            padding-top: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px 0 rgba(13, 62, 83, 0.15), 0 2px 10px 0 rgba(12, 75, 80, 0.29);
+            background-color: #ffffff;
+            font-family: Roboto;
+            color: #ec7185;
+            font-size: 16px;
+        }
+    }
+}
+

@@ -1,0 +1,26 @@
+<div fxLayout="column">
+    <div class="action-title" fxFlex="10%" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="confirm"> Search for Show by Title </div>
+        <div class="close" (click)="searchCancel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+    </div>
+    <div class="search-show text2" fxLayout="row" fxLayoutAlign="space-between center">
+        <input [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" class="input-text" autofocus  fxFlex="70" placeholder="Search for Show by Title">
+        <div fxFlex="10" >
+            <img class="ic-search" src="assets/icons/horselinc/search.svg"/>
+        </div>
+    </div>
+    <div *ngFor="let horse of horses" class="search-list" fxLayout="row" fxLayoutAlign="start center" (click)="getCurrentProviderHorse(horse.uid)">
+        <img *ngIf="horse?.avatarUrl" fxFlex="15" src="{{horse?.avatarUrl}}" class="avatar small40"/>   
+        <img *ngIf="!horse?.avatarUrl" fxFlex="15" src="assets/icons/horselinc/ic-manager-green.svg" class="avatar small40"/>
+        <span *ngIf="horse?.barnName" class="text1 black-color"> {{horse.barnName}} </span>
+    </div>
+    
+    <div *ngFor="let show of shows" class="search-list" fxLayout="row" fxLayoutAlign="start center" (click)="getCurrentShow(show.uid)">
+        <span *ngIf="show.name" class="text1 black-color"> {{show.name}} </span>
+    </div>
+
+    <div class="loading-bar" fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon *ngIf="isLogging" ><mat-spinner color="warn" diameter="20">
+        </mat-spinner></mat-icon>
+    </div>
+</div>

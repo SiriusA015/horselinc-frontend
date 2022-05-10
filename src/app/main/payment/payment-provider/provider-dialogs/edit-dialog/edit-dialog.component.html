@@ -1,0 +1,85 @@
+<div class="edit-dlg">
+    <div class="rectangle" fxLayout="column" fxLayoutAlign="start">
+        <div class="action-title" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="confirm"> Edit Invocie </div>
+            <div class="close" (click)="onCloseDlg()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+        <div class="content" *ngFor="let request of serviceRequests; index as i">
+            <div class="service-detail" fxLayout="column" fxLayoutAlign="start">
+                <div class="horse" fxLayout="row" fxLayoutAlign="start center">
+                    <img *ngIf="!request.horse?.avatarUrl" src="assets/icons/horselinc/ic-manager-green.svg" />
+                    <img *ngIf="request.horse?.avatarUrl" src="{{request.horse?.avatarUrl}}" />
+                    <div class="barn-name" fxLayout="column" fxLayoutAlign="center start">
+                        <div class="" *ngIf="request.horse" >{{request.horse.barnName}}</div>
+                    </div>
+                </div>
+                
+                <div fxLayout="row" class="request-date pointer" fxLayoutAlign="space-between center" (click)="picker1.open()">
+                    <mat-form-field style="width: 100%">
+                        <input class="pointer" matInput [matDatepicker]="picker1" [(ngModel)]="newRequestDates[i].value" readonly />
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                </div> 
+                <div>{{request.show?.name}}</div>
+
+                <mat-divider class="mt-5 mb-5" *ngIf="request.show"></mat-divider>
+                <div class="current-services" *ngFor="let service of requestServices[i]; index as k">
+                    <div class="content" fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="pt-5"> {{service.service}} </div>
+                        <img src="assets/icons/horselinc/filled.svg" (click)="deleteService(i, k)"/>
+                    </div>
+                    <div class="price" fxLayout="row" fxLayoutAlign="space-between center">
+                        <div fxFlex="60">Service Price ${{service.rate.toFixed(2)}}</div>
+                        <div fxFlex="20">Qty</div>
+                        <div fxFlex="15"> <input type="number" style="width: 30px; padding: 0px;" (keypress)="Quantitysearch($event, service)" [(ngModel)]="service.quantity" min="1"/> </div>
+                    </div>
+                    <mat-divider class="mt-5 mb-5"></mat-divider>
+                </div>
+
+                <div *ngFor = "let newService of newServicesList[i]" class="mt-4 mb-4"  fxLayout="column" >
+                        <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between center" >  
+                            <input class="in-text input-color p-0" [(ngModel)]="newService.service" placeholder="Input service"
+                                        (ngModelChange)="changeCustomServiceService($event, newService)" [ngModelOptions]="{standalone: true}" required/>
+                            <div (click)="customServiceCancel(newService, i)" class="buttondiv">
+                                <img src="assets/icons/horselinc/filled.svg"/>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between center" class="text2 green-color">  
+                            <span> Service Price  $</span>
+                            <input class="in-text input-color p-0" fxFlex="15" type="number" (keypress)="psearch($event, newService)" [(ngModel)]="newService.rate" placeholder="0.00"
+                                        (ngModelChange)="changeCustomServiceRate($event, newService.uid, i)" [ngModelOptions]="{standalone: true}" min="0" style="width: 50px;"/>
+                            <div class="text2 green-color">
+                                Qty
+                            </div>
+                            <input class="in-text input-color p-0" fxFlex="15" type="number" [(ngModel)]="newService.quantity" name="percentage" 
+                                (ngModelChange)="changeCustomServiceQuantity($event, newService.uid, i)" (keypress)="Quantitysearch($event, newService)" [ngModelOptions]="{standalone: true}" min="1"/>
+                        </div> 
+                        <mat-divider *ngIf="newServicesList[i]"></mat-divider>
+                </div>  
+                <div class="add-service" fxLayout="row" fxLayoutAlign="space-between center" (click)="openServiceListModal(i)">
+                    <div>Select Service</div>
+                    <img src="assets/icons/horselinc/keyboard_arrow_down-24px.svg" />
+                </div>
+                <mat-divider class="mt-5 mb-5"></mat-divider>
+                <div  class="mt-16 mb-16" fxLayout="row" fxLayoutAlign="end center">  
+                    <span class="in-text green-color pointer" (click)="AddService(i)">
+                        ADD CUSTOM SERVICE
+                    </span>
+                </div> 
+                <mat-divider class="mt-5 mb-5"></mat-divider>
+            </div>
+        </div>
+        <div class="action-ctrl" fxLayout="column" fxLayoutAlign="space-evenly center">
+            <div class="box"> Horse managers will see these prices increased by 5% to cover the processing fees </div>
+            <mat-divider></mat-divider>
+            <button class="btn-save mt-40" (click)="saveToDraft()" mat-raised-button [disabled]="isLogging || isLogging1">Save
+                <mat-icon *ngIf="isLogging" ><mat-spinner color="warn" diameter="20">
+                </mat-spinner></mat-icon></button>
+            <button class="btn-delete" (click)="deleteInvoiceDraft()" mat-raised-button [disabled]="isLogging1 || isLogging">Delete Invoice
+                <mat-icon *ngIf="isLogging1" ><mat-spinner color="warn" diameter="20">
+                </mat-spinner></mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

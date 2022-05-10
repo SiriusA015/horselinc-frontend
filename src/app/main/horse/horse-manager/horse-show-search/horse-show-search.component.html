@@ -1,0 +1,22 @@
+<div class="intro" fxLayout="column" fxLayoutAlign="start">
+
+    <div class="title-item mb-20" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="edit-profile">Search for Show by Title</div>
+        <div mat-raised-button class="btn pointer" (click)="searchCancel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+    </div>
+    <div class="search-edit" fxLayout="row" fxLayoutAlign="space-between center">
+        <input [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" class="edit" fxFlex="80" style="margin:0px; padding:0px" placeholder="Search for Show by Title" />
+    </div>
+    <mat-divider style="margin-left:-15px; margin-right:-15px; margin-bottom:10px"></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon *ngIf="isLogging">
+            <mat-spinner color="warn" diameter="20"></mat-spinner>
+        </mat-icon>
+    </div>
+    <div class="item-list" fxLayout="column" fxLayoutAlign="space-around start">
+
+        <div *ngFor="let show of this.shows" class="text-box1" fxLayout="row" (click)="getCurrentShow(show.uid)">
+            <span *ngIf="show.name" class="text1 black-color"> {{show.name}} </span>
+        </div>
+    </div>
+</div>

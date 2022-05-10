@@ -1,0 +1,76 @@
+<div class="container">
+    <div [formGroup]="horseForm" name="horseForm" fxLayout="column" fxLayoutAlign="start">
+        <div fxLayout="column">
+            <div class="edit-horse-profile" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="title black-green-color" fxLayoutAlign="start center">
+                    Create Horse Profile
+                </div>
+                <div (click)="profileCancel()" class="pointer">
+                    <img class="btn-close pointer" src="assets/icons/horselinc/filled.svg" />
+                </div>
+            </div>
+            <div class="photo input-group">
+                <label for="file123" class="file-upload">
+                    <input id="file123" type="file" (change)="changedAvatarFile($event)">
+                    <img class="image" src={{uploadedAvatarUrl}}/>
+                </label>
+            </div>
+        </div>
+        <div fxLayout="column">
+            <div fxLayout="column">
+                <div class="sel-option" fxLayoutAlign="start center">
+                    <input fxFlex class="text1 input-color p-0" placeholder="Horse Barn Name (required)" formControlName="barnName" required/>
+                    <div class="edit-title">Horse Barn Name</div>
+                </div>
+
+                <div class="sel-option" fxLayoutAlign="start center">
+                    <input fxFlex class="text1 input-color p-0" placeholder="Horse Show Name" formControlName="displayName" />
+                    <div class="edit-title">Horse Show Name</div>
+                </div>
+                <div class="sel-option" fxLayoutAlign="start center">
+                    <mat-select class="text1 input-color" placeholder="Horse Gender" formControlName="gender">
+                        <mat-option value="Mare">Mare</mat-option>
+                        <mat-option value="Stallion">Stallion</mat-option>
+                        <mat-option value="Gelding">Gelding</mat-option>
+                    </mat-select>
+                    <div class="edit-title">Horse Gender</div>
+                </div>
+
+                <div class="sel-option" fxLayoutAlign="start center">
+                    <mat-select class="text1 input-color p-0" placeholder="Horse Birth Year" formControlName="birthYear">
+                        <mat-option *ngFor="let horseYear of horseYears" value="{{horseYear}}">{{horseYear}}</mat-option>
+                    </mat-select>
+                    <div class="edit-title">Horse Birth Year</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="sel-option" fxLayoutAlign="start center">
+            <mat-select class="text1 input-color" placeholder="Set invoice method" [(value)]="selected">
+                <mat-option value="sms">Text</mat-option>
+                <mat-option value="email">Email</mat-option>
+            </mat-select>
+            <div class="edit-title">Set invoice method</div>
+        </div>
+
+        <input *ngIf="selected=='sms'" type="text" class="sel-option text1 input-color p-16" fxFlex="14" placeholder="Text" [(ngModel)]="sms" name="sms" (ngModelChange)="changeSms($event)" [ngModelOptions]="{standalone: true}" required/>
+        <input *ngIf="selected=='email'" type="email" class="sel-option text1 input-color p-16" fxFlex="14" placeholder="Email" [(ngModel)]="email" name="email" (ngModelChange)="changeEmail($event)" [ngModelOptions]="{standalone: true}" required/>
+        <textarea class="text-area text1" placeholder="Add any neccessary notes on personality  or temperament here." formControlName="description" fxLayoutAlign="start center" name="description">
+        </textarea>
+
+        <div class="user-note text2">
+            Use the fields below to attach an Owner, Trainer, and/or Leaser to this horse profile/ If no owner is attached, the trainer will be responsible for payment.
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+            <button (click)="addHorse()" mat-raised-button class="btn-create big red-color pointer" [disabled]="horseForm.invalid || isLogging || onValidaton()">
+                    <span class="text1 white-color">
+                        Create
+                    </span>
+                    <mat-icon *ngIf="isLogging" ><mat-spinner color="warn" diameter="20">
+                    </mat-spinner></mat-icon>
+            </button>
+        </div>
+
+    </div>
+</div>

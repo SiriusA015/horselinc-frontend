@@ -1,0 +1,39 @@
+<div id="profile-detail-provider" fxLayout="column">
+    <!-- CONTENT -->
+    <div class="title" fxLayout="row" fxLayoutAlign="space-between center" >
+        <p class="label" style="text-align:left">My service providers</p>
+    </div>
+    
+    <div fxLayout="column">
+        <div fxLayout="row wrap" fxLayout.lt-lg ="column">
+            <div class="textbox4" fxLayout="column" *ngFor="let itemKey of managerProvidersSort1">
+                <div class="p-8">
+                    <span class="text2 black-green-color">{{itemKey[0] | uppercase}}</span> 
+                </div>
+                <div class="p-8" fxLayout="row" fxLayoutAlign="start center" *ngFor="let item of itemKey[1]">
+                    <div fxFlex="12">
+                        <img *ngIf="item.avatarUrl" src="{{item.avatarUrl}}" class="avatar small32"/>
+                        <img *ngIf="!item.avatarUrl" src="assets/icons/horselinc/avatar-placeholder.png" class="avatar small32"/>
+                    </div>
+                        <div fxFlex="82">
+                        <span class="text1 black-color">
+                            {{item.name}}
+                        </span>
+                    </div>
+                    <div fxFlex="8" class="buttondiv">
+                        <img src="assets/icons/horselinc/cancel-24-px.svg" (click)="onDeleteProvider(item)"/>   
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div fxLayoutAlign="start center"> 
+        <button mat-raised-button  class="add-provder button big red-color" (click)="addServiceProvider()">
+            <span class="text2 white-color">
+                Add Service Provider
+            </span>
+        </button>
+    </div>
+</div>

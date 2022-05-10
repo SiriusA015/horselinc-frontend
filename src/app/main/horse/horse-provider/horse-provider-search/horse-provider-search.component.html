@@ -1,0 +1,26 @@
+<div class="intro" fxLayout="column" fxLayoutAlign="start">
+    <div class="search-edit" fxLayout="row" fxLayoutAlign="space-between center">
+        <input [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" class="edit" fxFlex="80" style="margin:0px; padding:0px" placeholder="{{Title}}" />
+        <div mat-raised-button class="button-div pointer" (click)="searchCancel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+    </div>
+    <mat-divider style="margin-left:-15px; margin-right:-15px; margin-bottom:10px"></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon *ngIf="isLogging">
+            <mat-spinner color="warn" diameter="20"></mat-spinner>
+        </mat-icon>
+    </div>
+
+    <div class="item-list" fxLayout="column" fxLayoutAlign="space-around start">
+        <div *ngFor="let horse of this.horses" class="text-box1" fxLayout="row" (click)="getCurrentProviderHorse(horse.uid)" fxLayoutAlign="flex-start center">
+            <img *ngIf="horse.avatarUrl" src="{{horse.avatarUrl}}" class="avatar small32" />
+            <img *ngIf="!horse.avatarUrl" src="assets/icons/horselinc/ic-manager-green.svg" class="avatar small32" />
+            <span *ngIf="horse.barnName" class="text1 black-color"> {{horse.barnName}} </span>
+        </div>
+        <div *ngFor="let show of this.shows" class="text-box1" fxLayout="row" (click)="getCurrentShow(show.uid)">
+            <span *ngIf="show.name" class="text1 black-color"> {{show.name}} </span>
+        </div>
+    </div>
+
+    <button mat-button class="invite-button m-16" (click)="onNewHorse()">Create New Horse Profile</button>
+
+</div>

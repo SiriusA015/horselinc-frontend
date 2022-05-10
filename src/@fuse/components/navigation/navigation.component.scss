@@ -1,0 +1,57 @@
+@import 'src/@fuse/scss/fuse';
+a:not(.mat-button):not(.mat-raised-button):not(.mat-flat-button):not(.mat-stroked-button):not(.mat-icon-button):not(.mat-fab):not(.mat-mini-fab):hover,
+a:not(.mat-button):not(.mat-raised-button):not(.mat-flat-button):not(.mat-stroked-button):not(.mat-icon-button):not(.mat-fab):not(.mat-mini-fab):active {
+    text-decoration: none;
+}
+
+a,
+a:visited,
+a:active,
+a:link,
+a:hover {
+    text-decoration: none;
+}
+
+fuse-navigation {
+    position: relative;
+    display: flex;
+    flex: 1 0 auto;
+    >.nav {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    .inviteDiv {
+        position: fixed;
+        bottom: 40px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        a {
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        button {
+            border-radius: 0px !important;
+            width: 100% !important;
+            height: 44px !important;
+            border-radius: 100px !important;
+            box-shadow: 0 2px 10px 0 rgba(12, 75, 80, 0.29) !important;
+            background-color: #335c77 !important;
+            font-family: Roboto !important;
+            font-size: 16px !important;
+            font-weight: normal !important;
+            font-stretch: normal !important;
+            font-style: normal !important;
+            line-height: 1.25 !important;
+            letter-spacing: 0.37px !important;
+            text-align: center !important;
+            color: #27c5c8 !important;
+        }
+    }
+}

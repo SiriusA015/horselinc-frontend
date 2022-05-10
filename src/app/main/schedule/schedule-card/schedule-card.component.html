@@ -1,0 +1,62 @@
+<div class="card-content" *ngIf="request">
+    <mat-card class="card">
+        <mat-card-header>
+            <div mat-card-avatar>
+                <img *ngIf="!request.horse?.avatarUrl" class="header-image" src="assets/icons/horselinc/ic-manager-green.svg" />
+                <img *ngIf="request.horse?.avatarUrl" class="header-image" src="{{request.horse?.avatarUrl}}" />
+            </div>
+            <mat-card-title class="barn-name">{{request.horseBarnName}}</mat-card-title>
+            <mat-card-subtitle class="display-name">{{request.horseDisplayName}}</mat-card-subtitle>
+            <div class="btn-3dot" *ngIf="request.status!='completed' && reservation!='past'" (click)="requestDenial()">
+                <img  src="assets/icons/horselinc/more-vert-24-px.svg">
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <div  class="greates-show" *ngIf="request.show"> <span> {{request.show?.name}} </span></div>
+            <div  class="greates-show" *ngIf="!request.show">Non-Show Request</div>
+            <div  class="competition-class">{{request.competitionClass}}</div>
+            <div class= "service-box" fxLayout = "column" fxLayoutAlign="start start">
+                <div class="service-content" *ngFor="let service of request.services"> {{service.service}} (x{{service.quantity}}) </div>
+            </div>
+            <div  class="instruction">{{request.instruction}}</div>
+
+            <div [ngClass]="{'alignbottom': noneButtonFlag == true}"  fxLayoutAlign="start center" class="trainer-info">
+                <img *ngIf="request.horse?.trainer?.avatarUrl" src="{{request.horse?.trainer?.avatarUrl}}" />
+                <img *ngIf="!request.horse?.trainer?.avatarUrl" src='assets/icons/horselinc/ic-profile.svg' />
+                <div class="trainer-barn" *ngIf="request.horse?.trainer">{{request.horse?.trainer?.name}} ({{request.horse?.trainer?.barnName}})</div>
+            </div>
+            <div *ngIf="!noneButtonFlag" class="schedule-type">
+                <div *ngIf="!inputAssignFlag" class="btn-action">
+                    <div *ngIf="!outAssignFlag">                    <!--  assigned by hm   -->
+                        <div *ngIf="request.status=='pending'" class="btn-accept pt-12" fxFlex matRipple (click)="onAssign()"> Assign Job</div>
+                        <div *ngIf="request.status=='pending'" class="btn-accept-blue pt-12" fxFlex matRipple  (click)="onAccept()"> Accept Job</div>
+                        <div *ngIf="request.status=='accepted' && reservation!='Upcoming'" class="btn-mark pt-12" fxFlex mat-button matRipple  (click)="onJobComplete()">Mark Job Complete</div>
+                        <div *ngIf="request.status=='completed'" class="btn-completed pt-12" fxFlex >Completed</div>
+                        <div *ngIf="request.status=='declined'" class="btn-completed pt-12" fxFlex >Declined</div>
+                    </div>
+                    <div *ngIf="outAssignFlag">                     <!-- have assigned to other sp   -->
+                        <div *ngIf= "request.status!='declined'" class="assign-action">
+                            <div  fxLayout="row" >
+                                <span class="assign-statusMark">Assigned to:&nbsp;&nbsp;&nbsp;</span>
+                                <span class="assign-name">{{request.assigner?.name}}</span>
+                            </div>
+                            <div fxLayout="row">
+                                <span class="assign-statusMark"> Status:&nbsp;&nbsp;&nbsp;</span>
+                                <span *ngIf = "request.status=='accepted'" class="assign-status accepted"> Accepted </span>
+                                <span *ngIf = "request.status=='pending'" class="assign-status pending"> Pending </span>
+                                <span *ngIf = "request.status=='completed'"  class="assign-status completed"> Completed </span>
+                            </div>
+                        </div>
+                        <div *ngIf= "request.status=='declined'" class="btn-declined pt-12" fxFlex matRipple>Declined</div>
+                        <div *ngIf= "request.status=='declined'" class="btn-declined_red pt-12" fxFlex matRipple  (click)="onAssign()">Choose Service Provider</div>  
+                    </div>
+                </div>
+                <div *ngIf="inputAssignFlag" class="btn-action">       <!--  assigned   -->
+                    <div *ngIf="request.status=='pending'" class="btn-accept-blue pt-12" fxFlex matRipple   (click)="onAccept()"> Accept Job</div>
+                    <div *ngIf="request.status=='accepted' && reservation!='Upcoming'" class="btn-mark pt-12" fxFlex mat-button matRipple  (click)="onJobComplete()">Mark Job Complete</div>
+                    <div *ngIf="request.status=='completed'" class="btn-completed pt-12" fxFlex >Completed</div>
+                </div>
+            </div>
+        </mat-card-content>
+  </mat-card>
+</div>

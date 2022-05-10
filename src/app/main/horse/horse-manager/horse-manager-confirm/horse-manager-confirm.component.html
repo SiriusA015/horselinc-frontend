@@ -1,0 +1,50 @@
+<div *ngIf="request.data" fxLayout="column">
+    <div *ngIf="addRequest" fxLayout="column">
+        <div fxLayout="row">
+            <div class="text-box6 title-26 black-green-color pt-8 pb-20">
+                Confirm
+            </div>
+            <div (click)="confirmCancel()">
+                <img class="button-div pointer" src="assets/icons/horselinc/filled.svg" />
+            </div>
+        </div>
+        <div fxLayout="column" class="textbox2">
+            <span class="text-box1 text-14 black-green-color">Date</span>
+            <span class="text-box1 text-14 black-color">{{ addRequest.requestDate | date:'fullDate' }}</span>
+        </div>
+        <div fxLayout="column" class="textbox2">
+            <span class="text-box1 text-14 black-green-color">Show</span>
+            <span class="text-box1 text-14 black-color">{{disShow}}</span>
+        </div>
+        <div fxLayout="column" class="textbox2">
+            <span class="text-box1 text-14 black-green-color">Class</span>
+            <span class="text-box1 text-14 black-color">{{addRequest.competitionClass}}</span>
+        </div>
+        <div fxLayout="column" class="textbox2">
+            <span class="text-box1 text-14 black-green-color">Service Provider</span>
+            <span class="text-box1 text-14 black-color">{{addRequest.serviceProvider.name}}</span>
+        </div>
+        <div fxLayout="column" class="textbox2">
+            <span class="text-box1 text-14 black-green-color">Services</span>
+            <div *ngFor="let service of addRequest.services" class="textbox1 title-14 black-color" fxLayout="row" fxLayoutAlign="space-between start">
+                <div fxFlex="70">
+                    <span>{{service.service}}</span>
+                    <span>(x {{service.quantity}})</span>
+                </div>
+                <span>${{getAmountWithApplicationFee(service.rate*service.quantity).toFixed(2)}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="pt-16" fxLayout="row" fxLayoutAlign="center center">
+        <button mat-button class="m-8 mb-16 text-16 cancel-save-button cancel-button pointer" (click)="confirmCancel()">
+            Cancel
+        </button>
+        <button mat-button class="m-8 mb-16 text-16 cancel-save-button save-button pointer" (click)="confirmSave()" [disabled]="isLogging">
+            Save
+            <mat-icon *ngIf="isLogging">
+                <mat-spinner color="warn" diameter="20">
+                </mat-spinner>
+            </mat-icon>
+        </button>
+    </div>
+</div>

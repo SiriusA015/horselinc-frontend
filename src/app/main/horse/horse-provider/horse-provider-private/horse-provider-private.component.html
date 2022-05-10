@@ -1,0 +1,31 @@
+<div class="horse-provider-private" fxLayout="column">
+    <div fxLayout="column">
+        <div fxLayout="row" class="text-box2">
+            <div class="text-box6 title1 black-green-color pt-8">
+                Private Note
+            </div>
+            <div (click)="CancelPrivate()">
+                <img class="button-div" src="assets/icons/horselinc/filled.svg" />
+            </div>
+        </div>
+        <div fxLayout="column" class="text-box2">
+            <span class="text-box1 text2 black-green-color">
+                My notes for {{this.providerHorse.barnName}}
+            </span>
+        </div>
+        <textarea class="text-area text1" placeholder=" (Add your notes or this horse's temperament needs, quirks,etc. No one else can view your private notes.)" [(ngModel)]="addPrivate" name="addPrivate" required>
+        </textarea>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-button class="m-8 button medium white-color" (click)="CancelPrivate()">
+            <span class="text1 green-color">
+                Cancel
+            </span>
+        </button>
+        <button mat-button class="m-8 button medium red-color" (click)="SavePrivate()">
+            <span class="text1 white-color">
+                Save
+            </span>
+        </button>
+    </div>
+</div>

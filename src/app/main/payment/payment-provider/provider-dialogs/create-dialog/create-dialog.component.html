@@ -1,0 +1,147 @@
+<div class="create-dlg">
+    <form  id="invoiceDraftForm" name="invoiceDraftForm" [formGroup]="invoiceDraftForm">
+        <div class="rectangle" fxLayout="column" fxLayoutAlign="space-between center">
+            <div class="action-title" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="confirm"> Create Invoice </div>
+                <div class="close" (click)="onCloseDlg()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+            </div>
+            <div class="content">
+                <div class="text2 black-green-color pl-16 pt-12 pb-12">Horse</div>
+                <div class="horse-search" fxLayout="row" fxLayoutAlign="space-between center" (click)="onSearchShow('horse')">
+                    <div *ngIf="!currentHorse">  Search or Add Horse </div>
+                    <div *ngIf="currentHorse" fxLayout="row" fxLayoutAlign="start">
+                        <img class="small32 avatar" src="{{(currentHorse.avatarUrl!='')? currentHorse.avatarUrl : 'assets/icons/horselinc/ic-profile.svg'}}" />
+                        <div *ngIf="currentHorse" fxLayout="column" fxLayoutAlign="start">
+                            <div class="barn-name"> {{ currentHorse.barnName }} </div>
+                            <div class="display-name"> {{ currentHorse.displayName }} </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-search" > 
+                        <img src="assets/icons/horselinc/search.svg"  mat-ripple />
+                    </div> 
+                </div>
+
+                <div class="horse-detail" fxLayout="column" fxLayoutAlign="start">
+                    <div *ngIf="currentHorse?.trainer">
+                        <div class="user-type">TRAINER</div>
+                        <div *ngIf="currentHorse" class="horse-manager" fxLayout="row" fxLayoutAlign="start center" >
+                            <img *ngIf="currentHorse?.trainer?.avatarUrl" src="{{currentHorse?.trainer?.avatarUrl}}" />
+                            <img *ngIf="!currentHorse?.trainer?.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" />
+                            <div class="user-name" fxLayout="column" fxLayoutAlign="center start">
+                                <div class="">{{currentHorse.trainer.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="currentHorse?.owners && currentHorse?.owners.length>0">
+                        <mat-divider class="mt-5 mb-5"></mat-divider>
+                        <div class="user-type" >OWNER(S)</div>
+                        <div *ngFor="let owner of currentHorse.owners">
+                            <div *ngIf="currentHorse" class="horse-manager" fxLayout="row" fxLayoutAlign="start center" > 
+                               <img *ngIf="owner?.avatarUrl" src="{{owner?.avatarUrl}}" />
+                                <img *ngIf="!owner?.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" />
+                                <div class="user-name" fxLayout="column" fxLayoutAlign="center start">    
+                                    <div class="">{{owner.name}}</div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div *ngIf="currentHorse?.leaser">
+                        <mat-divider class="mt-5 mb-5"></mat-divider>
+                        <div class="user-type">LEASED TO</div>
+                        <div *ngIf="currentHorse" class="horse-manager" fxLayout="row" fxLayoutAlign="start center" >
+                            <img *ngIf="currentHorse?.leaser?.avatarUrl" src="{{currentHorse?.leaser?.avatarUrl}}" />
+                            <img *ngIf="!currentHorse?.leaser?.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" />
+                            <div class="user-name" fxLayout="column" fxLayoutAlign="center start">
+                                <div class="">{{currentHorse?.leaser?.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" class="txt-container pointer" fxLayoutAlign="space-between center" (click)="picker1.open()">
+                        <span fxFlex="15" class="text2 black-color">
+                            Date
+                        </span>  
+                       <input fxFlex="75" class=" text2 black-color" readonly matInput [matDatepicker]="picker1" placeholder=""  [(ngModel)]="requestDate" [ngModelOptions]="{standalone: true}" name="requestDate" required>
+                        <div fxFlax="15">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </div>
+                    </div>
+
+                    <div class="current-services" *ngFor="let service of serviceTrue">
+                        <div class="mt-5" fxLayout="row" fxLayoutAlign="space-between center">
+                            <div class="green-color"> {{service?.service}} </div>
+                            <img class="w-16 h-16" src="assets/icons/horselinc/filled.svg" (click)="deleteService(service)"/>
+                        </div>
+                        <div class="price" fxLayout="row" fxLayoutAlign="space-between center">
+                            <div fxFlex="60" class="green-color">Service Price ${{service?.rate.toFixed(2)}}</div>
+                            <div fxFlex="20" class="green-color">Qty</div>
+                            <div fxFlex="15"> <input type="number" class="service-quantity" (keypress)="Quantitysearch($event, service)" [(ngModel)]="service.quantity" [ngModelOptions]="{standalone: true}" min="1"/> </div>
+                        </div>
+                        <div class="edit-title">Service</div>   
+                    </div>
+
+                    <div *ngFor = "let newService of newServices" class="current-services"  fxLayout="column" fxLayoutAlign="center">
+                            <div fxLayout="row" fxLayoutAlign="space-between center" >  
+                                <input class="text1 input-color p-0" [(ngModel)]="newService.service" placeholder="Input service"
+                                            (ngModelChange)="changeCustomServiceService($event, newService.uid)" [ngModelOptions]="{standalone: true}" required/>
+                                <img class="w-16 h-16" src="assets/icons/horselinc/filled.svg" (click)="customServiceCancel(newService)"/>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="space-between center" class="text2 green-color">  
+                                <div fxFlex="35"> Service Price  $</div>
+                                <input fxFlex="15" class="text1 input-color p-0" type="number" (keypress)="psearch($event, newService)" [(ngModel)]="newService.rate" placeholder="0.00"
+                                        (ngModelChange)="changeCustomServiceRate($event, newService.uid)" [ngModelOptions]="{standalone: true}" min="0"/>
+                                <div fxFlex="30" class="text2 green-color center"> Qty </div>
+                                <input fxFlex="15" class="text1 input-color p-0" type="number" [(ngModel)]="newService.quantity" name="percentage" 
+                                        (ngModelChange)="changeCustomServiceQuantity($event, newService.uid)" (keypress)="Quantitysearch($event, newService)" [ngModelOptions]="{standalone: true}" min="1"/>
+                            </div>  
+                            <div class="edit-title">Service</div>   
+                    </div>  
+
+                    <div class="add-service pointer" fxLayout="row" fxLayoutAlign="space-between center" (click)="openServiceListModal()">
+                        <div>Select Service</div>
+                        <img src="assets/icons/horselinc/keyboard_arrow_down-24px.svg" />
+                    </div>
+                    <div  class="mt-16 mb-16" fxLayout="row" fxLayoutAlign="end center">  
+                        <span class="text1 green-color pointer" (click)="AddService()">
+                            ADD CUSTOM SERVICE
+                        </span>
+                    </div>  
+                    <div class="show-notes mb-10">
+                        <div> Horse managers will see these prices increased by 5% to cover the processing fees </div>
+                        <div class="mt-10"> SHOW (optional) </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between center" class="txt-container pointer" (click)="onSearchShow('show')">
+                        <div *ngIf="!currentShow?.name">
+                            Search by Name
+                        </div>
+                        <div *ngIf="currentShow?.name" >
+                            <div>{{currentShow?.name}}</div>
+                        </div>
+                        <div class="btn-search"> 
+                            <img src="assets/icons/horselinc/search.svg" mat-ripple />
+                        </div> 
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="txt-container"> 
+                        <input class=" text2 p-0" [(ngModel)]="showName" (keypress)="onInputShow($event)" [ngModelOptions]="{standalone: true}"  placeholder="Or enter show here" />
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="txt-container"> 
+                        <input class=" text2 p-0" name="competitionClass" formControlName="competitionClass" placeholder="Competition Class" />
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+                <div class="total-rect" fxLayout="row" fxLayoutAlign="space-between center">
+                    <textarea name="instruction" formControlName="instruction"  type="text"  class="instruction" placeholder="Add a note to the Horse Managers">
+                    </textarea>                     
+                </div>
+            </div>
+            <div class="action-ctrl">
+                <button class="btn-next" (click)="onNext()" mat-raised-button >Next</button>
+            </div>
+        </div>
+    </form>
+</div>

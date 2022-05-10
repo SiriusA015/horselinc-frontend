@@ -1,0 +1,15 @@
+<div class="noNotification" *ngIf="isLoading">
+  <mat-icon ><mat-spinner color="warn" diameter="20">
+  </mat-spinner></mat-icon>
+</div>
+
+<div class="notificatio_container" *ngIf="!isLoading">
+  <div class="unread_msg_num"> {{notifications.length}} unread messages </div>
+  <div class="unread_msg">
+      <notification-card class="card" *ngFor="let notification of filteredNotifications" [notification]="notification"></notification-card>
+      <!-- <notification-card [card]="cardInfo"></notification-card> -->
+  </div>
+  <div style="height: 30px;">
+
+  </div>
+</div>

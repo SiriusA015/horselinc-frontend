@@ -1,0 +1,26 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start">
+    <!-- <div class="title"> Add New Service </div> -->
+    <form class="full-width">
+        <div class="input">
+            <mat-form-field class="full-width">
+                <input matInput placeholder="First name">
+            </mat-form-field>
+        </div>
+
+        <div class="input">
+            <mat-form-field class="full-width">
+                <input type="number" matInput placeholder="Service Rate">
+            </mat-form-field>
+        </div>
+
+        <div class="action_btn" style="float: right;">
+            <button mat-raised-button>Cancel</button>
+            <button mat-raised-button>Add</button>
+        </div>
+
+        <div *ngIf="message">
+            <p style="color:lightcoral; font-size:16px">{{message}}</p>
+        </div>
+
+    </form>
+</div>

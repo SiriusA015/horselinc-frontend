@@ -1,0 +1,43 @@
+<div class="navbar-top" [ngClass]="fuseConfig.layout.navbar.secondaryBackground">
+</div>
+
+<div class="navbar-scroll-container" [ngClass]="fuseConfig.layout.navbar.primaryBackground" fusePerfectScrollbar [fusePerfectScrollbarOptions]="{suppressScrollX: true}">
+
+    <div class="user" fxLayout="column" [ngClass]="fuseConfig.layout.navbar.secondaryBackground">
+        <div>
+            <img src="assets/images/logos/pic-logo.svg">
+        </div>
+        <div>
+            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+               <div fxLayout="row" fxLayoutAlign="center center">
+                    <img *ngIf="avatarUrl"  class="avatar small" src="{{avatarUrl}}">
+                    <img *ngIf="!avatarUrl" class="avatar small" src="assets/icons/horselinc/avatar-placeholder.png">
+                    <div fxLayout="column" fxLayoutAlign="start start" class="userInfo ml-8 mr-12">
+                        <span class="username" style="font-size: 14px;line-height: 1.43;letter-spacing: 0.25px;">{{userName}}</span>
+                        <span class="userType"style="font-size: 12px;font-weight:300; line-height: 1.43;">{{userType}}</span>
+                    </div>
+            <!-- fxHide fxShow.gt-sm -->
+            <img class="avatar" src="assets/icons/horselinc/arrow-drop-down-24-px.svg">
+        </div>
+        </button>
+
+            <mat-menu class="userMenu" #userMenu="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" (click)="onSwitchProfile()">
+                    <img class="small mr-12" src="assets/icons/horselinc/ic-side-freelancer.svg">
+                    <span>{{switchProfile}}</span>
+                </button>
+
+                <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/user/login/">
+                    <img class="small mr-12" src="assets/icons/horselinc/ic-side-exit.svg">
+                    <span>Log out</span>
+                </button>
+
+            </mat-menu>
+        </div>
+    </div>
+
+    <div class="navbar-content">
+        <fuse-navigation class="material2" layout="vertical"></fuse-navigation>
+    </div>
+
+</div>

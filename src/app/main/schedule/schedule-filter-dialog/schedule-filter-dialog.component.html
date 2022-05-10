@@ -1,0 +1,53 @@
+<div class="filter-modal" fxLayout="column" fxLayoutAlign="center end">
+    <div fxFlex="90" class="modal" fxLayout="column" fxLayoutAlign="start center" fxHide="{{toggle}}">
+        <div class="filter-container">
+            <div class="flat" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="filters">Filters</div>
+                <img src="assets/icons/horselinc/filled.svg" class="filled" (click)="toggleFilter()" />
+            </div>
+            <div class="box" fxLayout="row">
+                <div fxFlex="30">Sort by</div>
+                <div fxFlex="70">
+                    <mat-select [(value)]="sortType">
+                        <mat-option *ngFor="let data of sortBy" [value]="data" class="green-color">
+                            {{data}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="flat">
+                <div class="show-only">Show only</div>
+            </div>
+
+             <div fxLayout="row" class="date-container" fxLayoutAlign="space-between center" style="cursor: pointer;" (click)="picker1.open()">
+                <span fxFlex="30" class="fs-14 black-color">
+                    Start Date
+                </span>  
+                <input fxFlax="50" readonly class="input-color fs-14"  [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" name="startDate" [matDatepicker]="picker1" required/>
+                <div fxFlax="20">      
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </div>
+            </div> 
+
+            <div fxLayout="row" class="date-container" fxLayoutAlign="space-between center" style="cursor: pointer;" (click)="picker2.open()">
+                <span fxFlex="30" class="fs-14 black-color">
+                    End Date
+                </span>  
+                <input fxFlax="50" readonly class="input-color fs-14"  [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}" name="endDate" [matDatepicker]="picker2" required/>
+                <div fxFlax="20">      
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </div>
+            </div> 
+            <div class="action" fxLayout="row" fxLayoutAlign="space-between center">
+                <button class="btn-clear" mat-raised-button (click)="onClear()">Clear</button>
+                <button class="btn-apply" mat-raised-button (click)="onApply()">Apply</button>
+            </div>
+        </div>
+        <div class="arrow-down"></div>
+    </div>
+    <button fxFlex="10" mat-raised-button class="btn-filter" (click)="toggleFilter()">Filters
+        <img *ngIf="isFiltering" src="assets/icons/horselinc/done-24px.svg">
+    </button>
+</div>

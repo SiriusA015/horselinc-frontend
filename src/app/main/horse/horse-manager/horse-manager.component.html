@@ -1,0 +1,39 @@
+<div class="page-layout carded left-sidebar inner-scroll">
+    <div class="m-0 center">
+        <div class="content-card" [ngClass]="{'current-horse-selected':currentHorseFlag != false}">
+            <div class="back" fxHide fxShow.xs fxLayout="row" fxLayoutAlign="start center" *ngIf="currentHorseFlag != false" (click)="gotoList()">
+                <mat-icon class="text1 red-color">chevron_left</mat-icon>
+                <span class="text1 red-color">Manager Horse</span>
+            </div>
+            <div class="content" fxLayout="row">
+                <horse-manager-list *ngIf="disFlag"></horse-manager-list>
+                <horse-manager-list *ngIf="!disFlag" fxFlex="100"></horse-manager-list>
+                <horse-manager-details fxFlex *ngIf="disFlag"></horse-manager-details>
+            </div>
+        </div>
+    </div>
+    <fuse-sidebar name="horse-manager-profile-panel" class="horse-manager-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-manager-profile class="h-100-p"></horse-manager-profile>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-manager-schedule-panel" class="horse-manager-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-manager-schedule class="h-100-p"></horse-manager-schedule>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-manager-confirm-panel" class="horse-manager-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-manager-confirm class="h-100-p"></horse-manager-confirm>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-search-service-panel" class="horse-manager-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-search-service class="h-100-p"></horse-search-service>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-show-search-panel" class="horse-manager-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-show-search class="h-100-p"></horse-show-search>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-owner-create" class="horse-manager-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-owner-create class="h-100-p"></horse-owner-create>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-owner-payment-info" class="horse-manager-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-owner-payment-info class="h-100-p"></horse-owner-payment-info>
+    </fuse-sidebar>
+    <fuse-sidebar name="horse-owner-payment-approver" class="horse-manager-sidebar" position="right" [invisibleOverlay]="false">
+        <horse-owner-payment-approver class="h-100-p"></horse-owner-payment-approver>
+    </fuse-sidebar>
+</div>

@@ -1,0 +1,35 @@
+@import "src/@fuse/scss/fuse";
+.container {
+    width: 250px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Roboto;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    @include media-breakpoint('xs') {
+        width: 200px;
+    }
+    .check-box {
+        width: 100%;
+        margin-bottom: 3px;
+    }
+    .text {
+        font-size: 14px;
+        line-height: 1.43;
+    }
+    .button {
+        margin: 8px 8px 0 8px;
+        color: #4f748c;
+        font-weight: 900;
+        font-size: 16px;
+        line-height: 1.43;
+    }
+    .pointer {
+        cursor: pointer;
+    }
+}

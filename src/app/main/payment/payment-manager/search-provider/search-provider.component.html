@@ -1,0 +1,41 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start">
+    <div id="search-provider" fxLayout="column" fxLayoutAlign="start">
+
+        <div class="title-item mb-20" fxLayout="row" fxLayoutAlign="space-between center" >
+            <div class="edit-profile">{{title}}</div>
+            <div mat-raised-button class="btn" (click)="closePanel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+
+        <div class="search-edit" *ngIf="searchType=='provider'" >
+            <input [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" class="edit" style="margin:0px; padding:0px" placeholder="Search by name" value="" />
+            <mat-divider style="margin-left:-15px; margin-right:-15px; margin-bottom:20px"></mat-divider>
+        </div>
+        <div class="search-edit" *ngIf="searchType=='horse'">
+            <input [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" class="edit" style="margin:0px; padding:0px" placeholder="Search by Horse barn name" value="" />
+            <mat-divider style="margin-left:-15px; margin-right:-15px; margin-bottom:20px"></mat-divider>
+        </div>
+
+        <div *ngIf="searchType=='provider'" class="item-list" fxLayout="column" fxLayoutAlign="space-between center">
+            <div class="item" *ngFor="let serviceProvider of serviceProviders" (click)="selectServiceProvider(serviceProvider)" fxLayout="row" fxLayoutAlign="flex-start center">
+                <img *ngIf="serviceProvider.avatarUrl" src="{{serviceProvider.avatarUrl}}" class="avatar small32"/>   
+                <img *ngIf="!serviceProvider.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32"/>
+                <span class="name">{{serviceProvider?.name}}</span>
+            </div>
+        </div>
+
+        <div *ngIf="searchType=='horse'" class="item-list" fxLayout="column" fxLayoutAlign="space-between center">
+            <div class="item" *ngFor="let horse of horses" (click)="selectHorse(horse)" fxLayout="row" fxLayoutAlign="flex-start center">
+                <img *ngIf="horse.avatarUrl" src="{{horse?.avatarUrl}}" class="avatar small32"/>   
+                <img *ngIf="!horse.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32"/>
+                <div class="name">{{horse?.barnName}}</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px;" fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon *ngIf="isLogging" ><mat-spinner color="warn" diameter="20">
+            </mat-spinner></mat-icon>
+        </div>
+
+        <a *ngIf="searchType=='provider'" href="{{getInviteHorseLinc()}}"><button class="btn-invite" mat-button>Invite to HorseLinc</button></a>
+    </div>
+</div>

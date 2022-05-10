@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="intro" fxLayout="column" fxLayoutAlign="start">
+
+        <div class="title-item" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="edit-profile">Add Payment Approver</div>
+            <div mat-raised-button class="btn" (click)="closePanel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+        <p class="title-desc">When you add another Horse Manager to your payment information, you give them the authority to approve payments to Service Providers on your behalf (up to a specified dollar value).</p>
+
+        <p class="item-name">Payment Approvers</p>
+        <div class="item1" style="margin-bottom:10px" fxLayout="row" fxLayoutAlign="space-between center">
+            <input *ngIf="action=='Edit'" type="text" class="pr-20" [value]="curApprover.name" readonly>
+            <input *ngIf="action=='Add'" type="text" class="pr-20" [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" matInput [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnOfSearch" (optionSelected)="onSelectApprover($event.option.value)">
+                <mat-option *ngFor="let item of horseManagers" [value]="item">
+                    {{item.name}}
+                </mat-option>
+            </mat-autocomplete>
+
+            <div class="search-icon" style="margin-right:10px" fxFlax="15">
+                <mat-icon class="s-24">search</mat-icon>
+            </div>
+        </div>
+
+        <p class="item-name">Dollar Value </p>
+        <div class="item1" style="margin-bottom:10px" fxLayout="row" fxLayoutAlign="space-between center">
+            <input value="Unlimited" />
+            <mat-slide-toggle style="margin-right:10px" [(ngModel)]="amountUnlimited"></mat-slide-toggle>
+        </div>
+        <div class="item1" style="margin-bottom:10px" fxLayout="row" fxLayoutAlign="space-between center">
+            <input type="number" mat-input [(ngModel)]="amountValue" [readonly]="amountUnlimited" />
+        </div>
+    </div>
+    <div class="cancel-save" fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-button class="cancel m-0" (click)="closePanel()">Cancel</button>
+        <button mat-button [ngClass]="{'disabled': true}" class="save m-0" (click)="editApprover()">{{this.action}}</button>
+    </div>
+</div>

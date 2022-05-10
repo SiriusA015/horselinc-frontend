@@ -1,0 +1,17 @@
+<div fxLayout="column" class="container">
+    <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="selectedCard">
+        <mat-radio-button class="example-radio-button" *ngFor="let card of cards" [value]="card">
+            <div class="textbox3" fxLayout="row">
+                <div fxFlex="30"><img src="assets/icons/stripcard/{{card?.brand}}.svg"/></div>
+                <div fxFlex="50" class="green-color" >{{card?.brand}}  {{card?.last4}}</div>
+            </div>
+        </mat-radio-button>
+    </mat-radio-group>
+    <div  fxLayout="row">
+        <button mat-button (click) = "onClose()" class="btn">CLOSE</button>
+        <button mat-button (click) = "onDone()" class="btn">DONE</button>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start">
+    <div id="search-provider" fxLayout="column" fxLayoutAlign="start">
+
+        <div class="title-item mb-20" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="edit-profile">Service Provider</div>
+            <div mat-raised-button class="btn" (click)="closePanel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+
+        <div class="search-edit">
+            <input [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" class="edit" style="margin:0px; padding:0px" value="" />
+            <mat-divider style="margin-left:-15px; margin-right:-15px; margin-bottom:20px"></mat-divider>
+        </div>
+
+        <div class="item-list" fxLayout="column" fxLayoutAlign="space-between center">
+            <div class="item" (click)="selectServiceProvider(serviceProvider)" *ngFor="let serviceProvider of serviceProviders" fxLayout="row" fxLayoutAlign="flex-start center">
+                <img *ngIf="serviceProvider.avatarUrl" src="{{serviceProvider.avatarUrl}}" class="avatar small32" />
+                <img *ngIf="!serviceProvider.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32" />
+                <span class="name">{{serviceProvider.name}}</span>
+            </div>
+        </div>
+
+        <p class="cant-find-someone">CAN'T FIND SOMEONE?</p>
+        <a href="{{getInviteHorseLinc()}}"><button class="invite-button" mat-button>Invite to HorseLinc</button></a>
+    </div>
+</div>

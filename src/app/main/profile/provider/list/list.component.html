@@ -1,0 +1,97 @@
+<div fxLayout="column">
+
+    <div class="profile-header" fxLayout="row" fxLayoutAlign="start start">
+        <div fxFlex>
+            <img *ngIf="avatarUrl" class="avatar big" src="{{avatarUrl}}">
+            <img *ngIf="!avatarUrl" class="avatar big" src="assets/icons/horselinc/avatar-placeholder.png">
+        </div>
+
+        <div fxLayout="column" fxFlex="60">
+            <div class="name">
+                {{userName}}
+            </div>
+            <!-- <div class="text1 opacitycolor2" fxLayout="row" >  
+                "Naples"
+            </div> -->
+            <div class="text2 opacitycolor2 " fxLayout="column">
+                <span>{{location}}</span>
+                <span>{{phoneNum}}</span>
+            </div>
+        </div>
+
+        <div class="avatar small" fxFlex fxLayoutAlign="start start">
+            <img class="edit-profile" src="assets/icons/horselinc/ic-nav-create.svg" (click)="editProfile()" />
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+    <div class="profile-instant-payout" fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="column" fxLayoutAlign="start start">
+            <div class="title">
+                Your balance
+            </div>
+            <div class="value">
+                {{instantAmount | currency:'USD':'symbol'}}
+            </div>
+        </div>
+        <button class="payout-btn" mat-raised-button (click)="instantPayout()" [disabled]="!isInstant"> Instant Payout </button>
+    </div>
+
+    <div class="profile-service-rate" fxLayout="column" fxLayoutAlign="start start">
+        <p class="my-rates">My Rates</p>
+        <mat-divider></mat-divider>
+        <div class="rate-item" *ngFor="let item of providerServices">
+            <div class="item">
+                <div>{{item.service}}</div>
+                <div>$ {{item.rate.toFixed(2)}}</div>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+
+        <p class="edit-rate" (click)="onSelectedProfile(0)">EDIT RATES</p>
+    </div>
+    <div class="profile-list" fxLayout="column" >
+
+        <div matRipple class="navdiv" (click)="onGoInvoicing()">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <span class="text1" fxFlex="90"> {{invoicingLabel}} </span>
+                <mat-icon class="m-0 avatar-mini">chevron_right</mat-icon>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <a href="{{getContactHorseLinc()}}">
+            <div matRipple class="navdiv" [ngClass]="{'selected-profile':selectedProfileNo == 1}">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <span class="text1" fxFlex="90"> Contact HorseLinc </span>
+                    <mat-icon class="m-0 avatar-mini">chevron_right</mat-icon>
+                </div>
+            </div>
+        </a>
+
+        <mat-divider></mat-divider>
+
+        <div matRipple class="navdiv" [ngClass]="{'selected-profile':selectedProfileNo == 2}" (click)="onSelectedProfile(2)">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <span class="text1" fxFlex="90"> Terms & Conditions </span>
+                <mat-icon class="m-0 avatar-mini">chevron_right</mat-icon>
+            </div>
+
+
+        </div>
+
+        <mat-divider></mat-divider>
+        <div matRipple class="navdiv" [ngClass]="{'selected-profile':selectedProfileNo == 3}" (click)="onSelectedProfile(3)">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <span class="text1" fxFlex="90"> Privacy Policy </span>
+                <mat-icon class="m-0 avatar-mini">chevron_right</mat-icon>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+    </div>
+</div>

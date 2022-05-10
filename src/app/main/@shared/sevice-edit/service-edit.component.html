@@ -1,0 +1,38 @@
+<div class="dialog-content-wrapper p-16">
+    <!-- <div class="container" fxLayout="column" fxLayoutAlign="start"> -->
+    <div class="title"> {{dialogTitle}} </div>
+    <div></div>
+    <form class="full-width" [formGroup]="providerServiceForm">
+
+        <div class="input">
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Service Name" formControlName="service" required>
+            </mat-form-field>
+        </div>
+
+        <div class="input">
+            <mat-form-field class="full-width">
+                <input matInput type="number" placeholder="Service Rate" (keypress)="psearch($event)" formControlName="rate" required>
+            </mat-form-field>
+        </div>
+
+        <div class="action_btn" fxLayout="row" fxLayoutAlign="end">
+            <button mat-raised-button class="accent" mat-button class="mr-8" (click)="onCancel()" aria-label="Cancel" matTooltip="Cancel">
+                Cancel
+            </button>
+
+            <button mat-raised-button *ngIf="action !== 'edit'" mat-button class="accent save-button" (click)="onClose(providerServiceForm)" [disabled]="providerServiceForm.invalid" aria-label="SAVE">
+                Add
+            </button>
+
+            <button mat-raised-button *ngIf="action === 'edit'" mat-button class="accent save-button" (click)="onClose(['save',providerServiceForm])" [disabled]="providerServiceForm.invalid" aria-label="SAVE">
+                Save
+            </button>
+        </div>
+
+        <div *ngIf="message">
+            <p style="color:lightcoral; font-size:16px">{{message}}</p>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,37 @@
+<div id="profile-provider" class="page-layout carded left-sidebar inner-scroll">
+    <div class="m-0 center">
+        <div class="content-card" [ngClass]="{'current-profile-selected':currentProfileFlag != false}">
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar px-24 py-0" fxHide fxShow.xs *ngIf="currentProfileFlag != false" fxLayout="row" fxLayoutAlign="start center" (click)="gotoList()">
+                <mat-icon class="secondary-text">chevron_left</mat-icon>
+                <p>Manager Profile</p>
+            </div>
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <div class="content" fxLayout="row">
+                <apps-profile-provider-list ></apps-profile-provider-list>
+                <apps-profile-provider-details fxFlex></apps-profile-provider-details>
+            </div>
+            <!-- CONTENT -->
+
+        </div>
+    </div>
+
+    <fuse-sidebar name="profile-provider-editprofile" class="profile-provider-editprofile" position="right" [invisibleOverlay]="false">
+        <profile-provider-editprofile class="h-100-p"></profile-provider-editprofile>
+    </fuse-sidebar>
+    <fuse-sidebar name="profile-provider-updateemail" class="profile-provider-updateemail" position="right" [invisibleOverlay]="false">
+        <profile-provider-updateemail class="h-100-p"></profile-provider-updateemail>
+    </fuse-sidebar>
+    <fuse-sidebar name="profile-provider-updatepassword" class="profile-provider-updatepassword" position="right" [invisibleOverlay]="false">
+        <profile-provider-updatepassword class="h-100-p"></profile-provider-updatepassword>
+    </fuse-sidebar>
+    <fuse-sidebar name="profile-provider-addservice" class="profile-provider-addservice" position="right" [invisibleOverlay]="false">
+        <profile-provider-addservice class="h-100-p"></profile-provider-addservice>
+    </fuse-sidebar>
+    <fuse-sidebar name="profile-provider-instantpayout" class="profile-provider-instantpayout" position="right" [invisibleOverlay]="false">
+        <profile-provider-instantpayout class="h-100-p"></profile-provider-instantpayout>
+    </fuse-sidebar>
+</div>

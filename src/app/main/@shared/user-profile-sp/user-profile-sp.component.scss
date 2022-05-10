@@ -1,0 +1,138 @@
+@import "src/@fuse/scss/fuse";
+.container {
+    background-color: #4f748c;
+    background-image: url('assets/images/backgrounds/horse-material-bg.svg');
+    background-repeat: repeat;
+    font-family: Roboto;
+    font-size: 20px;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    .title {
+        padding-top: 95px;
+        padding-bottom: 104px;
+        @include media-breakpoint(xs) {
+            padding-top: 30px;
+        }
+    }
+    .content {
+        width: 100%;
+        .cards {
+            position: relative;
+            width: 960px;
+            box-shadow: 0 5px 30px 0 rgba(13, 62, 83, 0.17);
+            background-color: #ffffff;
+            padding-top: 96px;
+            padding-bottom: 16px;
+            @include media-breakpoint(lt-lg) {
+                width: 100%;
+                max-width: 962px;
+                min-width: 800px;
+            }
+            @include media-breakpoint(xs) {
+                width: 100%;
+                min-width: 100%;
+            }
+            .card-avatar-div {
+                position: absolute;
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                top: -90px;
+                z-index: 1;
+                padding: 10px;
+                .card-avatar {
+                    // position: absolute;
+                    width: 160px;
+                    height: 160px;
+                    border-radius: 50%;
+                    top: -80px;
+                }
+            }
+            .card-name {
+                font-size: 20px;
+                font-weight: 500;
+                text-align: center;
+                color: #5389a0;
+                margin-bottom: 24px;
+            }
+            .card-rates {
+                font-size: 14px;
+                font-weight: 500;
+                text-align: center;
+                color: #5389a0;
+            }
+            .card-group {
+                flex-direction: row;
+                justify-content: center;
+                display: flex;
+                flex-wrap: wrap;
+                margin: 4px 31px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #5389a0;
+                @include media-breakpoint(xs) {
+                    width: calc(100% - 32px);
+                    margin: 4px 16px;
+                }
+                .card {
+                    height: 56px;
+                    width: 283px;
+                    padding: 18px;
+                    margin: 8px;
+                    @include media-breakpoint(xs) {
+                        width: 100%;
+                        height: 56px;
+                        margin: 8px 0;
+                    }
+                    border-radius: 4px;
+                    box-shadow: 0 2px 13px 0 rgba(0,
+                    0,
+                    0,
+                    0.1);
+                    background-color: #fafafa;
+                    .card-text {
+                        font-size: 14px;
+                        line-height: 1.43;
+                        color: rgba(0, 0, 0, 0.87);
+                    }
+                }
+            }
+            .card-no-service {
+                font-size: 20px;
+                color: #000000;
+                width: 100%;
+            }
+            .card-contact {
+                font-size: 28px;
+                font-weight: 500;
+                text-align: center;
+                color: #5389a0;
+                margin-top: 12px;
+            }
+            .card-link {
+                font-size: 16px;
+                text-align: center;
+                color: #017aff;
+                margin: 8px;
+            }
+            .card-phone {
+                font-size: 16px;
+                font-weight: normal;
+                text-align: center;
+                color: #5389a0;
+                margin: 8px;
+            }
+        }
+        .footer-text {
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            color: #27c5c8;
+            margin: 24px 0 24px 0;
+            cursor: pointer;
+        }
+    }
+}

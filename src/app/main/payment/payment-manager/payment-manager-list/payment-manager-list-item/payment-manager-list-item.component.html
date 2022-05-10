@@ -1,0 +1,36 @@
+<div fxLayout="row" fxLayoutAlign="start center" *ngIf="payment && payment?.requests?.length>0">
+    <div class="rectangle" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+        <div class="info" fxFlex fxFlexLayout="column" *ngIf="payment?.requests?.length>0">
+            <div class="title" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="title-date"> {{payment.createdAt | date: 'MM/dd/yyyy'}} </div>
+                <div *ngIf="!completed" class="title-money red-color" > Invoice Total: ${{getAmountWithApplicationFee(payment?.amount).toFixed(2)}} </div>
+                <div *ngIf="completed" class="title-money green-color" > Invoice Total: ${{getAmountWithApplicationFee(payment?.amount).toFixed(2)}} </div>
+            </div>
+            <div class="title">
+                <div *ngIf="payment.requests[0].serviceProvider" class="provider-name"> {{payment.requests[0].serviceProvider?.name}} </div>
+            </div>
+            <div *ngFor="let request of payment.requests; let idx = index">
+                <div class="tags">
+                    <div class="money"> ${{getSubTotal(request.services).toFixed(2)}} </div>
+                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                        <img *ngIf="request.horse.avatarUrl" src="{{request.horse.avatarUrl}}" class="oval" />
+                        <img *ngIf="!request.horse.avatarUrl" src="assets/icons/horselinc/ic-manager-green.svg" class="oval" />
+                        <div class="tag-label"> {{request.horseBarnName}}  </div>
+                    </div>
+                </div>
+                <div class="detail">
+                    <div class="ic-arrow" *ngIf="(payment.requests.length-1) == idx" >
+                        <mat-icon class="arrow-forward">chevron_right</mat-icon>
+                    </div>
+                    <div class="notes">
+                        {{request.services.length}} service{{(request.services.length>1)? 's': ''}} provided
+                    </div>
+                    <div class="duration" fxLayout="row">
+                        <div> {{request.createdAt | date: 'MM/dd/yyyy'}} &nbsp; </div>
+                        <div *ngIf="compare(request.updatedAt, request.createdAt)"> - {{request.updatedAt | date: 'MM/dd/yyyy'}} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

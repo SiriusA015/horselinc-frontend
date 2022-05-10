@@ -1,0 +1,96 @@
+@import "src/@fuse/scss/fuse";
+
+:host{
+
+    #user-register {
+        background-image: url('assets/images/backgrounds/horse-material-bg.svg');
+        font-family: Roboto;
+        font-size: 14px;
+        font-stretch: normal;
+        font-style: normal;
+        letter-spacing: normal;
+        color: #ffffff;  
+        text-align:center;
+
+        .title {
+            justify-content: center;
+            padding-top: 95px;
+            padding-bottom: 30px;      
+        }
+        .content {
+            .register{
+                display:flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                #register-form {
+                    display:flex;
+                    flex-direction: column;
+                    justify-content : flex-start;
+    
+                    width: 280px;
+                    max-width: 280px;
+                    padding: 10px;
+                    text-align: center;
+
+                    .forget-password{
+                        font-size: 16px;
+                        text-align:center;
+                        color:#27c5c8;
+                    }
+                    .signup{
+                        font-size: 14px;
+                        text-align:center;
+                        color:#27c5c8;
+                    }     
+
+                    //affects all input placeholders across webkit browsers
+                    ::-webkit-input-placeholder {
+                        color: rgba(255, 255, 255, 0.7);
+                    }
+                    input{
+                        width:100%;
+                        height:44px;
+                        margin-bottom: 16px;
+
+                        font-family: "Roboto";
+                        font-size: 16px;
+                        font-weight: 300;
+                    
+                        color:white;
+                        text-align:center;
+                        border-width:0;
+                        border-radius: 100px;
+                        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12);
+                        background-color: rgba(203, 203, 203, 0.2);                 
+                        caret-color: #27c5c8;    
+                    }
+                    button{
+                        border-radius:0px;
+                        width:100%;
+                        height:44px;
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+        
+                        font-family: "Roboto";
+                        font-size: 16px;
+                        font-weight: 200;
+
+                        color:white;
+                        background-color: #ec7185;
+                        &:disabled{
+                            background-color: rgba(93, 189, 194, 0.2);
+                        }
+                    }
+                    .login-instead
+                    {
+                        background-color: rgba(93, 189, 194, 0.2);
+                        color: #27c5c8;
+                    }
+                }
+            }
+
+        }
+    }
+}

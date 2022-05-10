@@ -1,0 +1,131 @@
+@import "src/@fuse/scss/fuse";
+.filter-modal {
+    width: 350px;
+    height: auto;
+    z-index: 1;
+    font-family: Roboto;
+    
+    .modal {
+        width: 100%;
+        height: 100%;
+        .filter-container {
+            width: 100%;
+            // height: 464px;
+            box-shadow: 0 24px 24px 0 rgba(0, 0, 0, 0.3), 0 0 24px 0 rgba(0, 0, 0, 0.22);
+            border-radius: 10px;
+            background-color: #ffffff;
+            overflow: hidden;
+            .mat-select-value {
+                color: #27c5c8;
+            }
+            .flat {
+                width: 100%;
+                height: 50px;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-flex-wrap: wrap;
+                flex-wrap: wrap;
+                -webkit-align-content: center;
+                align-content: center;
+                padding: 15px;
+                .show-only {
+                    height: 16px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #5389a0;
+                }
+                .service-scheduled {
+                    width: 286px;
+                    height: 20px;
+                    font-size: 14px;
+                    color: rgba(0, 0, 0, 0.87);
+                }
+            }
+            .box {
+                width: 92%;
+                height: 50px;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-flex-wrap: wrap;
+                flex-wrap: wrap;
+                -webkit-align-content: center;
+                align-content: center;
+                margin: 5px 15px;
+                padding: 8px;
+                border-radius: 4px;
+                box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.1);
+                background-color: #fafafa;
+            }
+            .filters {
+                width: 75px;
+                height: 24px;
+                font-size: 26px;
+                font-weight: bold;
+                color: #4f748c;
+            }
+            .action {
+                width: 100%;
+                padding: 10px 20px;
+                border-radius: 0px 0px 10px 10px;
+                margin: 10px 0px;
+                .btn-clear {
+                    font-size: 16px;
+                    color: #27c5c8;
+                    width: 40%;
+                    height: 44px;
+                    border-radius: 100px;
+                    box-shadow: 0 5px 20px 0 rgba(13, 62, 83, 0.15), 0 2px 10px 0 rgba(12, 75, 80, 0.29);
+                    background-color: #ffffff;
+                }
+                .btn-apply {
+                    font-size: 16px;
+                    color: #ffffff;
+                    width: 40%;
+                    height: 44px;
+                    border-radius: 100px;
+                    box-shadow: 0 5px 14px 0 rgba(83, 25, 13, 0.07), 0 2px 7px 0 rgba(80, 14, 12, 0.2);
+                    background-color: #ec7185;
+                }
+            }
+        }
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid #fafafa;
+            margin-left: 70%;
+        }
+    }
+    .btn-filter {
+        width: 92.7px;
+        height: 44px;
+        margin: 20px 20px 0px 0px;
+        border-radius: 100px;
+        box-shadow: 0 5px 20px 0 rgba(13, 62, 83, 0.15), 0 2px 10px 0 rgba(12, 75, 80, 0.29);
+        background-color: #ffffff;
+        color: #27c5c8;
+    }
+    .fs-14 {
+        font-size: 14px;
+    }
+    .green-color {
+        color: #27c5c8;
+    }
+    
+    .input-color {
+        background-color: #fafafa;
+    }
+    .date-container {
+        padding: 10px;
+        height: 50px;
+        min-height: 50px;
+        width: 100%;
+        @include media-breakpoint('xs') {
+            width: 100%;
+        }
+        padding-left: 20px;
+        border-bottom: 1px solid #bbbbbb;
+        background-color: #fafafa;
+    }
+}

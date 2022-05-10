@@ -1,0 +1,65 @@
+<div *ngIf="!disFlag" class="emptyPage" fxLayout="column" fxLayoutAlign="center center" fxFill>
+    <img src="assets/icons/horselinc/ic-manager.svg" class="avatar huge">
+    <div class="text">
+        No horses available at this time
+    </div>
+    <mat-icon *ngIf="isLogging1">
+        <mat-spinner color="warn" diameter="40"></mat-spinner>
+    </mat-icon>
+</div>
+<div *ngIf="disFlag" fxLayout="column">
+    <div class="textbox1" fxLayoutAlign="start center">
+        <div fxLayout="row" fxFlex>
+            <div fxFlex="12">
+                <img src="assets/icons/horselinc/search.svg" class=" pointer buttondiv avatar small" />
+            </div>
+
+            <input fxFlex="78" [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" class="text-16 inputcolor p-0" placeholder="Search for horse name,trainer name,barn name" />
+            <mat-icon *ngIf="isLogging">
+                <mat-spinner color="warn" diameter="20"></mat-spinner>
+            </mat-icon>
+        </div>
+    </div>
+    <div class="title"> Horse (by Manager) </div>
+    <div fxLayout="row" class="mt-16" fxLayoutAlign="center center">
+        <div *ngIf="findErr" class="text-14 greencolor">No items match your search</div>
+    </div>
+    <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node *matTreeNodeDef="let node" matRipple>
+            <div class="horseList" fxLayout="row" fxLayoutAlign="start center" (click)="readHorseProvider(node)" [ngClass]="{'current-horseProvider':node.horses?.uid==tempHorse?.horses.uid}" [@animate]="{value:'*',params:{y:'100%'}}">
+                <div fxFlex="25" class="ml-20">
+                    <img *ngIf="!node.horses.avatarUrl" src="assets/icons/horselinc/ic-manager-green.svg" class="avatar medium" />
+                    <img *ngIf="node.horses.avatarUrl" src="{{node.horses?.avatarUrl}}" class="avatar medium">
+                </div>
+                <div fxFlex="65" fxLayout="column">
+                    <span class="text-16 blackcolor">{{node.horses?.barnName}} </span>
+                    <span class="text-14 opacitycolor" style="font-style: italic;">{{node.horses?.displayName}} </span>
+                    <span class="text-14 opacitycolor">Trainer: {{node.horses.trainer?.name}} </span>
+                    <span class="text-14 opacitycolor">({{node.horses.trainer?.barnName}}) </span>
+                </div>
+                <mat-icon fxFlex class="mat-icon-rtl-mirror">
+                    {{'chevron_right'}}
+                </mat-icon>
+            </div>
+        </mat-tree-node>
+        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+            <div class="horseManager" matRipple>
+                <div mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle' + node.manager.name" (click)="onManager(node.manager)">
+                    <div style="width: 100%; padding-left: 20px;" fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="15%">
+                            <img *ngIf="node.manager.avatarUrl" src="{{node.manager.avatarUrl}}" class="avatar small40" />
+                            <img *ngIf="!node.manager.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar samll40" />
+                        </div>
+                        <div fxFlex="75%" style="padding-left: 20px; font-size: 16px;">{{node.manager.name}}</div>
+
+                        <mat-icon fxFlex class="mat-icon-rtl-mirror">
+                            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                        </mat-icon>
+                    </div>
+                </div>
+            </div>
+        </mat-tree-node>
+
+    </mat-tree>
+    <div style="height:70px;"></div>
+</div>

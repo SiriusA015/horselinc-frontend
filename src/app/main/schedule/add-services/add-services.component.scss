@@ -1,0 +1,70 @@
+@import "src/@fuse/scss/fuse";
+.containter {
+    width: 100%;
+    min-width: 360px;
+    font-family: Roboto;
+    .title {
+        width: 100%;
+        min-width: 360px;
+        padding: 20px;
+        font-family: Roboto;
+        font-size: 25px;
+        color: #4f748c;
+    }
+    
+    .trainer {
+        padding: 20px;
+        .avatar {
+            height: 45px;
+        }
+        .intro {
+            div {
+                height: 25px;
+                padding: 5px;
+            }
+            .barn-name {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+        .header-image {
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+        }
+    }
+
+    .current-services {
+        padding: 5px 20px;
+        width: 100%;
+        box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.1);
+        div {
+            height: 30px;
+            width: 100%;
+        }
+    }
+
+    .add-service {
+        padding: 0px 20px;
+        width: 100%;
+        height: 40px;
+        background-color: white;
+    }
+
+    .action {
+        margin-top: 20px;
+        width: 100%;
+        padding: 0px 20px;
+        div {
+            width: 40%;
+            height: 40px;
+            text-align: center;
+            border-radius: 100px;
+            padding-top: 5px;
+            font-size: 20px;
+            background-color: #ec7185;
+            color: #ffffff;
+            cursor: pointer;
+        }
+    }
+}

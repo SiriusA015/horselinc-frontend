@@ -1,0 +1,20 @@
+<div id="profile-provider-instantPayout">
+    <form id="instant-payout-form" fxLayout="column" fxLayoutAlign="start" name="instantPayoutForm" [formGroup]="instantPayoutForm" novalidate>
+        <div class="item1" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="edit-profile">Instant Payout</div>
+            <div mat-raised-button class="btn" (click)="closePanel()"> <img src="assets/icons/horselinc/filled.svg" /> </div>
+        </div>
+
+        <p class="desc">
+            Instant Payouts are usually available within 30 minutes and posted in your account. The instant payouts are subject to a 1% fee that is deducted from your payout amount.
+        </p>
+        <p class="item-name">Instant Payouts Amount</p>
+        <input class="m-0 shadow" matInput placeholder={{payoutPlaceholder}} name="payoutAmount" formControlName="payoutAmount" autocomplete="off" required/>
+
+    </form>
+
+    <div class="cancel-save" fxLayout="row" fxLayoutAlign="space-between center">
+        <button class="cancel" mat-raised-button (click)="closePanel()"> Cancel </button>
+        <button class="save" mat-raised-button (click)="payout()"> Submit </button>
+    </div>
+</div>

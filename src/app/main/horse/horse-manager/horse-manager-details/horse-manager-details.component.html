@@ -1,0 +1,147 @@
+<div *ngIf="horse" fxLayout="column">
+    <div class="horse-header" fxLayout="row" fxLayoutAlign="start start">
+        <div class="title" fxLayout="column" fxLayoutAlign="start start">
+            <div class="title-avartar" fxLayout="row" fxLayoutAlign="start start">
+                <div>
+                    <img *ngIf="!horse.avatarUrl" src="assets/icons/horselinc/ic-manager-green.svg" class="avatar big">
+                    <img *ngIf="horse.avatarUrl" src="{{horse?.avatarUrl}}" class="avatar big">
+                </div>
+                <div fxLayout="column" fxFlex="75">
+                    <div class="header-title">
+                        {{horse?.barnName}}
+                    </div>
+                    <div class="name" fxLayout="row">
+                        <span>"{{horse?.displayName}}"</span>
+                    </div>
+                    <div class="lastdate" fxLayout="row" fxShow fxHide.lt-md>
+                        <span>Last Refresh&nbsp;&nbsp; </span>
+                        <span>{{ lastRefresh | date:'shortTime' }}</span>
+                    </div>
+                </div>
+                <div (click)="editHorseProfile()" fxFlex="10">
+                    <img class="avatar small button-div pointer" src="assets/icons/horselinc/ic-nav-create.svg">
+                </div>
+            </div>
+            <div class="pt-12 manager-card-wrap" fxLayoutAlign="start center">
+                <div fxLayout="column" class="manager-card">
+                    <span class="card-title">Trainer</span>
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <div>
+                            <img *ngIf="!horse.trainer?.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32">
+                            <img *ngIf="horse.trainer?.avatarUrl" src="{{horse.trainer?.avatarUrl}}" class="avatar small32">
+                        </div>
+                        <div fxLayout="column">
+                            <span class="manager-name">{{horse.trainer?.name}}</span>
+                            <span class="manager-details">({{horse.trainer?.barnName}})</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="horse.leaser" fxLayout="column" class="manager-card">
+                    <span class="card-title">Leased To</span>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <div>
+                            <img *ngIf="!horse.leaser?.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32">
+                            <img *ngIf="horse.leaser?.avatarUrl" src="{{horse.leaser?.avatarUrl}}" class="avatar small32">
+                        </div>
+                        <div fxLayout="column">
+                            <span class="manager-name">{{horse.leaser?.name}}</span>
+                            <span class="manager-details">({{horse.leaser?.barnName}})</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngFor="let owner of horse.owners">
+                    <div fxLayout="column" class="manager-card">
+                        <span class="card-title">Owner</span>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <div>
+                                <img *ngIf="!owner.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32">
+                                <img *ngIf="owner.avatarUrl" src="{{owner?.avatarUrl}}" class="avatar small32">
+                            </div>
+                            <div fxLayout="column">
+                                <span class="manager-name">{{owner?.name}}</span>
+                                <span class="manager-details">(Owns{{owner?.percentage}}%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div fxShow fxHide.lt-md class="calendar">
+            <mat-calendar *ngIf="caleFlag" [dateClass]="dateClass()" [selected]="selectedDate" (selectedChange)="onSelect($event)"></mat-calendar>
+        </div>
+    </div>
+    <div class="horse-content">
+        <div *ngIf="requestFlag" class="text-16 black-color m-8" fxLayoutAlign="center center">
+            No requests available at this time
+        </div>
+        <div *ngIf="leaserFlag" class="text-14 red-color m-8">
+            This horse is leased to another owner. {{horse.leaser?.name}} is currently responsible for payments.
+        </div>
+
+        <div *ngIf="!requestFlag" class="text-14 mr-20 opacity-color" fxHide fxShow.lt-md>
+            <span>Last Refresh&nbsp;&nbsp; </span>
+            <span>{{ lastRefresh | date:'shortTime' }}</span>
+        </div>
+        <div class="info" fxLayout="column" *ngFor="let serviceRequests of sortDateServiceRequests">
+            <span class="date" fxLayoutAlign="start center">{{serviceRequests.displayDate}}</span>
+            <div class="area" fxLayout.xs="column">
+                <div fxLayout="column" class="p-0 request-card" *ngFor="let serviceRequest of serviceRequests.requestList">
+                    <div fxFlex="75" fxLayout="column" class="card-content">
+                        <div fxLayout="row">
+                            <div fxFlex="92" class="queen">
+                                <span *ngIf="serviceRequest.show">{{(serviceRequest.show.name).toUpperCase()}}</span>
+                                <span *ngIf="!serviceRequest.show">NON-SHOW REQUEST</span>
+                            </div>
+                            <div fxFlex="8" *ngIf="serviceRequest.status != 'completed'" fxLayoutAlign="end end" (click)="diaEditDel(serviceRequest.status, serviceRequest.uid)">
+                                <img class="buttondiv pointer" src="assets/icons/horselinc/more-vert-24-px.svg">
+                            </div>
+                        </div>
+                        <div class="name">
+                            <span>{{serviceRequest.competitionClass}}</span><br>
+                            <span *ngIf="serviceRequest.competitionClass!=''">Payment Requested</span>
+                        </div>
+                        <div *ngIf="serviceRequest.serviceProvider" class="image" fxLayoutAlign="start center">
+                            <img *ngIf="!serviceRequest.serviceProvider.avatarUrl" src="assets/icons/horselinc/ic-profile.svg" class="avatar small32">
+                            <img *ngIf="serviceRequest.serviceProvider.avatarUrl" src="{{serviceRequest?.serviceProvider.avatarUrl}}" class="avatar small32">
+                            <span>{{serviceRequest.serviceProvider.name}}</span>
+                        </div>
+                        <div *ngIf="!serviceRequest.serviceProvider" class="image" fxLayoutAlign="start center">
+                            <img src="assets/icons/horselinc/ic-profile.svg" class="avatar small32">
+                            <span></span>
+                        </div>
+                        <div class="mane">
+                            <span *ngFor="let service of serviceRequest.services">  {{service.service}}(x{{service.quantity}})</span>
+                        </div>
+                    </div>
+                    <div *ngIf="serviceRequest.status == 'completed'" fxFlex="25" class="detail-completed" fxLayoutAlign="start center">
+                        Completed
+                    </div>
+                    <div *ngIf="serviceRequest.status == 'pending'" fxFlex="25" class="detail-pending" fxLayoutAlign="start center">
+                        Pending
+                    </div>
+                    <div *ngIf="serviceRequest.status == 'accepted'" fxFlex="25" class="detail-accepted" fxLayoutAlign="start center">
+                        Accepted
+                    </div>
+                    <div *ngIf="serviceRequest.status == 'declined'" fxFlex="25" fxLayout="row" class="detail-declined">
+                        <div fxFlex="50" fxLayoutAlign="center center" class="text-14 red-color">
+                            Declined
+                        </div>
+                        <div mat-ripple fxFlex="50" class="p-0 tab-button pointer" (click)="chooseProvider(serviceRequest.uid)" fxLayoutAlign="center center"> Choose Service Provider</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxHide={{dateToggle}} class="calendar-xs">
+            <mat-calendar *ngIf="caleFlag" [dateClass]="dateClass()" [selected]="selectedDate" (selectedChange)="onSelect($event)"></mat-calendar>
+        </div>
+        <div style="height:100px;"></div>
+        <div fxLayout="row" fxLayoutAlign="end start" fxLayoutAlign.xs="center center" class="cancel-save">
+            <div mat-ripple fxHide fxShow.lt-md class="button small pointer" (click)="DateShow()" fxLayoutAlign="center center">
+                <span class="text-16 green-color"> Date </span>
+            </div>
+            <div mat-ripple class="button big pointer" (click)="ScheduleService()" fxLayoutAlign="center center">
+                <span class="text-16 white-color"> Request a Service </span>
+            </div>
+        </div>
+    </div>

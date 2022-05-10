@@ -1,0 +1,14 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayoutAlign="start center">
+        <img *ngIf="!horse.avatarUrl" class="avatar medium" src="assets/icons/horselinc/ic-manager-green.svg" />
+        <img *ngIf="horse.avatarUrl" class="avatar medium" src="{{horse?.avatarUrl}}" />
+    </div>
+    <div class="info" fxFlex FlexLayout="column">
+        <span class="text-truncate text1">{{horse?.barnName}}</span>
+        <span class="text-truncate text2">{{horse?.trainer?.name}}({{horse.trainer?.barnName}})</span>
+    </div>
+    <div fxLayoutAlign="start center">
+        <!-- <img class="m-0 avatar mini" src="assets/icons/arrow-icons/arrow-forward-ios-24-px.svg"> -->
+        <mat-icon class="m-0">chevron_right</mat-icon>
+    </div>
+</div>

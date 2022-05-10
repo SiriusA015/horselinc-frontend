@@ -1,0 +1,81 @@
+<div *ngIf="data" class="container-invoice" fxLayout="column" fxLayoutAlign="start space-between" >
+    <div>
+        <div class="title-confirm" fxLayout="row" fxLayoutAlign="space-between center">
+            <div>Confirm</div>
+            <div class="btn-cancel" (click)="confirmCancel()">
+                <img src="assets/icons/horselinc/filled.svg"/>
+            </div>
+        </div>
+        <div class="normal-txt">
+            <div class="caption">HORSE</div>
+            <div class="txt">{{data?.horseBarnName}}&nbsp;<span>"{{data?.horseDisplayName}}"</span></div>
+        </div>
+        
+        <div class="normal-txt">
+            <div class="caption">TRAINER</div>
+            <div class="txt">{{horse?.trainer?.name}}</div>
+        </div>
+
+        <div class="multiline-txt" *ngIf="horse?.owners && horse?.owners?.length>0">
+            <div class="caption"> OWNER(S) </div>
+            <div class="txt" *ngFor="let owner of horse?.owners">{{owner?.name}}</div>
+        </div>
+
+        <div class="normal-txt" *ngIf="horse?.leaser">
+            <div class="caption">LEASED TO</div>
+            <div class="txt">{{horse?.leaser?.name}}</div>
+        </div>
+        
+        <div class="normal-txt">
+            <div class="caption">DATE</div>
+            <div class="txt">{{data?.requestDate | date : 'fullDate'}}</div>
+        </div>
+        <div class="normal-txt" *ngIf="data?.show && data?.show.name!=''">
+            <div class="caption">SHOW</div>
+            <div class="txt">{{data?.show?.name}}</div>
+        </div>
+
+        <div class="multiline-txt">
+            <div class="caption">SERVICE</div>
+            <div *ngFor="let service of data.services" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="txt">{{service.service}}&nbsp;(x{{service.quantity}})</div>
+                <div class="txt"> $&nbsp;{{(service.rate*service.quantity).toFixed(2)}}</div>
+            </div>
+        </div>
+
+        <div class="normal-txt" *ngIf="data?.competitionClass && data?.competitionClass!=''">
+            <div class="caption">COMPETITION CLASS</div>
+            <div class="txt">{{data?.competitionClass}}</div>
+        </div>
+
+        <div class="normal-txt">
+            <div class="caption">Total</div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="txt green-color"> {{serviceNum}}&nbsp;Service{{serviceNum>1? 's':''}} </div>
+                <div class="txt">$&nbsp;{{invoiceTotal.toFixed(2)}}</div>
+            </div>
+        </div>
+
+        <div class="normal-txt" *ngIf="data?.instruction && data?.instruction!=''">
+            <div class="caption">A NOTE TO THE HORSE MANAGERS</div>
+            <div class="txt">{{data?.instruction}}</div>
+        </div>
+
+        <div class="sum-h" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="txt"> Total</div>
+            <div class="txt"> $&nbsp;{{invoiceTotal.toFixed(2)}}</div>
+        </div>
+        
+    </div>
+
+   <div class="invoice-action" fxLayout="column" fxLayoutAlign="space-evenly center">
+        <button class="btn-submit" (click)="confirmSubmit()" mat-raised-button [disabled]="isLogging || isLogging1">Confirm & Submit Invoice
+            <mat-icon *ngIf="isLogging" ><mat-spinner color="warn" diameter="20">
+            </mat-spinner></mat-icon>
+        </button>
+        <button class="btn-draft" (click)="confirmSave()" mat-raised-button [disabled]="isLogging || isLogging1">Save to Drafts
+            <mat-icon *ngIf="isLogging1" ><mat-spinner color="warn" diameter="20">
+            </mat-spinner></mat-icon>
+        </button>
+    </div>
+</div>

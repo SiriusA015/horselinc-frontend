@@ -1,0 +1,99 @@
+
+<div fxLayout = "column" fxFlexFill>
+
+    <div class ="profile-header" fxLayout="row" fxLayoutAlign="start start">
+        <div class="w-80 h-80" fxFlex>
+            <img *ngIf="avatarUrl"  class="avatar big" src="{{avatarUrl}}">
+            <img *ngIf="!avatarUrl" class="avatar big" src="assets/icons/horselinc/avatar-placeholder.png">
+        </div>
+        
+        <div fxLayout="column" fxFlex="60">
+            <div class="name">
+                {{userName}}
+            </div>
+            <div class="text1 opacity-color2" fxLayout="row" >  
+                "{{barnName}}"
+            </div>
+            <div class="text2 opacity-color2 " fxLayout="column">  
+                <span>{{location}}</span>
+                <span>{{phoneNum}}</span>
+            </div>
+        </div>
+    
+        <div  class="avatar small" fxFlex  fxLayoutAlign="start start">
+                <img class="edit-profile" src="assets/icons/horselinc/ic-nav-create.svg" (click)="editProfile()"/>
+         </div>
+    </div>
+
+    <div class="profile-list" fxFlex fxLayout = "column">
+
+        <div matRipple class="navdiv" 
+        [ngClass]="{'selected-profile':selectedProfileNo == 0}"
+        (click)="onSelectedProfile(0)">
+            
+            <div fxLayout = "row" fxLayoutAlign="start center">
+                <span class="text1" fxFlex="90"> My Service Providers </span>
+                <mat-icon class="m-0 avatar-mini">chevron_right</mat-icon>
+            </div>
+           
+
+        </div> 
+        
+        <mat-divider></mat-divider>
+        
+        <div matRipple class="navdiv" 
+        [ngClass]="{'selected-profile':selectedProfileNo == 1}"
+        (click)="onSelectedProfile(1)">
+            
+            <div fxLayout = "row" fxLayoutAlign="start center">
+                <span class="text1" fxFlex="90"> Edit Payment Information </span>
+                <mat-icon class="m-0 avatar-mini">chevron_right</mat-icon>
+            </div>
+           
+
+        </div> 
+        
+        <mat-divider></mat-divider>
+        
+        <a href="{{getContactHorseLinc()}}">
+        <div matRipple class="navdiv"         
+        [ngClass]="{'selected-profile':selectedProfileNo == 2}">
+
+            <div fxLayout = "row" fxLayoutAlign="start center">
+                <span class="text1" fxFlex="90"> Contact HorseLinc </span>
+                <mat-icon class="m-0 avatar-mini">chevron_right</mat-icon>
+            </div>
+        </div> 
+        </a>
+       
+        <mat-divider></mat-divider>
+
+        <div matRipple class="navdiv" 
+        [ngClass]="{'selected-profile':selectedProfileNo == 3}"
+        (click)="onSelectedProfile(3)">
+            
+            <div fxLayout = "row" fxLayoutAlign="start center">
+                <span class="text1" fxFlex="90"> Terms & Conditions </span>
+                <mat-icon class="m-0 avatar-mini">chevron_right</mat-icon>
+            </div>
+           
+
+        </div> 
+       
+        <mat-divider></mat-divider>
+       
+        <div matRipple class="navdiv"
+        [ngClass]="{'selected-profile':selectedProfileNo == 4}"
+        (click)="onSelectedProfile(4)">
+            
+            <div fxLayout = "row" fxLayoutAlign="start center">
+                <span class="text1" fxFlex="90"> Privacy Policy </span>
+                <mat-icon class="m-0 avatar-mini">chevron_right</mat-icon>
+            </div>
+           
+
+        </div> 
+      
+        <mat-divider></mat-divider>
+    </div>   
+</div>

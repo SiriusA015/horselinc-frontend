@@ -1,0 +1,31 @@
+<div fxLayout="column">
+    <div class="search-horse" fxLayout="row" fxLayoutAlign="space-between center">
+        <input class="in-text" autofocus [(ngModel)]="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)" fxFlex="70" placeholder="{{display}}">
+        <div fxFlex="10">
+            <img class="search-icon" src="assets/icons/horselinc/search.svg" />
+        </div>
+        <div mat-raised-button fxLayoutAlign="center center" (click)="searchCancel()">
+            <img class="search-icon" src="assets/icons/horselinc/filled.svg" />
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div *ngFor="let horse of this.horses" class="search-list" fxLayout="row" fxLayoutAlign="start center" (click)="getCurrentProviderHorse(horse.uid)">
+        <img *ngIf="horse.avatarUrl" src="{{horse.avatarUrl}}" class="avatar small32" />
+        <img *ngIf="!horse.avatarUrl" src="assets/icons/horselinc/ic-manager-green.svg" class="avatar small32" />
+        <span *ngIf="horse.barnName"> {{horse.barnName}} </span>
+    </div>
+
+    <div *ngFor="let show of this.shows" class="search-list" fxLayout="row" fxLayoutAlign="start center" (click)="getCurrentShow(show.uid)">
+        <span *ngIf="show?.name"> {{show?.name}} </span>
+    </div>
+
+    <div class="loading-bar" fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon *ngIf="isLogging">
+            <mat-spinner color="warn" diameter="20">
+            </mat-spinner>
+        </mat-icon>
+    </div>
+    <div class="action-ctrl" *ngIf="this.horses?.length<1 && currentSearchType=='horse'">
+        <button class="btn-create" (click)="onNewHorse()" mat-raised-button>Create New Horse Profile</button>
+    </div>
+</div>
